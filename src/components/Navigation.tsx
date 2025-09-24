@@ -11,9 +11,23 @@ const Navigation = () => {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Earn", path: "/earn" },
-    { name: "Pricing", path: "/#pricing" },
+    { name: "Pricing", path: "/", scrollTo: "pricing" },
     { name: "Community", path: "/community" },
   ];
+
+  const handleNavigation = (link: any) => {
+    if (link.scrollTo) {
+      // If we're navigating to a section on home page
+      if (location.pathname !== "/") {
+        // Navigate to home first, then scroll
+        window.location.href = "/#" + link.scrollTo;
+      } else {
+        // Already on home page, just scroll
+        const element = document.getElementById(link.scrollTo);
+        element?.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -34,15 +48,27 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`font-body text-sm transition-colors hover:text-primary ${
-                  isActive(link.path) ? "text-primary font-semibold" : "text-muted-foreground"
-                }`}
-              >
-                {link.name}
-              </Link>
+              link.scrollTo ? (
+                <button
+                  key={link.path}
+                  onClick={() => handleNavigation(link)}
+                  className={`font-body text-sm transition-colors hover:text-primary ${
+                    location.pathname === "/" && location.hash === "#" + link.scrollTo ? "text-primary font-semibold" : "text-muted-foreground"
+                  }`}
+                >
+                  {link.name}
+                </button>
+              ) : (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`font-body text-sm transition-colors hover:text-primary ${
+                    isActive(link.path) ? "text-primary font-semibold" : "text-muted-foreground"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              )
             ))}
           </div>
 
@@ -77,16 +103,31 @@ const Navigation = () => {
             >
               <div className="py-4 space-y-4">
                 {navLinks.map((link) => (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    onClick={() => setIsOpen(false)}
-                    className={`block font-body text-sm transition-colors hover:text-primary ${
-                      isActive(link.path) ? "text-primary font-semibold" : "text-muted-foreground"
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
+                  link.scrollTo ? (
+                    <button
+                      key={link.path}
+                      onClick={() => {
+                        handleNavigation(link);
+                        setIsOpen(false);
+                      }}
+                      className={`block font-body text-sm text-left transition-colors hover:text-primary ${
+                        location.pathname === "/" && location.hash === "#" + link.scrollTo ? "text-primary font-semibold" : "text-muted-foreground"
+                      }`}
+                    >
+                      {link.name}
+                    </button>
+                  ) : (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      onClick={() => setIsOpen(false)}
+                      className={`block font-body text-sm transition-colors hover:text-primary ${
+                        isActive(link.path) ? "text-primary font-semibold" : "text-muted-foreground"
+                      }`}
+                    >
+                      {link.name}
+                    </Link>
+                  )
                 ))}
                 <div className="flex flex-col space-y-2 pt-4">
                   <Button variant="ghost" size="sm">

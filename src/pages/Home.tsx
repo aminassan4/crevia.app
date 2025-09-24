@@ -9,12 +9,22 @@ import {
   Star, 
   ArrowRight,
   Quote,
-  CheckCircle
+  CheckCircle,
+  MessageCircle,
+  BarChart3,
+  Video,
+  BookOpen,
+  Bot,
+  Mail,
+  CreditCard,
+  Globe
 } from "lucide-react";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const Home = () => {
+  const [activeFeature, setActiveFeature] = useState("courses");
   const features = [
     {
       icon: Users,
@@ -194,16 +204,16 @@ const Home = () => {
             className="flex flex-wrap justify-center gap-4 mb-12"
           >
             {[
-              { name: "Community", active: false },
-              { name: "Chat", active: false },
-              { name: "CRM", active: false },
-              { name: "Events", active: false },
-              { name: "Live", active: false },
-              { name: "Courses", active: true },
-              { name: "AI Agents", active: false },
-              { name: "Email Marketing", active: false },
-              { name: "Payments", active: false },
-              { name: "Website Builder", active: false }
+              { name: "Community", demo: "community" },
+              { name: "Chat", demo: "chat" },
+              { name: "CRM", demo: "crm" },
+              { name: "Events", demo: "events" },
+              { name: "Live", demo: "live" },
+              { name: "Courses", demo: "courses" },
+              { name: "AI Agents", demo: "ai" },
+              { name: "Email Marketing", demo: "email" },
+              { name: "Payments", demo: "payments" },
+              { name: "Website Builder", demo: "website" }
             ].map((feature, index) => (
               <motion.button
                 key={feature.name}
@@ -211,8 +221,9 @@ const Home = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 viewport={{ once: true }}
+                onClick={() => setActiveFeature(feature.demo)}
                 className={`px-6 py-3 rounded-full font-body font-medium transition-all duration-300 hover:scale-105 ${
-                  feature.active 
+                  activeFeature === feature.demo
                     ? 'bg-white text-primary shadow-lg' 
                     : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'
                 }`}
@@ -242,65 +253,247 @@ const Home = () => {
                   </div>
                   <div className="flex items-center space-x-4 font-body text-sm text-slate-600">
                     <span>Home</span>
-                    <span className="font-semibold text-primary">Courses</span>
-                    <span>Events</span>
+                    <span className={`font-semibold ${activeFeature === 'courses' ? 'text-primary' : 'text-slate-600'}`}>
+                      {activeFeature === 'community' && 'Community'}
+                      {activeFeature === 'chat' && 'Chat'}
+                      {activeFeature === 'crm' && 'CRM'}
+                      {activeFeature === 'events' && 'Events'}
+                      {activeFeature === 'live' && 'Live'}
+                      {activeFeature === 'courses' && 'Courses'}
+                      {activeFeature === 'ai' && 'AI'}
+                      {activeFeature === 'email' && 'Email'}
+                      {activeFeature === 'payments' && 'Payments'}
+                      {activeFeature === 'website' && 'Website'}
+                    </span>
                     <span>Members</span>
                     <span>Leaderboard</span>
                   </div>
                 </div>
               </div>
 
-              {/* Mock Course Interface */}
+              {/* Dynamic Feature Interface */}
               <div className="p-8">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="font-heading text-2xl font-bold text-slate-900">Courses</h3>
-                  <div className="flex items-center space-x-2">
-                    <button className="px-4 py-2 bg-slate-900 text-white rounded-full font-body text-sm font-medium">All</button>
-                    <button className="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-full font-body text-sm">Fitness</button>
-                    <button className="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-full font-body text-sm">Healing Circles</button>
-                    <button className="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-full font-body text-sm">Nutrition</button>
-                    <button className="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-full font-body text-sm">Guided Sessions</button>
-                    <button className="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-full font-body text-sm">More</button>
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-3 gap-6">
-                  {/* Course Card 1 */}
-                  <div className="bg-slate-50 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300">
-                    <div className="h-40 bg-gradient-to-br from-orange-400 to-pink-400"></div>
-                    <div className="p-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-medium">NEW</span>
+                {activeFeature === 'courses' && (
+                  <>
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="font-heading text-2xl font-bold text-slate-900">Courses</h3>
+                      <div className="flex items-center space-x-2">
+                        <button className="px-4 py-2 bg-slate-900 text-white rounded-full font-body text-sm font-medium">All</button>
+                        <button className="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-full font-body text-sm">Fitness</button>
+                        <button className="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-full font-body text-sm">Nutrition</button>
                       </div>
-                      <h4 className="font-body font-semibold text-slate-900 mb-2">Morning Yoga Flow</h4>
-                      <p className="font-body text-sm text-slate-600">Start your day with intention</p>
                     </div>
-                  </div>
-
-                  {/* Course Card 2 */}
-                  <div className="bg-slate-50 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300">
-                    <div className="h-40 bg-gradient-to-br from-green-400 to-blue-400"></div>
-                    <div className="p-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-medium">NEW</span>
+                    <div className="grid md:grid-cols-3 gap-6">
+                      <div className="bg-slate-50 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300">
+                        <div className="h-40 bg-gradient-to-br from-orange-400 to-pink-400"></div>
+                        <div className="p-4">
+                          <span className="bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-medium">NEW</span>
+                          <h4 className="font-body font-semibold text-slate-900 mt-2 mb-2">Morning Yoga Flow</h4>
+                          <p className="font-body text-sm text-slate-600">Start your day with intention</p>
+                        </div>
                       </div>
-                      <h4 className="font-body font-semibold text-slate-900 mb-2">Mindful Nutrition</h4>
-                      <p className="font-body text-sm text-slate-600">Nourish your body and soul</p>
                     </div>
-                  </div>
+                  </>
+                )}
 
-                  {/* Course Card 3 */}
-                  <div className="bg-slate-50 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300">
-                    <div className="h-40 bg-gradient-to-br from-purple-400 to-indigo-400"></div>
-                    <div className="p-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-medium">NEW</span>
-                      </div>
-                      <h4 className="font-body font-semibold text-slate-900 mb-2">Deep Meditation</h4>
-                      <p className="font-body text-sm text-slate-600">Find inner peace and clarity</p>
+                {activeFeature === 'community' && (
+                  <>
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="font-heading text-2xl font-bold text-slate-900">Community</h3>
+                      <button className="px-4 py-2 bg-primary text-white rounded-lg font-body text-sm">+ Create Group</button>
                     </div>
-                  </div>
-                </div>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="bg-slate-50 rounded-xl p-6">
+                        <div className="flex items-center space-x-3 mb-4">
+                          <Users className="w-8 h-8 text-primary" />
+                          <div>
+                            <h4 className="font-body font-semibold text-slate-900">Design Community</h4>
+                            <p className="font-body text-sm text-slate-600">1,234 members</p>
+                          </div>
+                        </div>
+                        <p className="font-body text-sm text-slate-700 mb-4">Latest: New portfolio review session tomorrow!</p>
+                        <div className="flex space-x-2">
+                          <span className="bg-primary/10 text-primary px-2 py-1 rounded text-xs">Active</span>
+                          <span className="bg-slate-200 text-slate-600 px-2 py-1 rounded text-xs">Design</span>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {activeFeature === 'chat' && (
+                  <>
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="font-heading text-2xl font-bold text-slate-900">Messages</h3>
+                      <MessageCircle className="w-6 h-6 text-primary" />
+                    </div>
+                    <div className="bg-slate-50 rounded-xl p-6">
+                      <div className="space-y-4">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">A</div>
+                          <div className="flex-1">
+                            <div className="bg-white rounded-lg p-3">
+                              <p className="font-body text-sm">Hey! How's the new course coming along?</p>
+                            </div>
+                            <p className="font-body text-xs text-slate-500 mt-1">2 min ago</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {activeFeature === 'crm' && (
+                  <>
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="font-heading text-2xl font-bold text-slate-900">Customer Management</h3>
+                      <BarChart3 className="w-6 h-6 text-primary" />
+                    </div>
+                    <div className="bg-slate-50 rounded-xl p-6">
+                      <div className="grid grid-cols-3 gap-4 mb-4">
+                        <div className="text-center">
+                          <div className="font-heading text-2xl font-bold text-primary">1,234</div>
+                          <p className="font-body text-sm text-slate-600">Total Customers</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="font-heading text-2xl font-bold text-green-600">89%</div>
+                          <p className="font-body text-sm text-slate-600">Satisfaction</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="font-heading text-2xl font-bold text-blue-600">456</div>
+                          <p className="font-body text-sm text-slate-600">Active This Month</p>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {activeFeature === 'events' && (
+                  <>
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="font-heading text-2xl font-bold text-slate-900">Events</h3>
+                      <button className="px-4 py-2 bg-primary text-white rounded-lg font-body text-sm">+ Create Event</button>
+                    </div>
+                    <div className="bg-slate-50 rounded-xl p-6">
+                      <div className="flex items-center space-x-4">
+                        <Calendar className="w-12 h-12 text-primary" />
+                        <div>
+                          <h4 className="font-body font-semibold text-slate-900">Design Workshop</h4>
+                          <p className="font-body text-sm text-slate-600">March 15, 2025 • 2:00 PM</p>
+                          <p className="font-body text-sm text-primary">56 registered</p>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {activeFeature === 'live' && (
+                  <>
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="font-heading text-2xl font-bold text-slate-900">Live Streaming</h3>
+                      <Video className="w-6 h-6 text-red-500" />
+                    </div>
+                    <div className="bg-slate-50 rounded-xl p-6">
+                      <div className="text-center">
+                        <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                          <Video className="w-8 h-8 text-white" />
+                        </div>
+                        <h4 className="font-body font-semibold text-slate-900 mb-2">Live Stream: Design Critique</h4>
+                        <p className="font-body text-sm text-slate-600 mb-4">234 viewers • Started 15 min ago</p>
+                        <button className="px-6 py-2 bg-red-500 text-white rounded-lg font-body text-sm">Join Stream</button>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {activeFeature === 'ai' && (
+                  <>
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="font-heading text-2xl font-bold text-slate-900">AI Assistant</h3>
+                      <Bot className="w-6 h-6 text-primary" />
+                    </div>
+                    <div className="bg-slate-50 rounded-xl p-6">
+                      <div className="space-y-4">
+                        <div className="flex items-start space-x-3">
+                          <Bot className="w-8 h-8 text-primary mt-1" />
+                          <div className="bg-white rounded-lg p-3 flex-1">
+                            <p className="font-body text-sm">I can help you optimize your course content, analyze student engagement, and suggest improvements. What would you like to work on?</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {activeFeature === 'email' && (
+                  <>
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="font-heading text-2xl font-bold text-slate-900">Email Campaigns</h3>
+                      <Mail className="w-6 h-6 text-primary" />
+                    </div>
+                    <div className="bg-slate-50 rounded-xl p-6">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <h4 className="font-body font-semibold text-slate-900 mb-2">Welcome Series</h4>
+                          <p className="font-body text-sm text-slate-600 mb-2">Open rate: 68%</p>
+                          <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">Active</span>
+                        </div>
+                        <div>
+                          <h4 className="font-body font-semibold text-slate-900 mb-2">Course Launch</h4>
+                          <p className="font-body text-sm text-slate-600 mb-2">Open rate: 72%</p>
+                          <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">Scheduled</span>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {activeFeature === 'payments' && (
+                  <>
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="font-heading text-2xl font-bold text-slate-900">Payment Dashboard</h3>
+                      <CreditCard className="w-6 h-6 text-primary" />
+                    </div>
+                    <div className="bg-slate-50 rounded-xl p-6">
+                      <div className="grid grid-cols-3 gap-4">
+                        <div className="text-center">
+                          <div className="font-heading text-2xl font-bold text-green-600">$12,450</div>
+                          <p className="font-body text-sm text-slate-600">This Month</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="font-heading text-2xl font-bold text-blue-600">89</div>
+                          <p className="font-body text-sm text-slate-600">Transactions</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="font-heading text-2xl font-bold text-purple-600">$890</div>
+                          <p className="font-body text-sm text-slate-600">Pending</p>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {activeFeature === 'website' && (
+                  <>
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="font-heading text-2xl font-bold text-slate-900">Website Builder</h3>
+                      <Globe className="w-6 h-6 text-primary" />
+                    </div>
+                    <div className="bg-slate-50 rounded-xl p-6">
+                      <div className="text-center">
+                        <div className="bg-white rounded-lg p-4 mb-4 border-2 border-dashed border-slate-300">
+                          <Globe className="w-12 h-12 text-slate-400 mx-auto mb-2" />
+                          <p className="font-body text-sm text-slate-600">Drag & drop to build your site</p>
+                        </div>
+                        <div className="flex justify-center space-x-2">
+                          <span className="bg-primary/10 text-primary px-3 py-1 rounded text-xs">Header</span>
+                          <span className="bg-secondary/10 text-secondary px-3 py-1 rounded text-xs">Hero</span>
+                          <span className="bg-accent/10 text-accent px-3 py-1 rounded text-xs">Footer</span>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </motion.div>
