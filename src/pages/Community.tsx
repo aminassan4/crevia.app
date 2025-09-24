@@ -13,6 +13,7 @@ import {
   ArrowRight
 } from "lucide-react";
 import { motion } from "framer-motion";
+import Footer from "@/components/Footer";
 
 const Community = () => {
   const missions = [
@@ -418,6 +419,8 @@ const Community = () => {
           </motion.div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };

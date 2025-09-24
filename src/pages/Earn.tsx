@@ -12,6 +12,7 @@ import {
   Play
 } from "lucide-react";
 import { motion } from "framer-motion";
+import Footer from "@/components/Footer";
 
 const Earn = () => {
   const earningSections = [
@@ -330,6 +331,7 @@ const Earn = () => {
           </motion.div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };

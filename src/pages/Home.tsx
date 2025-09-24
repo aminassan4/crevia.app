@@ -11,6 +11,7 @@ import {
   Quote,
   CheckCircle
 } from "lucide-react";
+import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 
 const Home = () => {
@@ -166,7 +167,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Features Overview */}
+      {/* Enhanced Features Section */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <motion.div
@@ -176,31 +177,307 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-6">
-              All The Features You Need
+            <h2 className="font-heading text-4xl md:text-6xl font-bold text-foreground mb-6">
+              Run your digital storefront from one place.
             </h2>
-            <p className="font-body text-xl text-muted-foreground">
-              Everything to build, grow, and monetize your creative journey
+            <p className="font-body text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Maximize your potential, minimize your cost—we provide everything you need to grow your business your way.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Feature Pills */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="flex flex-wrap justify-center gap-4 mb-16"
+          >
             {[
-              "Communities", "Digital Products", "Events & Webinars", "1:1 Bookings",
-              "Lead Magnets", "Course Creation", "Link-in-Bio", "Payment Processing"
+              "Courses", "Membership", "Webinars", "Coaching",
+              "Analytics", "AI Agent", "Auto DM", "Community"
             ].map((feature, index) => (
               <motion.div
                 key={feature}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="px-6 py-3 bg-background border border-border rounded-full hover:shadow-elegant transition-all duration-300 hover:scale-105"
+              >
+                <span className="font-body font-medium text-foreground">{feature}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Detailed Features Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                category: "Build",
+                icon: "🏪",
+                title: "Digital Storefront",
+                description: "Create your professional online presence with customizable storefronts"
+              },
+              {
+                category: "Sell",
+                icon: "📚",
+                title: "Digital Downloads",
+                description: "Sell eBooks, templates, guides, and digital resources instantly"  
+              },
+              {
+                category: "Sell",
+                icon: "🎥",
+                title: "Video Courses",
+                description: "Host and monetize comprehensive video course content"
+              },
+              {
+                category: "Sell",
+                icon: "👨‍🏫",
+                title: "Coaching Calls",
+                description: "Offer 1:1 mentorship and consulting sessions"
+              },
+              {
+                category: "Sell",
+                icon: "🌐",
+                title: "Webinars & Workshops",
+                description: "Host live and recorded educational events"
+              },
+              {
+                category: "Grow",
+                icon: "📧",
+                title: "Email Marketing",
+                description: "Build and nurture your audience with powerful email campaigns"
+              },
+              {
+                category: "Grow", 
+                icon: "📊",
+                title: "Analytics",
+                description: "Track performance and optimize your creator business"
+              },
+              {
+                category: "Grow",
+                icon: "💜",
+                title: "24/7 Support",
+                description: "Get help whenever you need it with our dedicated support team"
+              },
+              {
+                category: "Pro",
+                icon: "🤖",
+                title: "AI Assistant",
+                description: "Generate content, optimize pricing, and get personalized recommendations"
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={feature.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="flex items-center space-x-3 p-4 bg-background rounded-lg"
               >
-                <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
-                <span className="font-body font-medium">{feature}</span>
+                <Card className="hover-lift p-6 h-full bg-background/80 backdrop-blur-sm">
+                  <CardContent className="p-0">
+                    <div className="flex items-start space-x-4">
+                      <div className="text-3xl">{feature.icon}</div>
+                      <div className="flex-1">
+                        <Badge variant="outline" className="mb-3 text-xs">
+                          {feature.category}
+                        </Badge>
+                        <h3 className="font-heading text-lg font-bold mb-2 text-foreground">
+                          {feature.title}
+                        </h3>
+                        <p className="font-body text-muted-foreground text-sm leading-relaxed">
+                          {feature.description}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section id="pricing" className="py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="font-heading text-4xl md:text-6xl font-bold text-foreground mb-6">
+              What kind of Creator are you?
+            </h2>
+            <p className="font-body text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8">
+              Maximize your potential, minimize your cost—we provide everything you need to grow your business your way.
+            </p>
+            
+            {/* Pricing Toggle */}
+            <div className="flex items-center justify-center space-x-4 mb-12">
+              <Button variant="default" className="px-8 py-3">
+                Monthly
+              </Button>
+              <Button variant="outline" className="px-8 py-3">
+                Annual <span className="text-primary ml-2">(save 20%)</span>
+              </Button>
+            </div>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Creator Plan */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <Card className="hover-lift p-8 h-full relative bg-background">
+                <CardContent className="p-0">
+                  <div className="flex items-center space-x-3 mb-6">
+                    <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                      <span className="text-white font-bold">$</span>
+                    </div>
+                    <h3 className="font-heading text-2xl font-bold">Creator</h3>
+                  </div>
+                  
+                  <div className="mb-6">
+                    <div className="flex items-baseline space-x-2">
+                      <span className="font-heading text-5xl font-bold">$29</span>
+                      <span className="font-body text-muted-foreground">/mo</span>
+                      <Badge variant="secondary">0% transaction fee</Badge>
+                    </div>
+                    <p className="font-body text-sm text-muted-foreground mt-2">
+                      or ~$0.97/day
+                    </p>
+                  </div>
+
+                  <div className="space-y-6">
+                    <div>
+                      <h4 className="font-heading font-bold mb-3 text-primary">Build</h4>
+                      <div className="flex items-center space-x-3 mb-2">
+                        <span className="text-2xl">🏪</span>
+                        <span className="font-body">Digital Storefront</span>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-heading font-bold mb-3 text-primary">Sell</h4>
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-3">
+                          <span className="text-xl">📚</span>
+                          <span className="font-body">Digital Downloads</span>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <span className="text-xl">🎥</span>
+                          <span className="font-body">Video Courses</span>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <span className="text-xl">👨‍🏫</span>
+                          <span className="font-body">Coaching Calls</span>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <span className="text-xl">🌐</span>
+                          <span className="font-body">Webinars & Workshops</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h4 className="font-heading font-bold mb-3 text-primary">Grow</h4>
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-3">
+                          <span className="text-xl">📧</span>
+                          <span className="font-body">Email Marketing</span>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <span className="text-xl">📊</span>
+                          <span className="font-body">Analytics</span>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <span className="text-xl">💜</span>
+                          <span className="font-body">24/7 Support</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Button className="w-full mt-8" size="lg">
+                    Start Creating
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Creator Pro Plan */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <Card className="hover-lift p-8 h-full relative bg-gradient-subtle border-primary/20 shadow-glow">
+                <CardContent className="p-0">
+                  <div className="absolute -top-3 right-6">
+                    <Badge className="bg-primary text-white">Most Popular</Badge>
+                  </div>
+                  
+                  <div className="flex items-center space-x-3 mb-6">
+                    <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                      <span className="text-white font-bold">$</span>
+                    </div>
+                    <h3 className="font-heading text-2xl font-bold">Creator <span className="text-primary">Pro</span></h3>
+                  </div>
+                  
+                  <div className="mb-6">
+                    <div className="flex items-baseline space-x-2">
+                      <span className="font-heading text-5xl font-bold">$99</span>
+                      <span className="font-body text-muted-foreground">/mo</span>
+                      <Badge variant="secondary">0% transaction fee</Badge>
+                    </div>
+                    <p className="font-body text-sm text-muted-foreground mt-2">
+                      or ~$3.30/day
+                    </p>
+                  </div>
+
+                  <div className="bg-primary/10 rounded-lg p-4 mb-6">
+                    <p className="font-body font-medium text-center">
+                      Everything in the Stan Creator Plan, plus:
+                    </p>
+                  </div>
+
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-3">
+                      <span className="text-xl">🤖</span>
+                      <span className="font-body">AI Marketing Flows</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <span className="text-xl">📈</span>
+                      <span className="font-body">Order Bumps</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <span className="text-xl">🔗</span>
+                      <span className="font-body">Affiliate Links</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <span className="text-xl">📊</span>
+                      <span className="font-body">Pixel Tracking</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <span className="text-xl">⚡</span>
+                      <span className="font-body">Priority Support</span>
+                    </div>
+                  </div>
+
+                  <Button className="w-full mt-8 bg-primary hover:bg-primary/90" size="lg">
+                    Upgrade to Pro
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -258,25 +535,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 bg-background border-t border-border">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <div className="w-8 h-8 bg-gradient-hero rounded-lg flex items-center justify-center">
-                <span className="text-white font-heading font-bold text-lg">K</span>
-              </div>
-              <span className="font-heading text-xl font-bold text-foreground">
-                Kaizen Afrika
-              </span>
-            </div>
-            <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-8">
-              <p className="font-body text-muted-foreground">Support: +254-795-284-028</p>
-              <p className="font-body text-muted-foreground">kaizenafrika@gmail.com</p>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

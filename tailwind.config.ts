@@ -61,8 +61,8 @@ export default {
         },
       },
       fontFamily: {
-        heading: ['Libre Baskerville', 'serif'],
-        body: ['IBM Plex Mono', 'monospace'],
+        heading: ['IBM Plex Mono', 'monospace'],
+        body: ['Libre Baskerville', 'serif'],
         mono: ['IBM Plex Mono', 'monospace'],
       },
       backgroundImage: {
