@@ -167,8 +167,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Enhanced Features Section */}
-      <section className="py-20 bg-muted/30">
+      {/* Enhanced Interactive Features Section */}
+      <section className="py-20 bg-gradient-to-br from-slate-900 via-primary/90 to-slate-800 text-white">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -177,125 +177,171 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="font-heading text-4xl md:text-6xl font-bold text-foreground mb-6">
-              Run your digital storefront from one place.
+            <h2 className="font-heading text-4xl md:text-6xl font-bold text-white mb-6">
+              Where all-in-one meets best-in-class
             </h2>
-            <p className="font-body text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Maximize your potential, minimize your cost—we provide everything you need to grow your business your way.
+            <p className="font-body text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+              You don't need another tool. You need a platform to power your vision.
             </p>
           </motion.div>
 
-          {/* Feature Pills */}
+          {/* Interactive Feature Tabs */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="flex flex-wrap justify-center gap-4 mb-16"
+            className="flex flex-wrap justify-center gap-4 mb-12"
           >
             {[
-              "Courses", "Membership", "Webinars", "Coaching",
-              "Analytics", "AI Agent", "Auto DM", "Community"
+              { name: "Community", active: false },
+              { name: "Chat", active: false },
+              { name: "CRM", active: false },
+              { name: "Events", active: false },
+              { name: "Live", active: false },
+              { name: "Courses", active: true },
+              { name: "AI Agents", active: false },
+              { name: "Email Marketing", active: false },
+              { name: "Payments", active: false },
+              { name: "Website Builder", active: false }
             ].map((feature, index) => (
-              <motion.div
-                key={feature}
+              <motion.button
+                key={feature.name}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
                 viewport={{ once: true }}
-                className="px-6 py-3 bg-background border border-border rounded-full hover:shadow-elegant transition-all duration-300 hover:scale-105"
+                className={`px-6 py-3 rounded-full font-body font-medium transition-all duration-300 hover:scale-105 ${
+                  feature.active 
+                    ? 'bg-white text-primary shadow-lg' 
+                    : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'
+                }`}
               >
-                <span className="font-body font-medium text-foreground">{feature}</span>
-              </motion.div>
+                {feature.name}
+              </motion.button>
             ))}
           </motion.div>
 
-          {/* Detailed Features Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Feature Demonstration */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="max-w-6xl mx-auto"
+          >
+            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+              {/* Mock Interface Header */}
+              <div className="bg-slate-50 px-6 py-4 border-b border-gray-200">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                      <span className="text-white text-sm font-bold">✓</span>
+                    </div>
+                    <span className="font-body font-semibold text-slate-700">KaizenWellness</span>
+                  </div>
+                  <div className="flex items-center space-x-4 font-body text-sm text-slate-600">
+                    <span>Home</span>
+                    <span className="font-semibold text-primary">Courses</span>
+                    <span>Events</span>
+                    <span>Members</span>
+                    <span>Leaderboard</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Mock Course Interface */}
+              <div className="p-8">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="font-heading text-2xl font-bold text-slate-900">Courses</h3>
+                  <div className="flex items-center space-x-2">
+                    <button className="px-4 py-2 bg-slate-900 text-white rounded-full font-body text-sm font-medium">All</button>
+                    <button className="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-full font-body text-sm">Fitness</button>
+                    <button className="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-full font-body text-sm">Healing Circles</button>
+                    <button className="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-full font-body text-sm">Nutrition</button>
+                    <button className="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-full font-body text-sm">Guided Sessions</button>
+                    <button className="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-full font-body text-sm">More</button>
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-3 gap-6">
+                  {/* Course Card 1 */}
+                  <div className="bg-slate-50 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300">
+                    <div className="h-40 bg-gradient-to-br from-orange-400 to-pink-400"></div>
+                    <div className="p-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-medium">NEW</span>
+                      </div>
+                      <h4 className="font-body font-semibold text-slate-900 mb-2">Morning Yoga Flow</h4>
+                      <p className="font-body text-sm text-slate-600">Start your day with intention</p>
+                    </div>
+                  </div>
+
+                  {/* Course Card 2 */}
+                  <div className="bg-slate-50 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300">
+                    <div className="h-40 bg-gradient-to-br from-green-400 to-blue-400"></div>
+                    <div className="p-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-medium">NEW</span>
+                      </div>
+                      <h4 className="font-body font-semibold text-slate-900 mb-2">Mindful Nutrition</h4>
+                      <p className="font-body text-sm text-slate-600">Nourish your body and soul</p>
+                    </div>
+                  </div>
+
+                  {/* Course Card 3 */}
+                  <div className="bg-slate-50 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300">
+                    <div className="h-40 bg-gradient-to-br from-purple-400 to-indigo-400"></div>
+                    <div className="p-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-medium">NEW</span>
+                      </div>
+                      <h4 className="font-body font-semibold text-slate-900 mb-2">Deep Meditation</h4>
+                      <p className="font-body text-sm text-slate-600">Find inner peace and clarity</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Additional Features Grid */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true }}
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16"
+          >
             {[
               {
-                category: "Build",
                 icon: "🏪",
                 title: "Digital Storefront",
-                description: "Create your professional online presence with customizable storefronts"
+                description: "Create your professional online presence"
               },
               {
-                category: "Sell",
                 icon: "📚",
-                title: "Digital Downloads",
-                description: "Sell eBooks, templates, guides, and digital resources instantly"  
+                title: "Digital Products",
+                description: "Sell eBooks, courses, and digital resources"
               },
               {
-                category: "Sell",
-                icon: "🎥",
-                title: "Video Courses",
-                description: "Host and monetize comprehensive video course content"
+                icon: "👥",
+                title: "Community Building",
+                description: "Foster meaningful connections and engagement"
               },
               {
-                category: "Sell",
-                icon: "👨‍🏫",
-                title: "Coaching Calls",
-                description: "Offer 1:1 mentorship and consulting sessions"
-              },
-              {
-                category: "Sell",
-                icon: "🌐",
-                title: "Webinars & Workshops",
-                description: "Host live and recorded educational events"
-              },
-              {
-                category: "Grow",
-                icon: "📧",
-                title: "Email Marketing",
-                description: "Build and nurture your audience with powerful email campaigns"
-              },
-              {
-                category: "Grow", 
-                icon: "📊",
-                title: "Analytics",
-                description: "Track performance and optimize your creator business"
-              },
-              {
-                category: "Grow",
-                icon: "💜",
-                title: "24/7 Support",
-                description: "Get help whenever you need it with our dedicated support team"
-              },
-              {
-                category: "Pro",
-                icon: "🤖",
-                title: "AI Assistant",
-                description: "Generate content, optimize pricing, and get personalized recommendations"
+                icon: "🎯",
+                title: "Analytics & Insights",
+                description: "Track performance and optimize growth"
               }
             ].map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Card className="hover-lift p-6 h-full bg-background/80 backdrop-blur-sm">
-                  <CardContent className="p-0">
-                    <div className="flex items-start space-x-4">
-                      <div className="text-3xl">{feature.icon}</div>
-                      <div className="flex-1">
-                        <Badge variant="outline" className="mb-3 text-xs">
-                          {feature.category}
-                        </Badge>
-                        <h3 className="font-heading text-lg font-bold mb-2 text-foreground">
-                          {feature.title}
-                        </h3>
-                        <p className="font-body text-muted-foreground text-sm leading-relaxed">
-                          {feature.description}
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
+              <div key={feature.title} className="text-center p-6">
+                <div className="text-4xl mb-4">{feature.icon}</div>
+                <h4 className="font-heading font-bold text-white mb-2">{feature.title}</h4>
+                <p className="font-body text-white/70 text-sm">{feature.description}</p>
+              </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
