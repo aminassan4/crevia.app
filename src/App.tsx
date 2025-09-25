@@ -7,6 +7,10 @@ import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
 import Earn from "./pages/Earn";
 import Community from "./pages/Community";
+import Communities from "./pages/Communities";
+import CreateCommunity from "./pages/CreateCommunity";
+import Events from "./pages/Events";
+import CreateEvent from "./pages/CreateEvent";
 import Dashboard from "./pages/Dashboard";
 import CreateProduct from "./pages/CreateProduct";
 import NotFound from "./pages/NotFound";
@@ -20,6 +24,10 @@ const AppContent = () => (
       <Route path="/" element={<Home />} />
       <Route path="/earn" element={<Earn />} />
       <Route path="/community" element={<Community />} />
+      <Route path="/communities" element={<Communities />} />
+      <Route path="/create-community" element={<CreateCommunity />} />
+      <Route path="/events" element={<Events />} />
+      <Route path="/create-event" element={<CreateEvent />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/create-product" element={<CreateProduct />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

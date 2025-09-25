@@ -179,7 +179,7 @@ const Earn = () => {
                       ))}
                     </ul>
                     <Button variant="default" className="w-full" asChild>
-                      <Link to="/create-product">
+                      <Link to={section.title === "Communities" ? "/communities" : section.title === "Events" ? "/events" : "/create-product"}>
                         Get Started
                       </Link>
                     </Button>
