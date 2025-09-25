@@ -19,6 +19,7 @@ import {
   CreditCard,
   Globe
 } from "lucide-react";
+import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -644,8 +645,10 @@ const Home = () => {
                     </div>
                   </div>
 
-                  <Button className="w-full mt-8" size="lg">
-                    Start Creating
+                  <Button className="w-full mt-8" size="lg" asChild>
+                    <Link to="/create-product">
+                      Start Creating
+                    </Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -711,8 +714,10 @@ const Home = () => {
                     </div>
                   </div>
 
-                  <Button className="w-full mt-8 bg-primary hover:bg-primary/90" size="lg">
-                    Upgrade to Pro
+                  <Button className="w-full mt-8 bg-primary hover:bg-primary/90" size="lg" asChild>
+                    <Link to="/create-product">
+                      Upgrade to Pro
+                    </Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -766,9 +771,11 @@ const Home = () => {
             <p className="font-body text-xl text-white/90 mb-8 max-w-2xl mx-auto">
               Join thousands of African creators building wealth and freedom through community and creativity.
             </p>
-            <Button variant="glass" size="xl" className="group">
-              Start Your Journey
-              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+            <Button variant="glass" size="xl" className="group" asChild>
+              <Link to="/dashboard">
+                Start Your Journey
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </Button>
           </motion.div>
         </div>

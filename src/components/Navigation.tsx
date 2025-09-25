@@ -3,9 +3,13 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import SignInModal from "@/components/auth/SignInModal";
+import SignUpModal from "@/components/auth/SignUpModal";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showSignIn, setShowSignIn] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
   const location = useLocation();
 
   const navLinks = [
@@ -74,11 +78,11 @@ const Navigation = () => {
 
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="sm" onClick={() => setShowSignIn(true)}>
               <User className="w-4 h-4 mr-2" />
               Sign In
             </Button>
-            <Button variant="hero" size="sm">
+            <Button variant="hero" size="sm" onClick={() => setShowSignUp(true)}>
               Join Kaizen
             </Button>
           </div>
@@ -130,11 +134,11 @@ const Navigation = () => {
                   )
                 ))}
                 <div className="flex flex-col space-y-2 pt-4">
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" onClick={() => { setShowSignIn(true); setIsOpen(false); }}>
                     <User className="w-4 h-4 mr-2" />
                     Sign In
                   </Button>
-                  <Button variant="hero" size="sm">
+                  <Button variant="hero" size="sm" onClick={() => { setShowSignUp(true); setIsOpen(false); }}>
                     Join Kaizen
                   </Button>
                 </div>
@@ -143,6 +147,24 @@ const Navigation = () => {
           )}
         </AnimatePresence>
       </div>
+      
+      {/* Auth Modals */}
+      <SignInModal 
+        open={showSignIn} 
+        onOpenChange={setShowSignIn}
+        onSwitchToSignUp={() => {
+          setShowSignIn(false);
+          setShowSignUp(true);
+        }}
+      />
+      <SignUpModal 
+        open={showSignUp} 
+        onOpenChange={setShowSignUp}
+        onSwitchToSignIn={() => {
+          setShowSignUp(false);
+          setShowSignIn(true);
+        }}
+      />
     </nav>
   );
 };

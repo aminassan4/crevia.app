@@ -13,6 +13,7 @@ import {
   ArrowRight
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
 
 const Community = () => {
@@ -110,7 +111,10 @@ const Community = () => {
               Building Africa's largest community of creators, entrepreneurs, and innovators. 
               Together, we're shaping the future of work on our continent.
             </p>
-            <Button variant="hero" size="xl">
+            <Button variant="hero" size="xl" onClick={() => {
+              // TODO: Implement community joining with Supabase
+              console.log("Join community movement");
+            }}>
               <Users className="w-5 h-5 mr-2" />
               Join Our Movement
             </Button>
@@ -232,7 +236,10 @@ const Community = () => {
                         👥 {program.students} students enrolled
                       </p>
                     </div>
-                    <Button variant="default" className="w-full">
+                    <Button variant="default" className="w-full" onClick={() => {
+                      // TODO: Implement course enrollment with Supabase
+                      console.log("Enroll in program:", program.title);
+                    }}>
                       Enroll Now
                     </Button>
                   </CardContent>
@@ -339,7 +346,10 @@ const Community = () => {
                     <p className="font-body text-sm text-muted-foreground mb-4">
                       Available in: {item.colors.join(", ")}
                     </p>
-                    <Button variant="default" className="w-full">
+                    <Button variant="default" className="w-full" onClick={() => {
+                      // TODO: Implement shopping cart with Supabase
+                      console.log("Add to cart:", item.title);
+                    }}>
                       Add to Cart
                     </Button>
                   </CardContent>
@@ -369,11 +379,17 @@ const Community = () => {
               Your donation directly supports community programs and free educational content.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-              <Button variant="glass" size="xl">
+              <Button variant="glass" size="xl" onClick={() => {
+                // TODO: Implement donation system with Supabase/Stripe
+                console.log("Make donation");
+              }}>
                 <DollarSign className="w-5 h-5 mr-2" />
                 Make a Donation
               </Button>
-              <Button variant="outline" size="xl" className="bg-white text-primary hover:bg-white/90">
+              <Button variant="outline" size="xl" className="bg-white text-primary hover:bg-white/90" onClick={() => {
+                // TODO: Implement learn more functionality
+                console.log("Learn more about donations");
+              }}>
                 Learn More
               </Button>
             </div>

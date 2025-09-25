@@ -12,6 +12,7 @@ import {
   Play
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
 
 const Earn = () => {
@@ -117,12 +118,16 @@ const Earn = () => {
               Multiple ways to monetize your skills and knowledge. Build communities, sell digital products, and host events.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-              <Button variant="hero" size="xl">
-                <Plus className="w-5 h-5 mr-2" />
-                Create Your First Product
+              <Button variant="hero" size="xl" asChild>
+                <Link to="/create-product">
+                  <Plus className="w-5 h-5 mr-2" />
+                  Create Your First Product
+                </Link>
               </Button>
-              <Button variant="outline" size="xl">
-                Join a Community
+              <Button variant="outline" size="xl" asChild>
+                <Link to="/community">
+                  Join a Community
+                </Link>
               </Button>
             </div>
           </motion.div>
@@ -173,8 +178,10 @@ const Earn = () => {
                         </li>
                       ))}
                     </ul>
-                    <Button variant="default" className="w-full">
-                      Get Started
+                    <Button variant="default" className="w-full" asChild>
+                      <Link to="/create-product">
+                        Get Started
+                      </Link>
                     </Button>
                   </CardContent>
                 </Card>
@@ -286,7 +293,10 @@ const Earn = () => {
                         👥 {event.attendees} expected attendees
                       </p>
                     </div>
-                    <Button variant="default" className="w-full">
+                    <Button variant="default" className="w-full" onClick={() => {
+                      // TODO: Implement event registration with Supabase
+                      console.log("Register for event:", event.title);
+                    }}>
                       Register Now
                     </Button>
                   </CardContent>
