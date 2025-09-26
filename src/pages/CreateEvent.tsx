@@ -17,7 +17,13 @@ import {
   Clock,
   Globe,
   Ticket,
-  Settings
+  Settings,
+  Palette,
+  Type,
+  Sparkles,
+  RefreshCw,
+  Camera,
+  Zap
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -27,6 +33,9 @@ const CreateEvent = () => {
   const [eventType, setEventType] = useState("");
   const [isVirtual, setIsVirtual] = useState(false);
   const [isPaid, setIsPaid] = useState(false);
+  const [selectedTheme, setSelectedTheme] = useState("minimal");
+  const [selectedColor, setSelectedColor] = useState("primary");
+  const [selectedFont, setSelectedFont] = useState("Inter");
 
   const eventCategories = [
     { id: "workshop", label: "Workshop" },
@@ -37,6 +46,69 @@ const CreateEvent = () => {
     { id: "bootcamp", label: "Bootcamp" },
     { id: "summit", label: "Summit" },
     { id: "meetup", label: "Meetup" }
+  ];
+
+  const eventThemes = [
+    {
+      id: "minimal",
+      name: "Minimal",
+      preview: "bg-gradient-to-br from-slate-50 to-slate-100",
+      color: "from-slate-400 to-slate-600"
+    },
+    {
+      id: "quantum",
+      name: "Quantum", 
+      preview: "bg-gradient-to-br from-blue-100 to-cyan-100",
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      id: "warp",
+      name: "Warp",
+      preview: "bg-gradient-to-br from-purple-100 to-pink-100", 
+      color: "from-purple-600 to-pink-600"
+    },
+    {
+      id: "emoji",
+      name: "Emoji",
+      preview: "bg-gradient-to-br from-yellow-100 to-orange-100",
+      color: "from-yellow-500 to-orange-500"
+    },
+    {
+      id: "confetti", 
+      name: "Confetti",
+      preview: "bg-gradient-to-br from-pink-100 to-purple-100",
+      color: "from-pink-500 to-purple-500"
+    },
+    {
+      id: "pattern",
+      name: "Pattern", 
+      preview: "bg-gradient-to-br from-indigo-100 to-blue-100",
+      color: "from-indigo-500 to-blue-500"
+    },
+    {
+      id: "seasonal",
+      name: "Seasonal",
+      preview: "bg-gradient-to-br from-green-100 to-teal-100",
+      color: "from-green-500 to-teal-500"
+    }
+  ];
+
+  const colorOptions = [
+    { id: "primary", name: "Primary", color: "bg-primary" },
+    { id: "secondary", name: "Secondary", color: "bg-secondary" },
+    { id: "blue", name: "Ocean Blue", color: "bg-blue-500" },
+    { id: "purple", name: "Royal Purple", color: "bg-purple-500" },
+    { id: "green", name: "Forest Green", color: "bg-green-500" },
+    { id: "pink", name: "Rose Pink", color: "bg-pink-500" },
+    { id: "orange", name: "Sunset Orange", color: "bg-orange-500" }
+  ];
+
+  const fontOptions = [
+    { id: "inter", name: "Inter", style: "font-sans" },
+    { id: "roboto", name: "Roboto", style: "font-sans" },
+    { id: "poppins", name: "Poppins", style: "font-sans" },
+    { id: "playfair", name: "Playfair Display", style: "font-serif" },
+    { id: "merriweather", name: "Merriweather", style: "font-serif" }
   ];
 
   const features = [
@@ -89,7 +161,121 @@ const CreateEvent = () => {
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Main Form */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2 space-y-8">
+              {/* Event Preview */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <Card className="overflow-hidden">
+                  <div className={`h-48 ${eventThemes.find(t => t.id === selectedTheme)?.preview} flex items-center justify-center relative`}>
+                    <div className={`absolute inset-0 bg-gradient-to-br ${eventThemes.find(t => t.id === selectedTheme)?.color} opacity-20`} />
+                    <div className="text-center z-10">
+                      <h3 className="text-3xl font-bold text-foreground mb-2">Event Name</h3>
+                      <p className="text-muted-foreground">Fri, Sep 26 • 12:30 GMT+03:00</p>
+                    </div>
+                    <Camera className="absolute top-4 right-4 w-8 h-8 text-foreground/60 hover:text-foreground cursor-pointer transition-colors" />
+                  </div>
+                </Card>
+              </motion.div>
+              
+              {/* Theme Selection */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                <Card className="p-6">
+                  <div className="flex items-center space-x-3 mb-6">
+                    <Sparkles className="w-6 h-6 text-primary" />
+                    <h3 className="font-heading text-xl font-semibold">Event Theme</h3>
+                  </div>
+                  
+                  <div className="grid grid-cols-7 gap-3 mb-6">
+                    {eventThemes.map((theme) => (
+                      <motion.div
+                        key={theme.id}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className={`relative cursor-pointer rounded-lg overflow-hidden ${
+                          selectedTheme === theme.id ? 'ring-2 ring-primary' : ''
+                        }`}
+                        onClick={() => setSelectedTheme(theme.id)}
+                      >
+                        <div className={`aspect-square ${theme.preview} flex items-center justify-center`}>
+                          <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${theme.color}`} />
+                        </div>
+                        <p className="text-xs text-center mt-2 font-medium">{theme.name}</p>
+                        {theme.id === "seasonal" && (
+                          <Badge className="absolute -top-1 -right-1 text-xs px-1 py-0.5 bg-primary">NEW</Badge>
+                        )}
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* Color & Style Options */}
+                  <div className="grid md:grid-cols-3 gap-6">
+                    <div>
+                      <Label className="flex items-center space-x-2 mb-3">
+                        <Palette className="w-4 h-4 text-primary" />
+                        <span>Color</span>
+                      </Label>
+                      <Select value={selectedColor} onValueChange={setSelectedColor}>
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {colorOptions.map((color) => (
+                            <SelectItem key={color.id} value={color.id}>
+                              <div className="flex items-center space-x-2">
+                                <div className={`w-4 h-4 rounded-full ${color.color}`} />
+                                <span>{color.name}</span>
+                              </div>
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <Label className="flex items-center space-x-2 mb-3">
+                        <Type className="w-4 h-4 text-primary" />
+                        <span>Font</span>
+                      </Label>
+                      <Select value={selectedFont} onValueChange={setSelectedFont}>
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {fontOptions.map((font) => (
+                            <SelectItem key={font.id} value={font.id}>
+                              <span className={font.style}>{font.name}</span>
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <Label className="flex items-center space-x-2 mb-3">
+                        <Zap className="w-4 h-4 text-primary" />
+                        <span>Display</span>
+                      </Label>
+                      <Select defaultValue="auto">
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="auto">Auto</SelectItem>
+                          <SelectItem value="light">Light Mode</SelectItem>
+                          <SelectItem value="dark">Dark Mode</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                </Card>
+              </motion.div>
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
