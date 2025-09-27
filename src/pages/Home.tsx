@@ -130,7 +130,7 @@ const Home = () => {
       </section>
 
       {/* Success Stories */}
-      <section className="py-20">
+      <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -139,42 +139,103 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Success Stories
+            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Trusted by African Creators</Badge>
+            <h2 className="font-heading text-4xl md:text-6xl font-bold text-foreground mb-6">
+              Empowering 25,000+ <br />
+              <span className="bg-gradient-hero bg-clip-text text-transparent">African Creators</span>
             </h2>
-            <p className="font-body text-xl text-muted-foreground">
-              Real creators achieving real results
+            <p className="font-body text-xl text-muted-foreground max-w-2xl mx-auto">
+              Real creators, real transformations, real impact across the continent
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          {/* Featured Success Stories Grid */}
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
             {successStories.map((story, index) => (
               <motion.div
                 key={story.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: index * 0.15 }}
                 viewport={{ once: true }}
+                className="group"
               >
-                <Card className="hover-lift p-6">
-                  <CardContent className="p-0">
-                    <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 bg-gradient-hero rounded-full flex items-center justify-center text-white font-heading font-bold mr-4">
+                <Card className="hover-lift p-8 bg-background/80 backdrop-blur-sm border-primary/10 hover:border-primary/30 transition-all duration-300 group-hover:shadow-2xl">
+                  <CardContent className="p-0 text-center">
+                    {/* Large Avatar */}
+                    <div className="relative mb-6">
+                      <div className="w-20 h-20 bg-gradient-hero rounded-full flex items-center justify-center text-white font-heading font-bold text-2xl mx-auto shadow-lg group-hover:scale-110 transition-transform duration-300">
                         {story.avatar}
                       </div>
-                      <div>
-                        <h4 className="font-heading font-bold">{story.name}</h4>
-                        <p className="font-body text-sm text-muted-foreground">{story.role}</p>
+                      <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-background flex items-center justify-center">
+                        <CheckCircle className="w-4 h-4 text-white" />
                       </div>
                     </div>
-                    <p className="font-body text-muted-foreground leading-relaxed">
-                      "{story.story}"
-                    </p>
+
+                    {/* Creator Info */}
+                    <div className="mb-6">
+                      <h3 className="font-heading text-xl font-bold text-foreground mb-1">{story.name}</h3>
+                      <p className="font-body text-primary font-medium mb-3">{story.role}</p>
+                      
+                      {/* Metrics Badge */}
+                      <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
+                        <Star className="w-4 h-4 fill-current" />
+                        <span>Success Story</span>
+                      </div>
+                    </div>
+
+                    {/* Testimonial */}
+                    <div className="relative">
+                      <Quote className="w-8 h-8 text-primary/30 absolute -top-2 -left-2" />
+                      <blockquote className="font-body text-muted-foreground leading-relaxed italic text-lg relative z-10">
+                        {story.story}
+                      </blockquote>
+                    </div>
+
+                    {/* Achievement Highlight */}
+                    <div className="mt-6 pt-6 border-t border-primary/10">
+                      <div className="flex items-center justify-center space-x-4 text-sm">
+                        <div className="flex items-center space-x-1 text-green-600">
+                          <ArrowRight className="w-4 h-4" />
+                          <span className="font-semibold">
+                            {index === 0 && "300% Income Boost"}
+                            {index === 1 && "10K+ Community"}  
+                            {index === 2 && "6-Figure Creator"}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
             ))}
           </div>
+
+          {/* Community Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center"
+          >
+            <div className="p-6">
+              <div className="font-heading text-4xl font-bold text-primary mb-2">25K+</div>
+              <p className="font-body text-muted-foreground">Active Creators</p>
+            </div>
+            <div className="p-6">
+              <div className="font-heading text-4xl font-bold text-secondary mb-2">₦2.8B</div>
+              <p className="font-body text-muted-foreground">Revenue Generated</p>
+            </div>
+            <div className="p-6">
+              <div className="font-heading text-4xl font-bold text-primary mb-2">54</div>
+              <p className="font-body text-muted-foreground">Countries Reached</p>
+            </div>
+            <div className="p-6">
+              <div className="font-heading text-4xl font-bold text-secondary mb-2">98%</div>
+              <p className="font-body text-muted-foreground">Success Rate</p>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -561,7 +622,7 @@ const Home = () => {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-20">
+      <section id="pricing" className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -570,173 +631,157 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
+            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Choose Your Path</Badge>
             <h2 className="font-heading text-4xl md:text-6xl font-bold text-foreground mb-6">
-              What kind of Creator are you?
+              Start Free, Scale Fast
             </h2>
-            <p className="font-body text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8">
-              Maximize your potential, minimize your cost—we provide everything you need to grow your business your way.
+            <p className="font-body text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Join thousands of African creators. Start building your empire today, upgrade when you're ready to dominate.
             </p>
-            
-            {/* Pricing Toggle */}
-            <div className="flex items-center justify-center space-x-4 mb-12">
-              <Button variant="default" className="px-8 py-3">
-                Monthly
-              </Button>
-              <Button variant="outline" className="px-8 py-3">
-                Annual <span className="text-primary ml-2">(save 20%)</span>
-              </Button>
-            </div>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* Creator Plan */}
+            {/* Free Plan */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <Card className="hover-lift p-8 h-full relative bg-background">
+              <Card className="hover-lift p-8 h-full relative bg-background border-2">
                 <CardContent className="p-0">
                   <div className="flex items-center space-x-3 mb-6">
-                    <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                      <span className="text-white font-bold">$</span>
+                    <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                      <span className="text-white font-bold text-xl">✨</span>
                     </div>
-                    <h3 className="font-heading text-2xl font-bold">Creator</h3>
+                    <div>
+                      <h3 className="font-heading text-2xl font-bold">Free Starter</h3>
+                      <p className="font-body text-sm text-muted-foreground">Perfect to get started</p>
+                    </div>
                   </div>
                   
-                  <div className="mb-6">
-                    <div className="flex items-baseline space-x-2">
-                      <span className="font-heading text-5xl font-bold">$29</span>
-                      <span className="font-body text-muted-foreground">/mo</span>
-                      <Badge variant="secondary">0% transaction fee</Badge>
+                  <div className="mb-8">
+                    <div className="flex items-baseline space-x-2 mb-2">
+                      <span className="font-heading text-5xl font-bold text-green-600">$0</span>
+                      <span className="font-body text-muted-foreground">/forever</span>
                     </div>
-                    <p className="font-body text-sm text-muted-foreground mt-2">
-                      or ~$0.97/day
-                    </p>
-                  </div>
-
-                  <div className="space-y-6">
-                    <div>
-                      <h4 className="font-heading font-bold mb-3 text-primary">Build</h4>
-                      <div className="flex items-center space-x-3 mb-2">
-                        <span className="text-2xl">🏪</span>
-                        <span className="font-body">Digital Storefront</span>
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <h4 className="font-heading font-bold mb-3 text-primary">Sell</h4>
-                      <div className="space-y-2">
-                        <div className="flex items-center space-x-3">
-                          <span className="text-xl">📚</span>
-                          <span className="font-body">Digital Downloads</span>
-                        </div>
-                        <div className="flex items-center space-x-3">
-                          <span className="text-xl">🎥</span>
-                          <span className="font-body">Video Courses</span>
-                        </div>
-                        <div className="flex items-center space-x-3">
-                          <span className="text-xl">👨‍🏫</span>
-                          <span className="font-body">Coaching Calls</span>
-                        </div>
-                        <div className="flex items-center space-x-3">
-                          <span className="text-xl">🌐</span>
-                          <span className="font-body">Webinars & Workshops</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="font-heading font-bold mb-3 text-primary">Grow</h4>
-                      <div className="space-y-2">
-                        <div className="flex items-center space-x-3">
-                          <span className="text-xl">📧</span>
-                          <span className="font-body">Email Marketing</span>
-                        </div>
-                        <div className="flex items-center space-x-3">
-                          <span className="text-xl">📊</span>
-                          <span className="font-body">Analytics</span>
-                        </div>
-                        <div className="flex items-center space-x-3">
-                          <span className="text-xl">💜</span>
-                          <span className="font-body">24/7 Support</span>
-                        </div>
-                      </div>
+                    <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
+                      <p className="font-body text-sm text-amber-800">
+                        <strong>5% transaction fee</strong> on each sale
+                      </p>
                     </div>
                   </div>
 
-                  <Button className="w-full mt-8" size="lg" asChild>
-                    <Link to="/create-product">
-                      Start Creating
+                  <div className="space-y-4 mb-8">
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="w-5 h-5 text-green-600" />
+                      <span className="font-body">Basic Digital Storefront</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="w-5 h-5 text-green-600" />
+                      <span className="font-body">Sell Digital Products</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="w-5 h-5 text-green-600" />
+                      <span className="font-body">Community Access</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="w-5 h-5 text-green-600" />
+                      <span className="font-body">Host Events</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="w-5 h-5 text-green-600" />
+                      <span className="font-body">Basic Analytics</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="w-5 h-5 text-green-600" />
+                      <span className="font-body">Email Support</span>
+                    </div>
+                  </div>
+
+                  <Button className="w-full bg-green-600 hover:bg-green-700 text-white" size="lg" asChild>
+                    <Link to="#pricing">
+                      Start Free Today
                     </Link>
                   </Button>
                 </CardContent>
               </Card>
             </motion.div>
 
-            {/* Creator Pro Plan */}
+            {/* Pro Plan */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <Card className="hover-lift p-8 h-full relative bg-gradient-subtle border-primary/20 shadow-glow">
+              <Card className="hover-lift p-8 h-full relative bg-gradient-subtle border-2 border-primary shadow-glow">
                 <CardContent className="p-0">
                   <div className="absolute -top-3 right-6">
-                    <Badge className="bg-primary text-white">Most Popular</Badge>
+                    <Badge className="bg-primary text-white px-4 py-1">Most Popular</Badge>
                   </div>
                   
                   <div className="flex items-center space-x-3 mb-6">
-                    <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                      <span className="text-white font-bold">$</span>
+                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+                      <span className="text-white font-bold text-xl">🚀</span>
                     </div>
-                    <h3 className="font-heading text-2xl font-bold">Creator <span className="text-primary">Pro</span></h3>
+                    <div>
+                      <h3 className="font-heading text-2xl font-bold">Creator <span className="text-primary">Pro</span></h3>
+                      <p className="font-body text-sm text-muted-foreground">For serious creators</p>
+                    </div>
                   </div>
                   
-                  <div className="mb-6">
-                    <div className="flex items-baseline space-x-2">
-                      <span className="font-heading text-5xl font-bold">$99</span>
-                      <span className="font-body text-muted-foreground">/mo</span>
-                      <Badge variant="secondary">0% transaction fee</Badge>
+                  <div className="mb-8">
+                    <div className="flex items-baseline space-x-2 mb-2">
+                      <span className="font-heading text-5xl font-bold text-primary">$20</span>
+                      <span className="font-body text-muted-foreground">/month</span>
                     </div>
-                    <p className="font-body text-sm text-muted-foreground mt-2">
-                      or ~$3.30/day
+                    <div className="bg-primary/10 border border-primary/20 rounded-lg p-3">
+                      <p className="font-body text-sm text-primary font-semibold">
+                        ✅ <strong>0% transaction fees</strong> - Keep everything you earn!
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="bg-primary/5 rounded-lg p-4 mb-6">
+                    <p className="font-body font-medium text-center text-primary">
+                      Everything in Free, plus:
                     </p>
                   </div>
 
-                  <div className="bg-primary/10 rounded-lg p-4 mb-6">
-                    <p className="font-body font-medium text-center">
-                      Everything in the Stan Creator Plan, plus:
-                    </p>
+                  <div className="space-y-4 mb-8">
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="w-5 h-5 text-primary" />
+                      <span className="font-body"><strong>Profile Badges</strong> & Verification</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="w-5 h-5 text-primary" />
+                      <span className="font-body">Advanced Analytics & Insights</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="w-5 h-5 text-primary" />
+                      <span className="font-body">Custom Branding Options</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="w-5 h-5 text-primary" />
+                      <span className="font-body">Priority Customer Support</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="w-5 h-5 text-primary" />
+                      <span className="font-body">Advanced Marketing Tools</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="w-5 h-5 text-primary" />
+                      <span className="font-body">Affiliate Program Access</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="w-5 h-5 text-primary" />
+                      <span className="font-body">Early Access to New Features</span>
+                    </div>
                   </div>
 
-                  <div className="space-y-3">
-                    <div className="flex items-center space-x-3">
-                      <span className="text-xl">🤖</span>
-                      <span className="font-body">AI Marketing Flows</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <span className="text-xl">📈</span>
-                      <span className="font-body">Order Bumps</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <span className="text-xl">🔗</span>
-                      <span className="font-body">Affiliate Links</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <span className="text-xl">📊</span>
-                      <span className="font-body">Pixel Tracking</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <span className="text-xl">⚡</span>
-                      <span className="font-body">Priority Support</span>
-                    </div>
-                  </div>
-
-                  <Button className="w-full mt-8 bg-primary hover:bg-primary/90" size="lg" asChild>
-                    <Link to="/create-product">
+                  <Button className="w-full bg-primary hover:bg-primary/90 text-white" size="lg" asChild>
+                    <Link to="#pricing">
                       Upgrade to Pro
                     </Link>
                   </Button>
@@ -744,6 +789,24 @@ const Home = () => {
               </Card>
             </motion.div>
           </div>
+
+          {/* Additional Info */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="text-center mt-12"
+          >
+            <p className="font-body text-muted-foreground mb-4">
+              ✨ Start free, upgrade anytime. No contracts, cancel whenever you want.
+            </p>
+            <div className="flex items-center justify-center space-x-6 text-sm text-muted-foreground">
+              <span>✅ 7-day money-back guarantee</span>
+              <span>✅ Instant account setup</span>
+              <span>✅ Migration support included</span>
+            </div>
+          </motion.div>
         </div>
       </section>
 
