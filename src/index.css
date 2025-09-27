@@ -132,7 +132,7 @@ All colors MUST be HSL. Fonts: Libre Baskerville (headlines), IBM Plex Mono (bod
   }
 
   body {
-    @apply bg-background text-foreground font-mono;
+    @apply bg-background text-foreground font-mono text-base;
     font-family: 'IBM Plex Mono', monospace;
   }
 

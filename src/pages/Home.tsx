@@ -206,15 +206,9 @@ const Home = () => {
           >
             {[
               { name: "Community", demo: "community" },
-              { name: "Chat", demo: "chat" },
-              { name: "CRM", demo: "crm" },
               { name: "Events", demo: "events" },
-              { name: "Live", demo: "live" },
-              { name: "Courses", demo: "courses" },
-              { name: "AI Agents", demo: "ai" },
-              { name: "Email Marketing", demo: "email" },
-              { name: "Payments", demo: "payments" },
-              { name: "Website Builder", demo: "website" }
+              { name: "Digital Products", demo: "products" },
+              { name: "Courses", demo: "courses" }
             ].map((feature, index) => (
               <motion.button
                 key={feature.name}
@@ -256,15 +250,9 @@ const Home = () => {
                     <span>Home</span>
                     <span className={`font-semibold ${activeFeature === 'courses' ? 'text-primary' : 'text-slate-600'}`}>
                       {activeFeature === 'community' && 'Community'}
-                      {activeFeature === 'chat' && 'Chat'}
-                      {activeFeature === 'crm' && 'CRM'}
                       {activeFeature === 'events' && 'Events'}
-                      {activeFeature === 'live' && 'Live'}
+                      {activeFeature === 'products' && 'Digital Products'}
                       {activeFeature === 'courses' && 'Courses'}
-                      {activeFeature === 'ai' && 'AI'}
-                      {activeFeature === 'email' && 'Email'}
-                      {activeFeature === 'payments' && 'Payments'}
-                      {activeFeature === 'website' && 'Website'}
                     </span>
                     <span>Members</span>
                     <span>Leaderboard</span>
@@ -316,6 +304,39 @@ const Home = () => {
                         <div className="flex space-x-2">
                           <span className="bg-primary/10 text-primary px-2 py-1 rounded text-xs">Active</span>
                           <span className="bg-slate-200 text-slate-600 px-2 py-1 rounded text-xs">Design</span>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {activeFeature === 'products' && (
+                  <>
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="font-heading text-2xl font-bold text-slate-900">Digital Products</h3>
+                      <ShoppingBag className="w-6 h-6 text-primary" />
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="bg-slate-50 rounded-xl p-6">
+                        <div className="h-32 bg-gradient-to-br from-primary to-secondary rounded-lg mb-4 flex items-center justify-center">
+                          <BookOpen className="w-12 h-12 text-white" />
+                        </div>
+                        <h4 className="font-body font-semibold text-slate-900 mb-2">Design Course Bundle</h4>
+                        <p className="font-body text-sm text-slate-600 mb-3">Complete guide to UI/UX design</p>
+                        <div className="flex items-center justify-between">
+                          <span className="font-heading text-xl font-bold text-primary">$199</span>
+                          <Badge variant="outline" className="text-green-600 border-green-600">Best Seller</Badge>
+                        </div>
+                      </div>
+                      <div className="bg-slate-50 rounded-xl p-6">
+                        <div className="h-32 bg-gradient-to-br from-secondary to-primary rounded-lg mb-4 flex items-center justify-center">
+                          <span className="text-white font-bold text-2xl">📄</span>
+                        </div>
+                        <h4 className="font-body font-semibold text-slate-900 mb-2">Business Templates</h4>
+                        <p className="font-body text-sm text-slate-600 mb-3">25+ ready-to-use templates</p>
+                        <div className="flex items-center justify-between">
+                          <span className="font-heading text-xl font-bold text-primary">$49</span>
+                          <Badge variant="outline">New</Badge>
                         </div>
                       </div>
                     </div>

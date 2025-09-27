@@ -306,59 +306,6 @@ const Community = () => {
         </div>
       </section>
 
-      {/* Merchandise */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-6">
-              <ShoppingBag className="w-12 h-12 inline-block mr-4 text-primary" />
-              Kaizen Merch
-            </h2>
-            <p className="font-body text-xl text-muted-foreground">
-              Wear your story with pride
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {merchItems.map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                viewport={{ once: true }}
-              >
-                <Card className="hover-lift overflow-hidden">
-                  <div className="h-64 bg-gradient-hero flex items-center justify-center">
-                    <ShoppingBag className="w-20 h-20 text-white" />
-                  </div>
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="font-heading text-xl font-bold">{item.title}</h3>
-                      <span className="font-heading text-2xl font-bold text-primary">{item.price}</span>
-                    </div>
-                    <p className="font-body text-sm text-muted-foreground mb-4">
-                      Available in: {item.colors.join(", ")}
-                    </p>
-                    <Button variant="default" className="w-full" onClick={() => {
-                      // TODO: Implement shopping cart with Supabase
-                      console.log("Add to cart:", item.title);
-                    }}>
-                      Add to Cart
-                    </Button>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Donation Section */}
       <section className="py-20 bg-gradient-hero">
