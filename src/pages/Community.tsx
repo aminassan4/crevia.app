@@ -71,10 +71,10 @@ const AutoScrollEventGallery = () => {
         {allPhotos.map((photo, index) => (
           <div 
             key={`${photo.id}-${index}`}
-            className="flex-shrink-0 w-80"
+            className="flex-shrink-0 w-80 group"
           >
-            <div className={`h-96 bg-gradient-to-br ${photo.gradient} rounded-2xl flex items-end p-6 hover-lift`}>
-              <div className="bg-black/60 backdrop-blur-sm rounded-xl p-4 w-full">
+            <div className={`h-96 bg-gradient-to-br ${photo.gradient} rounded-2xl flex items-end p-6 hover-lift relative overflow-hidden`}>
+              <div className="bg-black/60 backdrop-blur-sm rounded-xl p-4 w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <p className="font-heading text-white font-semibold text-lg">
                   {photo.title}
                 </p>
@@ -217,7 +217,7 @@ const Community = () => {
             className="text-center mb-12"
           >
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Community <span className="bg-gradient-hero bg-clip-text text-transparent">In Action</span>
+              About <span className="bg-gradient-hero bg-clip-text text-transparent">In Action</span>
             </h2>
             <p className="font-body text-xl text-muted-foreground">
               Moments captured from our events across Africa
@@ -237,7 +237,7 @@ const Community = () => {
             className="text-center max-w-3xl mx-auto"
           >
             <h1 className="font-heading text-5xl md:text-6xl font-bold text-foreground mb-6">
-              Our <span className="bg-gradient-hero bg-clip-text text-transparent">Community</span>
+              About <span className="bg-gradient-hero bg-clip-text text-transparent">Us</span>
             </h1>
             <p className="font-body text-xl text-muted-foreground mb-8">
               Building Africa's largest community of creators, entrepreneurs, and innovators. 

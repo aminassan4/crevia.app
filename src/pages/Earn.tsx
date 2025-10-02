@@ -158,68 +158,6 @@ const Earn = () => {
         </div>
       </section>
 
-      {/* Featured Communities */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
-                Featured Communities
-              </h2>
-            </div>
-            <p className="font-body text-xl text-muted-foreground mb-6">
-              Join thriving communities of like-minded creators
-            </p>
-            <Button variant="outline" size="lg" asChild>
-              <Link to="/communities">
-                See All Communities
-              </Link>
-            </Button>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8 mt-12">
-            {featuredCommunities.map((community, index) => (
-              <motion.div
-                key={community.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                viewport={{ once: true }}
-              >
-                <Card className="hover-lift overflow-hidden h-full">
-                  <div className={`h-40 bg-${community.image} flex items-center justify-center`}>
-                    <Users className="w-16 h-16 text-white" />
-                  </div>
-                  <CardContent className="p-6">
-                    <div className="mb-3">
-                      <Badge variant="secondary">{community.category}</Badge>
-                    </div>
-                    <h3 className="font-heading text-xl font-bold mb-2">{community.name}</h3>
-                    <p className="font-body text-sm text-muted-foreground mb-4">
-                      {community.description}
-                    </p>
-                    <div className="flex items-center justify-between pt-4 border-t">
-                      <span className="font-body text-sm text-muted-foreground">
-                        👥 {community.members.toLocaleString()} members
-                      </span>
-                      <Button variant="ghost" size="sm" asChild>
-                        <Link to="/communities">Join</Link>
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Earning Methods */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
@@ -395,6 +333,68 @@ const Earn = () => {
                     }}>
                       Register Now
                     </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Communities */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
+                Featured Communities
+              </h2>
+            </div>
+            <p className="font-body text-xl text-muted-foreground mb-6">
+              Join thriving communities of like-minded creators
+            </p>
+            <Button variant="outline" size="lg" asChild>
+              <Link to="/communities">
+                See All Communities
+              </Link>
+            </Button>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8 mt-12">
+            {featuredCommunities.map((community, index) => (
+              <motion.div
+                key={community.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true }}
+              >
+                <Card className="hover-lift overflow-hidden h-full">
+                  <div className={`h-40 bg-${community.image} flex items-center justify-center`}>
+                    <Users className="w-16 h-16 text-white" />
+                  </div>
+                  <CardContent className="p-6">
+                    <div className="mb-3">
+                      <Badge variant="secondary">{community.category}</Badge>
+                    </div>
+                    <h3 className="font-heading text-xl font-bold mb-2">{community.name}</h3>
+                    <p className="font-body text-sm text-muted-foreground mb-4">
+                      {community.description}
+                    </p>
+                    <div className="flex items-center justify-between pt-4 border-t">
+                      <span className="font-body text-sm text-muted-foreground">
+                        👥 {community.members.toLocaleString()} members
+                      </span>
+                      <Button variant="ghost" size="sm" asChild>
+                        <Link to="/communities">Join</Link>
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
