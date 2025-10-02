@@ -22,7 +22,112 @@ import {
 import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+
+// Auto-scroll testimonials component
+const AutoScrollTestimonials = ({ successStories }: { successStories: typeof Home.prototype.successStories }) => {
+  const [isPaused, setIsPaused] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer || isPaused) return;
+
+    const scrollWidth = scrollContainer.scrollWidth;
+    const clientWidth = scrollContainer.clientWidth;
+    let scrollPosition = 0;
+
+    const scroll = () => {
+      if (!isPaused) {
+        scrollPosition += 1;
+        if (scrollPosition >= scrollWidth / 2) {
+          scrollPosition = 0;
+        }
+        if (scrollContainer) {
+          scrollContainer.scrollLeft = scrollPosition;
+        }
+      }
+    };
+
+    const intervalId = setInterval(scroll, 30);
+    return () => clearInterval(intervalId);
+  }, [isPaused]);
+
+  const duplicatedStories = [...successStories, ...successStories];
+
+  return (
+    <div 
+      className="relative overflow-hidden mb-16"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      <div 
+        ref={scrollRef}
+        className="flex gap-8 overflow-x-hidden"
+        style={{ scrollBehavior: 'auto' }}
+      >
+        {duplicatedStories.map((story, index) => (
+          <motion.div
+            key={`${story.name}-${index}`}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: (index % 3) * 0.15 }}
+            viewport={{ once: true }}
+            className="group flex-shrink-0 w-full md:w-[calc(33.333%-1.5rem)]"
+          >
+            <Card className="hover-lift p-8 bg-background/80 backdrop-blur-sm border-primary/10 hover:border-primary/30 transition-all duration-300 group-hover:shadow-2xl h-full">
+              <CardContent className="p-0 text-center">
+                {/* Large Avatar */}
+                <div className="relative mb-6">
+                  <div className="w-20 h-20 bg-gradient-hero rounded-full flex items-center justify-center text-white font-heading font-bold text-2xl mx-auto shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    {story.avatar}
+                  </div>
+                  <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-background flex items-center justify-center">
+                    <CheckCircle className="w-4 h-4 text-white" />
+                  </div>
+                </div>
+
+                {/* Creator Info */}
+                <div className="mb-6">
+                  <h3 className="font-heading text-xl font-bold text-foreground mb-1">{story.name}</h3>
+                  <p className="font-body text-primary font-medium mb-3">{story.role}</p>
+                  
+                  {/* Metrics Badge */}
+                  <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
+                    <Star className="w-4 h-4 fill-current" />
+                    <span>Success Story</span>
+                  </div>
+                </div>
+
+                {/* Testimonial */}
+                <div className="relative">
+                  <Quote className="w-8 h-8 text-primary/30 absolute -top-2 -left-2" />
+                  <blockquote className="font-body text-muted-foreground leading-relaxed italic text-lg relative z-10">
+                    {story.story}
+                  </blockquote>
+                </div>
+
+                {/* Achievement Highlight */}
+                <div className="mt-6 pt-6 border-t border-primary/10">
+                  <div className="flex items-center justify-center space-x-4 text-sm">
+                    <div className="flex items-center space-x-1 text-green-600">
+                      <ArrowRight className="w-4 h-4" />
+                      <span className="font-semibold">
+                        {(index % 3) === 0 && "300% Income Boost"}
+                        {(index % 3) === 1 && "10K+ Community"}  
+                        {(index % 3) === 2 && "6-Figure Creator"}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const Home = () => {
   const [activeFeature, setActiveFeature] = useState("courses");
@@ -149,67 +254,8 @@ const Home = () => {
             </p>
           </motion.div>
 
-          {/* Featured Success Stories Grid */}
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {successStories.map((story, index) => (
-              <motion.div
-                key={story.name}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-                viewport={{ once: true }}
-                className="group"
-              >
-                <Card className="hover-lift p-8 bg-background/80 backdrop-blur-sm border-primary/10 hover:border-primary/30 transition-all duration-300 group-hover:shadow-2xl">
-                  <CardContent className="p-0 text-center">
-                    {/* Large Avatar */}
-                    <div className="relative mb-6">
-                      <div className="w-20 h-20 bg-gradient-hero rounded-full flex items-center justify-center text-white font-heading font-bold text-2xl mx-auto shadow-lg group-hover:scale-110 transition-transform duration-300">
-                        {story.avatar}
-                      </div>
-                      <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-background flex items-center justify-center">
-                        <CheckCircle className="w-4 h-4 text-white" />
-                      </div>
-                    </div>
-
-                    {/* Creator Info */}
-                    <div className="mb-6">
-                      <h3 className="font-heading text-xl font-bold text-foreground mb-1">{story.name}</h3>
-                      <p className="font-body text-primary font-medium mb-3">{story.role}</p>
-                      
-                      {/* Metrics Badge */}
-                      <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
-                        <Star className="w-4 h-4 fill-current" />
-                        <span>Success Story</span>
-                      </div>
-                    </div>
-
-                    {/* Testimonial */}
-                    <div className="relative">
-                      <Quote className="w-8 h-8 text-primary/30 absolute -top-2 -left-2" />
-                      <blockquote className="font-body text-muted-foreground leading-relaxed italic text-lg relative z-10">
-                        {story.story}
-                      </blockquote>
-                    </div>
-
-                    {/* Achievement Highlight */}
-                    <div className="mt-6 pt-6 border-t border-primary/10">
-                      <div className="flex items-center justify-center space-x-4 text-sm">
-                        <div className="flex items-center space-x-1 text-green-600">
-                          <ArrowRight className="w-4 h-4" />
-                          <span className="font-semibold">
-                            {index === 0 && "300% Income Boost"}
-                            {index === 1 && "10K+ Community"}  
-                            {index === 2 && "6-Figure Creator"}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+          {/* Featured Success Stories Grid with Auto-Scroll */}
+          <AutoScrollTestimonials successStories={successStories} />
 
           {/* Community Stats */}
           <motion.div
