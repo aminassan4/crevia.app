@@ -17,7 +17,10 @@ import {
   Bot,
   Mail,
   CreditCard,
-  Globe
+  Globe,
+  X,
+  DollarSign,
+  Sparkles
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
@@ -190,15 +193,15 @@ const Home = () => {
     <div className="min-h-screen">
       <Hero />
       
-      {/* How Kaizen Afrika Helps */}
-      <section className="py-20 bg-muted/30">
+      {/* Scroll-Triggered Stacking Cards */}
+      <section className="py-32 bg-muted/30 overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-6">
               How does Kaizen Afrika help?
@@ -208,22 +211,48 @@ const Home = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="max-w-6xl mx-auto relative" style={{ minHeight: '600px' }}>
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                viewport={{ once: true }}
+                initial={{ scale: 0.95, opacity: 0 }}
+                whileInView={{ 
+                  scale: 1, 
+                  opacity: 1,
+                  rotateX: 0,
+                  y: 0
+                }}
+                transition={{ 
+                  duration: 0.6,
+                  delay: index * 0.2,
+                }}
+                viewport={{ once: false, amount: 0.5 }}
+                style={{
+                  position: index === 0 ? 'relative' : 'absolute',
+                  top: index === 0 ? 'auto' : 0,
+                  left: index === 0 ? 'auto' : '50%',
+                  transform: index === 0 ? 'none' : 'translateX(-50%)',
+                  zIndex: features.length - index,
+                  width: index === 0 ? '100%' : 'calc(100% - 32px)',
+                  marginBottom: index === features.length - 1 ? 0 : '500px'
+                }}
+                whileHover={{
+                  scale: 1.02,
+                  rotateY: index % 2 === 0 ? 2 : -2,
+                  transition: { duration: 0.3 }
+                }}
               >
-                <Card className="hover-lift p-8 text-center h-full">
-                  <CardContent className="p-0">
-                    <div className={`w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-subtle flex items-center justify-center ${feature.color}`}>
-                      <feature.icon className="w-8 h-8" />
-                    </div>
-                    <h3 className="font-heading text-2xl font-bold mb-4">{feature.title}</h3>
-                    <p className="font-body text-muted-foreground leading-relaxed">
+                <Card className="p-12 bg-background/95 backdrop-blur-sm border-2 hover:border-primary/30 transition-all duration-300 shadow-2xl">
+                  <CardContent className="p-0 text-center">
+                    <motion.div 
+                      className={`w-20 h-20 mx-auto mb-8 rounded-3xl bg-gradient-hero flex items-center justify-center ${feature.color}`}
+                      whileHover={{ rotate: 360, scale: 1.1 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <feature.icon className="w-10 h-10 text-white" />
+                    </motion.div>
+                    <h3 className="font-heading text-3xl md:text-4xl font-bold mb-6">{feature.title}</h3>
+                    <p className="font-body text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
                       {feature.description}
                     </p>
                   </CardContent>
@@ -663,6 +692,115 @@ const Home = () => {
                 <p className="font-body text-white/70 text-sm">{feature.description}</p>
               </div>
             ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Cost Savings Section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
+              <Sparkles className="w-3 h-3 mr-1" />
+              Value Breakdown
+            </Badge>
+            <h2 className="font-heading text-4xl md:text-6xl font-bold text-foreground mb-6">
+              One Platform, Unlimited Potential 💰
+            </h2>
+            <p className="font-body text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Stop paying for multiple tools. Kaizen Afrika brings everything you need in one place.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto"
+          >
+            <Card className="p-8 md:p-12 bg-gradient-subtle border-2 border-primary/20 shadow-2xl">
+              <CardContent className="p-0">
+                {/* Individual Tools Breakdown */}
+                <div className="space-y-4 mb-6">
+                  {[
+                    { icon: Globe, name: "Professional Website Builder", replacedTools: "Wix, Squarespace", cost: "$25" },
+                    { icon: Users, name: "Community Platform", replacedTools: "Circle, Mighty Networks", cost: "$39" },
+                    { icon: ShoppingBag, name: "Digital Product Store", replacedTools: "Gumroad, Sellfy", cost: "$15" },
+                    { icon: Calendar, name: "Event Management", replacedTools: "Eventbrite, Zoom", cost: "$29" },
+                    { icon: Mail, name: "Email Marketing", replacedTools: "Mailchimp, ConvertKit", cost: "$35" },
+                    { icon: BarChart3, name: "Analytics Dashboard", replacedTools: "Google Analytics Pro", cost: "$12" },
+                    { icon: BookOpen, name: "Course Hosting Platform", replacedTools: "Teachable, Kajabi", cost: "$99" },
+                    { icon: CreditCard, name: "Payment Processing", replacedTools: "Stripe, PayPal fees", cost: "$18" },
+                  ].map((tool, index) => (
+                    <motion.div
+                      key={tool.name}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4, delay: index * 0.05 }}
+                      viewport={{ once: true }}
+                      className="flex items-center justify-between p-4 bg-background/50 rounded-lg hover:bg-background/80 transition-all"
+                    >
+                      <div className="flex items-center space-x-4 flex-1">
+                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                          <tool.icon className="w-5 h-5 text-primary" />
+                        </div>
+                        <div className="flex-1">
+                          <p className="font-body font-semibold text-foreground">{tool.name}</p>
+                          <p className="font-body text-xs text-muted-foreground">Replaces: {tool.replacedTools}</p>
+                        </div>
+                      </div>
+                      <span className="font-body font-semibold text-muted-foreground">{tool.cost}/mo</span>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Total Cost Comparison */}
+                <div className="border-t-2 border-dashed border-muted pt-6">
+                  <div className="flex items-center justify-between p-4 bg-destructive/10 rounded-lg mb-4">
+                    <div className="flex items-center space-x-3">
+                      <X className="w-6 h-6 text-destructive" />
+                      <span className="font-body text-muted-foreground">What You'd Spend Otherwise</span>
+                    </div>
+                    <span className="font-heading text-2xl font-bold text-destructive">$272/mo</span>
+                  </div>
+
+                  <div className="flex items-center justify-between p-6 bg-gradient-hero rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                        <CheckCircle className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <span className="font-body text-white/90 block text-sm">Join Kaizen Afrika Pro ✨</span>
+                        <span className="font-body text-white font-semibold">All features included</span>
+                      </div>
+                    </div>
+                    <span className="font-heading text-4xl font-bold text-white">$20/mo</span>
+                  </div>
+                </div>
+
+                {/* Savings Highlight */}
+                <motion.div
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  viewport={{ once: true }}
+                  className="text-center mt-8 p-6 bg-green-50 dark:bg-green-950/20 rounded-xl border-2 border-green-200 dark:border-green-800"
+                >
+                  <div className="flex items-center justify-center space-x-2 mb-2">
+                    <DollarSign className="w-8 h-8 text-green-600" />
+                    <span className="font-heading text-5xl font-bold text-green-600">Save $3,024</span>
+                  </div>
+                  <p className="font-body text-green-700 dark:text-green-400 font-medium">per year compared to using separate tools</p>
+                </motion.div>
+              </CardContent>
+            </Card>
           </motion.div>
         </div>
       </section>
