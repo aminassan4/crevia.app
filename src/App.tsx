@@ -10,6 +10,7 @@ import Community from "./pages/Community";
 import Communities from "./pages/Communities";
 import CreateCommunity from "./pages/CreateCommunity";
 import Events from "./pages/Events";
+import Products from "./pages/Products";
 import CreateEvent from "./pages/CreateEvent";
 import Dashboard from "./pages/Dashboard";
 import CreateProduct from "./pages/CreateProduct";
@@ -27,6 +28,7 @@ const AppContent = () => (
       <Route path="/communities" element={<Communities />} />
       <Route path="/create-community" element={<CreateCommunity />} />
       <Route path="/events" element={<Events />} />
+      <Route path="/products" element={<Products />} />
       <Route path="/create-event" element={<CreateEvent />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/create-product" element={<CreateProduct />} />

@@ -54,7 +54,7 @@ const Navigation = () => {
             {navLinks.map((link) => (
               link.scrollTo ? (
                 <button
-                  key={link.path}
+                  key={`${link.path}-${link.scrollTo}`}
                   onClick={() => handleNavigation(link)}
                   className={`font-body text-sm transition-colors hover:text-primary ${
                     location.pathname === "/" && location.hash === "#" + link.scrollTo ? "text-primary font-semibold" : "text-muted-foreground"
@@ -64,7 +64,7 @@ const Navigation = () => {
                 </button>
               ) : (
                 <Link
-                  key={link.path}
+                  key={link.name}
                   to={link.path}
                   className={`font-body text-sm transition-colors hover:text-primary ${
                     isActive(link.path) ? "text-primary font-semibold" : "text-muted-foreground"
@@ -109,7 +109,7 @@ const Navigation = () => {
                 {navLinks.map((link) => (
                   link.scrollTo ? (
                     <button
-                      key={link.path}
+                      key={`${link.path}-${link.scrollTo}`}
                       onClick={() => {
                         handleNavigation(link);
                         setIsOpen(false);
@@ -122,7 +122,7 @@ const Navigation = () => {
                     </button>
                   ) : (
                     <Link
-                      key={link.path}
+                      key={link.name}
                       to={link.path}
                       onClick={() => setIsOpen(false)}
                       className={`block font-body text-sm transition-colors hover:text-primary ${

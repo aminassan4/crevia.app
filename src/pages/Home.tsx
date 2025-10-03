@@ -194,7 +194,7 @@ const Home = () => {
       <Hero />
       
       {/* Scroll-Triggered Stacking Cards */}
-      <section className="py-32 bg-muted/30 overflow-hidden">
+      <section className="py-32 bg-muted/30 overflow-visible relative">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -211,43 +211,39 @@ const Home = () => {
             </p>
           </motion.div>
 
-          <div className="max-w-6xl mx-auto relative" style={{ minHeight: '600px' }}>
+          <div className="max-w-5xl mx-auto space-y-8">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
-                initial={{ scale: 0.95, opacity: 0 }}
+                initial={{ opacity: 0, y: 50, rotateX: -10, scale: 0.95 }}
                 whileInView={{ 
-                  scale: 1, 
-                  opacity: 1,
+                  opacity: 1, 
+                  y: 0,
                   rotateX: 0,
-                  y: 0
+                  scale: 1
                 }}
                 transition={{ 
-                  duration: 0.6,
-                  delay: index * 0.2,
+                  duration: 0.7,
+                  delay: index * 0.15,
+                  ease: [0.25, 0.46, 0.45, 0.94]
                 }}
-                viewport={{ once: false, amount: 0.5 }}
+                viewport={{ once: false, amount: 0.3, margin: "-100px" }}
                 style={{
-                  position: index === 0 ? 'relative' : 'absolute',
-                  top: index === 0 ? 'auto' : 0,
-                  left: index === 0 ? 'auto' : '50%',
-                  transform: index === 0 ? 'none' : 'translateX(-50%)',
-                  zIndex: features.length - index,
-                  width: index === 0 ? '100%' : 'calc(100% - 32px)',
-                  marginBottom: index === features.length - 1 ? 0 : '500px'
+                  transformStyle: 'preserve-3d',
+                  perspective: '1000px'
                 }}
                 whileHover={{
                   scale: 1.02,
-                  rotateY: index % 2 === 0 ? 2 : -2,
+                  rotateY: index % 2 === 0 ? 1 : -1,
                   transition: { duration: 0.3 }
                 }}
               >
-                <Card className="p-12 bg-background/95 backdrop-blur-sm border-2 hover:border-primary/30 transition-all duration-300 shadow-2xl">
+                <Card className="p-10 md:p-14 bg-background/95 backdrop-blur-sm border-2 hover:border-primary/40 transition-all duration-500 shadow-2xl hover:shadow-primary/10">
                   <CardContent className="p-0 text-center">
                     <motion.div 
-                      className={`w-20 h-20 mx-auto mb-8 rounded-3xl bg-gradient-hero flex items-center justify-center ${feature.color}`}
-                      whileHover={{ rotate: 360, scale: 1.1 }}
-                      transition={{ duration: 0.6 }}
+                      className={`w-20 h-20 mx-auto mb-8 rounded-3xl bg-gradient-hero flex items-center justify-center`}
+                      whileHover={{ rotate: 360, scale: 1.15 }}
+                      transition={{ duration: 0.6, ease: "easeInOut" }}
                     >
                       <feature.icon className="w-10 h-10 text-white" />
                     </motion.div>

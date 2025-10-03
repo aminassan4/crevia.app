@@ -232,7 +232,7 @@ const Earn = () => {
               Top-selling products from our creator community
             </p>
             <Button variant="outline" size="lg" asChild>
-              <Link to="/create-product">
+              <Link to="/products">
                 See All Products
               </Link>
             </Button>
