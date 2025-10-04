@@ -132,6 +132,89 @@ const AutoScrollTestimonials = ({ successStories }: { successStories: typeof Hom
   );
 };
 
+// Clean auto-scroll testimonials component (inspired by reference design)
+const CleanAutoScrollTestimonials = ({ testimonials }: { testimonials: { quote: string; author: string; role: string }[] }) => {
+  const [isPaused, setIsPaused] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer || isPaused) return;
+
+    const scrollWidth = scrollContainer.scrollWidth;
+    const clientWidth = scrollContainer.clientWidth;
+    let scrollPosition = 0;
+
+    const scroll = () => {
+      if (!isPaused) {
+        scrollPosition += 0.5;
+        if (scrollPosition >= scrollWidth / 2) {
+          scrollPosition = 0;
+        }
+        if (scrollContainer) {
+          scrollContainer.scrollLeft = scrollPosition;
+        }
+      }
+    };
+
+    const intervalId = setInterval(scroll, 30);
+    return () => clearInterval(intervalId);
+  }, [isPaused]);
+
+  // Duplicate testimonials for infinite scroll
+  const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
+
+  return (
+    <div 
+      className="relative overflow-hidden"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      <div 
+        ref={scrollRef}
+        className="flex gap-6 overflow-x-hidden pb-4"
+        style={{ scrollBehavior: 'auto' }}
+      >
+        {duplicatedTestimonials.map((testimonial, index) => (
+          <motion.div
+            key={`testimonial-${index}`}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="flex-shrink-0 w-full md:w-[400px]"
+          >
+            <Card className="p-8 bg-background hover:shadow-xl transition-all duration-300 border border-border h-full group relative">
+              <CardContent className="p-0 flex flex-col h-full">
+                {/* Arrow icon in top right */}
+                <div className="absolute top-6 right-6 w-8 h-8 rounded-full bg-muted/50 group-hover:bg-primary/10 flex items-center justify-center transition-all">
+                  <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                </div>
+
+                {/* Avatar with initials */}
+                <div className="w-12 h-12 rounded-full bg-gradient-hero flex items-center justify-center text-white font-bold text-sm mb-6">
+                  {testimonial.author.split(' ').map(n => n[0]).join('')}
+                </div>
+
+                {/* Testimonial text */}
+                <p className="font-body text-base text-foreground leading-relaxed mb-6 flex-grow">
+                  {testimonial.quote}
+                </p>
+
+                {/* Author info */}
+                <div className="mt-auto pt-4 border-t border-border">
+                  <p className="font-heading font-bold text-foreground text-sm">{testimonial.author}</p>
+                  <p className="font-body text-xs text-muted-foreground mt-1">{testimonial.role}</p>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const Home = () => {
   const [activeFeature, setActiveFeature] = useState("courses");
   const features = [
@@ -178,14 +261,29 @@ const Home = () => {
 
   const testimonials = [
     {
-      quote: "Kaizen Afrika changed my perspective on what's possible as an African creator. The community is incredible.",
+      quote: "Kaizen Afrika changed my perspective on what's possible as an African creator. The community is incredible and the platform makes it so easy to monetize my skills.",
       author: "Sarah Mwangi",
       role: "UX Designer"
     },
     {
-      quote: "The platform made it so easy to launch my digital products and connect with my audience.",
+      quote: "The platform made it so easy to launch my digital products and connect with my audience. I've never felt more empowered as a creator.",
       author: "James Ochieng",
       role: "Business Coach"
+    },
+    {
+      quote: "I got early access to Kaizen Afrika and it's making history! Watch as I easily create content and build my community with this powerful platform.",
+      author: "Aisha Kamara",
+      role: "Content Creator"
+    },
+    {
+      quote: "Amazing is an understatement for how Kaizen Afrika looks and interacts with users! The tricky thing about platforms is it's not always intuitive, but these folks nailed it! Can't wait to see what's next.",
+      author: "David Mensah",
+      role: "Digital Entrepreneur"
+    },
+    {
+      quote: "Future of African creators under 4 mins similar tools will be the new platform for modern times? I mean, this is just revolutionary for our community.",
+      author: "Fatima Hassan",
+      role: "Creative Director"
     }
   ];
 
@@ -193,69 +291,73 @@ const Home = () => {
     <div className="min-h-screen">
       <Hero />
       
-      {/* Scroll-Triggered Stacking Cards */}
-      <section className="py-32 bg-muted/30 overflow-visible relative">
+      {/* Video Demonstration Section */}
+      <section className="py-32 bg-muted/30 relative">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-20"
+            className="text-center mb-16"
           >
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-6">
-              How does Kaizen Afrika help?
+              See Kaizen Afrika In Action
             </h2>
             <p className="font-body text-xl text-muted-foreground max-w-2xl mx-auto">
-              Kaizen Afrika helps in three ways: with community, digital products, and events.
+              Watch how our platform empowers African creators to build, sell, and grow their digital empire
             </p>
           </motion.div>
 
-          <div className="max-w-5xl mx-auto space-y-8">
-            {features.map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 50, rotateX: -10, scale: 0.95 }}
-                whileInView={{ 
-                  opacity: 1, 
-                  y: 0,
-                  rotateX: 0,
-                  scale: 1
-                }}
-                transition={{ 
-                  duration: 0.7,
-                  delay: index * 0.15,
-                  ease: [0.25, 0.46, 0.45, 0.94]
-                }}
-                viewport={{ once: false, amount: 0.3, margin: "-100px" }}
-                style={{
-                  transformStyle: 'preserve-3d',
-                  perspective: '1000px'
-                }}
-                whileHover={{
-                  scale: 1.02,
-                  rotateY: index % 2 === 0 ? 1 : -1,
-                  transition: { duration: 0.3 }
-                }}
-              >
-                <Card className="p-10 md:p-14 bg-background/95 backdrop-blur-sm border-2 hover:border-primary/40 transition-all duration-500 shadow-2xl hover:shadow-primary/10">
-                  <CardContent className="p-0 text-center">
-                    <motion.div 
-                      className={`w-20 h-20 mx-auto mb-8 rounded-3xl bg-gradient-hero flex items-center justify-center`}
-                      whileHover={{ rotate: 360, scale: 1.15 }}
-                      transition={{ duration: 0.6, ease: "easeInOut" }}
-                    >
-                      <feature.icon className="w-10 h-10 text-white" />
-                    </motion.div>
-                    <h3 className="font-heading text-3xl md:text-4xl font-bold mb-6">{feature.title}</h3>
-                    <p className="font-body text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-                      {feature.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="max-w-6xl mx-auto"
+          >
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-primary/20">
+              {/* Video Player */}
+              <div className="relative aspect-video bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+                <video 
+                  className="w-full h-full object-cover"
+                  controls
+                  poster="/placeholder.svg"
+                >
+                  <source src="/path-to-your-video.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                
+                {/* Play Overlay (optional - shows before video plays) */}
+                <div className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/30 transition-all group cursor-pointer">
+                  <div className="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Video className="w-10 h-10 text-primary ml-1" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Video Features Grid */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="grid md:grid-cols-3 gap-6 mt-12"
+            >
+              {features.map((feature, index) => (
+                <div key={feature.title} className="text-center p-6 bg-background/50 rounded-xl backdrop-blur-sm border border-primary/10 hover:border-primary/30 transition-all">
+                  <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-hero flex items-center justify-center">
+                    <feature.icon className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="font-heading text-xl font-bold mb-2">{feature.title}</h3>
+                  <p className="font-body text-sm text-muted-foreground">
+                    {feature.description}
+                  </p>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -990,33 +1092,26 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20">
+      {/* Testimonials - Clean Auto-Scroll Design */}
+      <section className="py-20 bg-muted/20">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={testimonial.author}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                viewport={{ once: true }}
-              >
-                <Card className="hover-lift p-8">
-                  <CardContent className="p-0">
-                    <Quote className="w-8 h-8 text-primary mb-4" />
-                    <p className="font-body text-lg text-muted-foreground mb-6 leading-relaxed">
-                      "{testimonial.quote}"
-                    </p>
-                    <div>
-                      <p className="font-heading font-bold">{testimonial.author}</p>
-                      <p className="font-body text-sm text-muted-foreground">{testimonial.role}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="font-heading text-5xl md:text-7xl font-black text-foreground mb-4 uppercase tracking-tight">
+              Love From The Community
+            </h2>
+            <p className="font-body text-xl text-muted-foreground">
+              Love from the community
+            </p>
+          </motion.div>
+
+          {/* Auto-scroll testimonials with clean design */}
+          <CleanAutoScrollTestimonials testimonials={testimonials} />
         </div>
       </section>
 
