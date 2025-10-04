@@ -43,7 +43,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-body mb-6"
+            className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-body mb-8"
           >
             <Sparkles className="w-4 h-4" />
             <span>Empowering Africa's Next Generation</span>
@@ -56,9 +56,9 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="font-heading text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight"
           >
-            <span className="block">Own Your</span>
+            One Platform to Build Your{" "}
             <span className="bg-gradient-hero bg-clip-text text-transparent">
-              Story
+              Wealth
             </span>
           </motion.h1>
 
@@ -67,47 +67,23 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="font-body text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed"
+            className="font-body text-xl md:text-2xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed"
           >
-            Empower your creative journey through community, digital products, and events. 
-            Join Africa's creators building wealth and freedom.
+            Create communities, sell digital products, and host events—all in one place. 
+            Join thousands of African creators monetizing their expertise.
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* CTA Button */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6"
+            className="mb-16"
           >
             <Button variant="hero" size="xl" className="group">
-              Join Kaizen Afrika
+              Get Started
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button variant="outline" size="xl">
-              Explore Communities
-            </Button>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="mt-16 grid grid-cols-3 gap-8 max-w-md mx-auto"
-          >
-            <div className="text-center">
-              <div className="font-heading text-3xl font-bold text-primary">1M+</div>
-              <div className="font-body text-sm text-muted-foreground">Target Creators</div>
-            </div>
-            <div className="text-center">
-              <div className="font-heading text-3xl font-bold text-primary">50+</div>
-              <div className="font-body text-sm text-muted-foreground">Countries</div>
-            </div>
-            <div className="text-center">
-              <div className="font-heading text-3xl font-bold text-primary">24/7</div>
-              <div className="font-body text-sm text-muted-foreground">Support</div>
-            </div>
           </motion.div>
         </div>
       </div>

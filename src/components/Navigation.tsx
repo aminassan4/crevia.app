@@ -16,7 +16,7 @@ const Navigation = () => {
     { name: "Home", path: "/" },
     { name: "Earn", path: "/earn" },
     { name: "Pricing", path: "/", scrollTo: "pricing" },
-    { name: "Community", path: "/community" },
+    { name: "About", path: "/community" },
   ];
 
   const handleNavigation = (link: any) => {
