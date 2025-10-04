@@ -298,6 +298,77 @@ const Community = () => {
         </div>
       </section>
 
+      {/* Founder's Vision Section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="max-w-6xl mx-auto"
+          >
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              {/* Founder Image */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="relative"
+              >
+                <div className="relative">
+                  {/* Yellow decorative blob */}
+                  <div className="absolute -left-8 -top-8 w-64 h-64 bg-gradient-to-br from-amber-400 to-amber-500 rounded-full opacity-20 blur-3xl"></div>
+                  
+                  {/* Main image container */}
+                  <div className="relative w-full max-w-md mx-auto">
+                    <div className="relative rounded-full overflow-hidden border-8 border-background shadow-2xl aspect-square">
+                      <img 
+                        src={new URL("@/assets/founder.jpg", import.meta.url).href}
+                        alt="Founder"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    
+                    {/* Decorative accent circles */}
+                    <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-hero rounded-full opacity-30 blur-xl"></div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Text Content */}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                viewport={{ once: true }}
+                className="space-y-6"
+              >
+                <div>
+                  <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
+                    Get to know our founder's vision 
+                    <span className="inline-block ml-2 animate-wave">👋</span>
+                  </h2>
+                  
+                  <div className="space-y-4 font-body text-lg text-muted-foreground leading-relaxed">
+                    <p>
+                      At Kaizen Afrika, we believe in the power of African creativity and entrepreneurship. Our mission is to empower every creator on the continent with the tools and community they need to transform their passion into sustainable income.
+                    </p>
+                    <p>
+                      We're not just building a platform—we're building a movement. A movement that celebrates African innovation, connects creators across borders, and proves that the future of work is creative, collaborative, and unmistakably African.
+                    </p>
+                    <p className="font-semibold text-primary">
+                      Together, we're rewriting what's possible for African creators. Join us on this journey.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Success Target */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4 text-center">

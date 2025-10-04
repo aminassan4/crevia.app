@@ -361,57 +361,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Success Stories */}
-      <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Trusted by African Creators</Badge>
-            <h2 className="font-heading text-4xl md:text-6xl font-bold text-foreground mb-6">
-              Empowering 25,000+ <br />
-              <span className="bg-gradient-hero bg-clip-text text-transparent">African Creators</span>
-            </h2>
-            <p className="font-body text-xl text-muted-foreground max-w-2xl mx-auto">
-              Real creators, real transformations, real impact across the continent
-            </p>
-          </motion.div>
-
-          {/* Featured Success Stories Grid with Auto-Scroll */}
-          <AutoScrollTestimonials successStories={successStories} />
-
-          {/* Community Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center"
-          >
-            <div className="p-6">
-              <div className="font-heading text-4xl font-bold text-primary mb-2">25K+</div>
-              <p className="font-body text-muted-foreground">Active Creators</p>
-            </div>
-            <div className="p-6">
-              <div className="font-heading text-4xl font-bold text-secondary mb-2">₦2.8B</div>
-              <p className="font-body text-muted-foreground">Revenue Generated</p>
-            </div>
-            <div className="p-6">
-              <div className="font-heading text-4xl font-bold text-primary mb-2">54</div>
-              <p className="font-body text-muted-foreground">Countries Reached</p>
-            </div>
-            <div className="p-6">
-              <div className="font-heading text-4xl font-bold text-secondary mb-2">98%</div>
-              <p className="font-body text-muted-foreground">Success Rate</p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Enhanced Interactive Features Section */}
       <section className="py-20 bg-gradient-to-br from-slate-900 via-primary/90 to-slate-800 text-white">
         <div className="container mx-auto px-4">
