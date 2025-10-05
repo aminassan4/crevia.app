@@ -13,15 +13,39 @@ import {
   Wand2
 } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
+import Footer from "@/components/Footer";
 
 const QoraAgent = () => {
   const [activePrompt, setActivePrompt] = useState(0);
+  const navigate = useNavigate();
+  const { toast } = useToast();
   
   const examplePrompts = [
     "Write a product description for my eBook",
     "Plan my next workshop",
     "Create a welcome post for my community"
   ];
+
+  const handleGetStarted = () => {
+    toast({
+      title: "Coming Soon! 🚀",
+      description: "Qora Agent will be available soon. Join our waitlist to be notified when it launches!",
+    });
+  };
+
+  const handleUpgrade = () => {
+    navigate("/#pricing");
+  };
+
+  const handlePromptClick = (index: number) => {
+    setActivePrompt(index);
+    toast({
+      title: "Try this prompt",
+      description: `"${examplePrompts[index]}" - This is a preview of what Qora Agent can do!`,
+    });
+  };
 
   const useCases = [
     {
@@ -147,7 +171,7 @@ const QoraAgent = () => {
                     {examplePrompts.map((prompt, index) => (
                       <motion.button
                         key={index}
-                        onClick={() => setActivePrompt(index)}
+                        onClick={() => handlePromptClick(index)}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         className={`w-full text-left p-4 rounded-lg transition-all duration-300 ${
@@ -172,6 +196,7 @@ const QoraAgent = () => {
             >
               <Button 
                 size="xl" 
+                onClick={handleGetStarted}
                 className="group bg-gradient-to-r from-[#3533cd] to-[#3533cd]/80 hover:shadow-[0_0_40px_rgba(53,51,205,0.4)] text-white"
               >
                 Start Creating with AI
@@ -262,6 +287,7 @@ const QoraAgent = () => {
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <Button 
                     size="xl"
+                    onClick={handleUpgrade}
                     className="bg-gradient-to-r from-[#3533cd] to-[#3533cd]/80 hover:shadow-[0_0_40px_rgba(53,51,205,0.4)] text-white group"
                   >
                     Upgrade to Qora Pro
@@ -270,6 +296,7 @@ const QoraAgent = () => {
                   <Button 
                     size="xl"
                     variant="outline"
+                    onClick={handleGetStarted}
                     className="border-2 border-[#3533cd]/30 hover:bg-[#3533cd]/5"
                   >
                     Learn More
@@ -280,6 +307,9 @@ const QoraAgent = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

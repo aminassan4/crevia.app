@@ -15,9 +15,9 @@ const Navigation = () => {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Earn", path: "/earn" },
+    { name: "Agent", path: "/qora-agent" },
     { name: "Pricing", path: "/", scrollTo: "pricing" },
     { name: "About", path: "/community" },
-    { name: "Qora Agent", path: "/qora-agent" },
   ];
 
   const handleNavigation = (link: any) => {
