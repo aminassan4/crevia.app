@@ -852,6 +852,56 @@ const Home = () => {
         </div>
       </section>
 
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-hero relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center max-w-3xl mx-auto"
+          >
+            <Badge className="mb-6 bg-white/20 text-white border-white/30 backdrop-blur-sm">
+              <Sparkles className="w-4 h-4 mr-2" />
+              Join Thousands of Creators
+            </Badge>
+            <h2 className="font-heading text-4xl md:text-6xl font-bold text-white mb-6">
+              Ready to Transform Your Creative Journey?
+            </h2>
+            <p className="font-body text-xl text-white/90 mb-10 leading-relaxed">
+              Stop juggling multiple tools. Start building your empire on one powerful platform designed for African creators.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button 
+                size="xl" 
+                className="bg-white text-primary hover:bg-white/90 shadow-2xl hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] transition-all group"
+                asChild
+              >
+                <Link to="/pricing">
+                  View Pricing Plans
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+              <Button 
+                size="xl" 
+                variant="outline" 
+                className="border-2 border-white text-white hover:bg-white/10 backdrop-blur-sm"
+                asChild
+              >
+                <Link to="/community">
+                  Learn More About Us
+                </Link>
+              </Button>
+            </div>
+            <p className="font-body text-sm text-white/70 mt-8">
+              ✨ Start free • No credit card required • Cancel anytime
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Pricing Section */}
       <section id="pricing" className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">

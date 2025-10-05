@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, User } from "lucide-react";
@@ -12,27 +12,18 @@ const Navigation = () => {
   const [showSignUp, setShowSignUp] = useState(false);
   const location = useLocation();
 
+  // Scroll to top when route changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Earn", path: "/earn" },
     { name: "Agent", path: "/qora-agent" },
-    { name: "Pricing", path: "/", scrollTo: "pricing" },
+    { name: "Pricing", path: "/pricing" },
     { name: "About", path: "/community" },
   ];
-
-  const handleNavigation = (link: any) => {
-    if (link.scrollTo) {
-      // If we're navigating to a section on home page
-      if (location.pathname !== "/") {
-        // Navigate to home first, then scroll
-        window.location.href = "/#" + link.scrollTo;
-      } else {
-        // Already on home page, just scroll
-        const element = document.getElementById(link.scrollTo);
-        element?.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  };
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -53,27 +44,15 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              link.scrollTo ? (
-                <button
-                  key={`${link.path}-${link.scrollTo}`}
-                  onClick={() => handleNavigation(link)}
-                  className={`font-body text-sm transition-colors hover:text-primary ${
-                    location.pathname === "/" && location.hash === "#" + link.scrollTo ? "text-primary font-semibold" : "text-muted-foreground"
-                  }`}
-                >
-                  {link.name}
-                </button>
-              ) : (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  className={`font-body text-sm transition-colors hover:text-primary ${
-                    isActive(link.path) ? "text-primary font-semibold" : "text-muted-foreground"
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              )
+              <Link
+                key={link.name}
+                to={link.path}
+                className={`font-body text-sm transition-colors hover:text-primary ${
+                  isActive(link.path) ? "text-primary font-semibold" : "text-muted-foreground"
+                }`}
+              >
+                {link.name}
+              </Link>
             ))}
           </div>
 
@@ -108,31 +87,16 @@ const Navigation = () => {
             >
               <div className="py-4 space-y-4">
                 {navLinks.map((link) => (
-                  link.scrollTo ? (
-                    <button
-                      key={`${link.path}-${link.scrollTo}`}
-                      onClick={() => {
-                        handleNavigation(link);
-                        setIsOpen(false);
-                      }}
-                      className={`block font-body text-sm text-left transition-colors hover:text-primary ${
-                        location.pathname === "/" && location.hash === "#" + link.scrollTo ? "text-primary font-semibold" : "text-muted-foreground"
-                      }`}
-                    >
-                      {link.name}
-                    </button>
-                  ) : (
-                    <Link
-                      key={link.name}
-                      to={link.path}
-                      onClick={() => setIsOpen(false)}
-                      className={`block font-body text-sm transition-colors hover:text-primary ${
-                        isActive(link.path) ? "text-primary font-semibold" : "text-muted-foreground"
-                      }`}
-                    >
-                      {link.name}
-                    </Link>
-                  )
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    onClick={() => setIsOpen(false)}
+                    className={`block font-body text-sm transition-colors hover:text-primary ${
+                      isActive(link.path) ? "text-primary font-semibold" : "text-muted-foreground"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
                 ))}
                 <div className="flex flex-col space-y-2 pt-4">
                   <Button variant="ghost" size="sm" onClick={() => { setShowSignIn(true); setIsOpen(false); }}>
