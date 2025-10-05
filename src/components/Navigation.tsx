@@ -17,6 +17,7 @@ const Navigation = () => {
     { name: "Earn", path: "/earn" },
     { name: "Pricing", path: "/", scrollTo: "pricing" },
     { name: "About", path: "/community" },
+    { name: "Qora Agent", path: "/qora-agent" },
   ];
 
   const handleNavigation = (link: any) => {

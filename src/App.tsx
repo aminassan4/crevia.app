@@ -14,6 +14,7 @@ import Products from "./pages/Products";
 import CreateEvent from "./pages/CreateEvent";
 import Dashboard from "./pages/Dashboard";
 import CreateProduct from "./pages/CreateProduct";
+import QoraAgent from "./pages/QoraAgent";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const AppContent = () => (
       <Route path="/create-event" element={<CreateEvent />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/create-product" element={<CreateProduct />} />
+      <Route path="/qora-agent" element={<QoraAgent />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
     </Routes>
