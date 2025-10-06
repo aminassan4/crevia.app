@@ -346,52 +346,6 @@ const Events = () => {
         </div>
       </section>
 
-      {/* Explore Local Events */}
-      <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <h2 className="font-heading text-2xl font-bold text-foreground mb-8">
-            Explore Local Events
-          </h2>
-
-          <div className="space-y-8">
-            {localRegions.map((region, index) => (
-              <motion.div
-                key={region.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="mb-4">
-                  <h3 className="font-heading text-lg font-semibold text-foreground">
-                    {region.name}
-                  </h3>
-                </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {region.cities.map((city) => (
-                    <Card key={city} className="hover-lift cursor-pointer p-4 group">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-hero flex items-center justify-center">
-                          <MapPin className="w-5 h-5 text-white" />
-                        </div>
-                        <div>
-                          <h4 className="font-heading font-semibold group-hover:text-primary transition-colors">
-                            {city}
-                          </h4>
-                          <p className="text-xs text-muted-foreground">
-                            {Math.floor(Math.random() * 50) + 10} Events
-                          </p>
-                        </div>
-                      </div>
-                    </Card>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="py-20 bg-gradient-hero">
         <div className="container mx-auto px-4 text-center">

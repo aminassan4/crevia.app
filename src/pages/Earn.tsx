@@ -33,14 +33,6 @@ const Earn = () => {
       color: "text-primary",
       bgColor: "bg-primary/10",
       features: ["Event Hosting", "Ticket Sales", "Virtual Meetings", "Workshop Creation"]
-    },
-    {
-      icon: Video,
-      title: "Workshops & Masterclasses",
-      description: "Share your expertise through live workshops, coaching sessions, and training programs.",
-      color: "text-primary",
-      bgColor: "bg-primary/10",
-      features: ["Live Sessions", "Recording Sales", "Group Coaching", "1-on-1 Mentorship"]
     }
   ];
 
@@ -153,7 +145,7 @@ const Earn = () => {
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-2 gap-8">
             {earningSections.map((section, index) => (
               <motion.div
                 key={section.title}
