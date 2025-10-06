@@ -37,7 +37,7 @@ const Pricing = () => {
     },
     {
       question: "Can I use Kaizen Afrika for memberships?",
-      answer: "Yes! You can create and manage paid communities, membership tiers, and recurring subscriptions for your audience."
+      answer: "Yes! You can create and manage membership tiers and recurring subscriptions for your audience through events and digital products."
     },
     {
       question: "What happens to my content if I cancel?",

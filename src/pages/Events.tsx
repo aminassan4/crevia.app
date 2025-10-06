@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { 
@@ -10,257 +10,255 @@ import {
   Users,
   Clock,
   Video,
-  DollarSign,
-  Filter,
-  Star,
-  TrendingUp
+  Globe,
+  Palette,
+  Brain,
+  Code,
+  Coffee,
+  Dumbbell,
+  Music,
+  Briefcase,
+  ChevronRight,
+  Bell,
+  Star
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Footer from "@/components/Footer";
 
 const Events = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
-  const upcomingEvents = [
+  const popularEvents = [
     {
       id: 1,
-      title: "AI in African Business Summit",
-      description: "Explore how artificial intelligence is transforming businesses across Africa. Network with AI experts and learn implementation strategies.",
-      date: "March 15, 2025",
-      time: "09:00 - 17:00",
-      location: "Virtual Event",
-      price: "Free",
-      attendees: 2500,
-      maxAttendees: 3000,
+      title: "Hedera Africa Hackathon Nairobi",
       organizer: "TechAfrica Foundation",
-      category: "Technology",
-      type: "summit",
+      date: "Tomorrow, 1:30 PM",
+      location: "Nairobi Stock Exchange",
       image: "gradient-hero",
-      tags: ["AI", "Business", "Innovation"]
+      attendees: 247
     },
     {
       id: 2,
-      title: "Content Creator Masterclass",
-      description: "Learn advanced strategies for growing your audience, creating viral content, and monetizing your creative work.",
-      date: "March 22, 2025",
-      time: "14:00 - 18:00",
-      location: "iHub Nairobi, Kenya",
-      price: "$75",
-      attendees: 150,
-      maxAttendees: 200,
-      organizer: "CreativeHub Africa",
-      category: "Creators",
-      type: "workshop",
+      title: "GIKOMBA FASHION SHOW",
+      organizer: "Fashion Africa",
+      date: "Fri, Oct 10, 4:00 PM",
+      location: "LUCARNDI STORE",
       image: "gradient-accent",
-      tags: ["Content", "Social Media", "Monetization"]
+      attendees: 189
     },
     {
       id: 3,
-      title: "Freelancers & Remote Work Expo",
-      description: "Connect with top companies hiring freelancers, learn about remote work opportunities, and improve your skills.",
-      date: "April 5, 2025",
-      time: "10:00 - 16:00",
-      location: "Lagos Convention Centre",
-      price: "$50",
-      attendees: 800,
-      maxAttendees: 1000,
-      organizer: "FreelanceAfrica",
-      category: "Business",
-      type: "expo",
+      title: "Just Walk",
+      organizer: "Community Wellness",
+      date: "Sat, Oct 11, 9:00 AM",
+      location: "Karura Forest Gate A",
       image: "gradient-hero",
-      tags: ["Freelancing", "Remote Work", "Networking"]
-    }
-  ];
-
-  const featuredEvents = [
+      attendees: 312
+    },
     {
       id: 4,
-      title: "Design Thinking Workshop",
-      date: "March 28, 2025",
-      location: "Cape Town, SA",
-      price: "$120",
-      attendees: 80,
-      category: "Design"
+      title: "Datafest Africa 2025 - Nairobi",
+      organizer: "Data Science Africa",
+      date: "Wed, Oct 15, 9:00 AM",
+      location: "Aga Khan University",
+      image: "gradient-accent",
+      attendees: 456
     },
     {
       id: 5,
-      title: "Startup Pitch Competition",
-      date: "April 12, 2025",
-      location: "Virtual",
-      price: "Free",
-      attendees: 500,
-      category: "Business"
+      title: "Nairobi Startup Coworking Club",
+      organizer: "Startup Hub Kenya",
+      date: "Wed, Oct 15, 11:00 AM",
+      location: "iHub Nairobi",
+      image: "gradient-hero",
+      attendees: 128
     },
     {
       id: 6,
-      title: "Photography Bootcamp",
-      date: "April 18, 2025",
-      location: "Accra, Ghana",
-      price: "$95",
-      attendees: 120,
-      category: "Photography"
+      title: "Bridging the Gap: Chainlink-ing Smart Contracts",
+      organizer: "Blockchain Centre NBO",
+      date: "Thu, Oct 16, 6:30 PM",
+      location: "Blockchain Centre NBO",
+      image: "gradient-accent",
+      attendees: 201
     }
   ];
 
-  const eventTypes = [
-    { name: "Workshops", count: 45, icon: Star },
-    { name: "Conferences", count: 23, icon: Users },
-    { name: "Webinars", count: 67, icon: Video },
-    { name: "Networking", count: 34, icon: TrendingUp },
-    { name: "Masterclasses", count: 29, icon: Calendar },
-    { name: "Bootcamps", count: 18, icon: Clock }
+  const categories = [
+    { name: "Tech", count: "2K", icon: Code, color: "text-blue-500" },
+    { name: "Food & Drink", count: "79", icon: Coffee, color: "text-orange-500" },
+    { name: "AI", count: "2K", icon: Brain, color: "text-purple-500" },
+    { name: "Arts & Culture", count: "965", icon: Palette, color: "text-pink-500" },
+    { name: "Climate", count: "530", icon: Globe, color: "text-green-500" },
+    { name: "Fitness", count: "768", icon: Dumbbell, color: "text-red-500" },
+    { name: "Wellness", count: "1K", icon: Star, color: "text-indigo-500" },
+    { name: "Crypto", count: "873", icon: Briefcase, color: "text-yellow-500" }
+  ];
+
+  const featuredCalendars = [
+    {
+      id: 1,
+      name: "Reading Rhythms Global",
+      description: "Not a book club. A reading party. Read with friends in live music...",
+      avatar: "RR",
+      location: "Sydney",
+      events: 24,
+      color: "bg-purple-500"
+    },
+    {
+      id: 2,
+      name: "Build Club",
+      description: "The best place in the world to learn AI. Curated with ❤️ at the BAS! Our Etho",
+      avatar: "BC",
+      location: "Sydney · Online",
+      events: 45,
+      color: "bg-blue-500"
+    },
+    {
+      id: 3,
+      name: "Design Buddies",
+      description: "Events for designers and all creatives across SF, online, and...",
+      avatar: "DB",
+      location: "San Francisco",
+      events: 32,
+      color: "bg-pink-500"
+    },
+    {
+      id: 4,
+      name: "ADPList",
+      description: "Your favorite all-things happening at ADPList! We featu...",
+      avatar: "AD",
+      location: "Global",
+      events: 67,
+      color: "bg-orange-500"
+    },
+    {
+      id: 5,
+      name: "Cursor Community",
+      description: "Cursor community hosted meetups, hackathons,...",
+      avatar: "CC",
+      location: "San Francisco",
+      events: 18,
+      color: "bg-green-500"
+    },
+    {
+      id: 6,
+      name: "The AI Collective",
+      description: "The world's largest AI community: 100,000+ pioneers ...",
+      avatar: "AI",
+      location: "Global",
+      events: 89,
+      color: "bg-indigo-500"
+    }
+  ];
+
+  const localRegions = [
+    { name: "Africa", cities: ["Lagos", "Nairobi", "Cape Town", "Accra"] },
+    { name: "Asia & Pacific", cities: ["Singapore", "Sydney", "Tokyo", "Mumbai"] },
+    { name: "Europe", cities: ["London", "Berlin", "Paris", "Amsterdam"] },
+    { name: "South America", cities: ["São Paulo", "Buenos Aires", "Bogotá"] },
+    { name: "North America", cities: ["San Francisco", "New York", "Toronto", "Austin"] }
   ];
 
   return (
-    <div className="min-h-screen pt-16">
+    <div className="min-h-screen pt-16 bg-background">
       {/* Header */}
-      <section className="py-20 bg-gradient-subtle">
+      <section className="py-12 border-b border-border">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <h1 className="font-heading text-5xl md:text-6xl font-bold text-foreground mb-6">
-              Discover <span className="bg-gradient-hero bg-clip-text text-transparent">Events</span>
-            </h1>
-            <p className="font-body text-xl text-muted-foreground mb-8">
-              Join thousands of creators, entrepreneurs, and innovators at events across Africa.
-              Learn, network, and grow your business.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-              <Button variant="hero" size="xl" asChild>
+          <div className="flex items-center justify-between mb-8">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
+                Discover Events
+              </h1>
+              <p className="font-body text-muted-foreground mt-2">
+                Explore popular events near you, browse by category, or check out some of the great community calendars.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Button variant="hero" size="lg" asChild>
                 <Link to="/create-event">
                   <Plus className="w-5 h-5 mr-2" />
-                  Host an Event
+                  Create Event
                 </Link>
               </Button>
-              <div className="relative w-full sm:w-96">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                <Input
-                  placeholder="Search events..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 h-12"
-                />
-              </div>
-            </div>
+            </motion.div>
+          </div>
+
+          {/* Search Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative max-w-2xl"
+          >
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+            <Input
+              placeholder="Search events..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-12 h-12 bg-muted/50"
+            />
           </motion.div>
         </div>
       </section>
 
-      {/* Upcoming Events */}
-      <section className="py-20">
+      {/* Popular Events */}
+      <section className="py-16">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Upcoming Events
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="font-heading text-2xl font-bold text-foreground">
+              Popular Events
             </h2>
-            <p className="font-body text-xl text-muted-foreground">
-              Don't miss these amazing learning and networking opportunities
-            </p>
-          </motion.div>
+            <Button variant="ghost" size="sm">
+              View All
+              <ChevronRight className="w-4 h-4 ml-1" />
+            </Button>
+          </div>
 
-          <div className="space-y-8">
-            {upcomingEvents.map((event, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {popularEvents.map((event, index) => (
               <motion.div
                 key={event.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="hover-lift overflow-hidden">
-                  <div className="grid lg:grid-cols-4 gap-6 p-6">
-                    {/* Event Image */}
-                    <div className={`lg:col-span-1 h-48 lg:h-auto bg-${event.image} rounded-lg flex items-center justify-center`}>
-                      <Calendar className="w-12 h-12 text-white" />
-                    </div>
-                    
-                    {/* Event Details */}
-                    <div className="lg:col-span-2 space-y-4">
-                      <div>
-                        <div className="flex items-center gap-2 mb-2">
-                          <Badge variant="secondary">{event.category}</Badge>
-                          <Badge variant="outline" className="capitalize">{event.type}</Badge>
-                        </div>
-                        <h3 className="font-heading text-2xl font-bold mb-2">{event.title}</h3>
-                        <p className="font-body text-muted-foreground">{event.description}</p>
-                      </div>
-                      
-                      <div className="flex flex-wrap gap-1">
-                        {event.tags.map((tag) => (
-                          <Badge key={tag} variant="outline" className="text-xs">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                      
-                      <div className="grid sm:grid-cols-2 gap-4 text-sm">
-                        <div className="flex items-center space-x-2">
-                          <Calendar className="w-4 h-4 text-primary" />
-                          <span className="font-body">{event.date}</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <Clock className="w-4 h-4 text-primary" />
-                          <span className="font-body">{event.time}</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <MapPin className="w-4 h-4 text-primary" />
-                          <span className="font-body">{event.location}</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <Users className="w-4 h-4 text-primary" />
-                          <span className="font-body">{event.attendees}/{event.maxAttendees} attending</span>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Registration */}
-                    <div className="lg:col-span-1 space-y-4">
-                      <div className="text-center">
-                        <div className="font-heading text-3xl font-bold text-primary mb-1">{event.price}</div>
-                        <p className="font-body text-sm text-muted-foreground">by {event.organizer}</p>
-                      </div>
-                      
-                      <div className="space-y-3">
-                        <Button 
-                          variant="default" 
-                          className="w-full"
-                          onClick={() => {
-                            // TODO: Implement event registration with Supabase
-                            console.log("Register for event:", event.title);
-                          }}
-                        >
-                          Register Now
-                        </Button>
-                        <Button variant="outline" className="w-full">
-                          View Details
-                        </Button>
-                      </div>
-                      
-                      <div className="text-center">
-                        <div className="w-full bg-muted rounded-full h-2 mb-2">
-                          <div 
-                            className="bg-primary h-2 rounded-full" 
-                            style={{ width: `${(event.attendees / event.maxAttendees) * 100}%` }}
-                          />
-                        </div>
-                        <p className="font-body text-xs text-muted-foreground">
-                          {Math.round((event.attendees / event.maxAttendees) * 100)}% capacity
-                        </p>
-                      </div>
-                    </div>
+                <Card className="hover-lift overflow-hidden cursor-pointer group">
+                  <div className={`h-40 bg-${event.image} relative flex items-center justify-center`}>
+                    <Calendar className="w-12 h-12 text-white" />
                   </div>
+                  <CardContent className="p-5">
+                    <h3 className="font-heading text-lg font-bold mb-2 group-hover:text-primary transition-colors">
+                      {event.title}
+                    </h3>
+                    <div className="space-y-2 text-sm text-muted-foreground">
+                      <div className="flex items-center space-x-2">
+                        <Clock className="w-4 h-4" />
+                        <span>{event.date}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <MapPin className="w-4 h-4" />
+                        <span>{event.location}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Users className="w-4 h-4" />
+                        <span>{event.attendees} attending</span>
+                      </div>
+                    </div>
+                  </CardContent>
                 </Card>
               </motion.div>
             ))}
@@ -268,91 +266,128 @@ const Events = () => {
         </div>
       </section>
 
-      {/* Featured Events & Event Types */}
-      <section className="py-20 bg-muted/30">
+      {/* Browse by Category */}
+      <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Featured Events */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="font-heading text-3xl font-bold mb-8 flex items-center">
-                <Star className="w-8 h-8 mr-3 text-primary" />
-                Featured Events
-              </h3>
-              <div className="space-y-4">
-                {featuredEvents.map((event, index) => (
-                  <motion.div
-                    key={event.id}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                  >
-                    <Card className="hover-lift p-4">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-12 h-12 bg-gradient-hero rounded-lg flex items-center justify-center">
-                            <Calendar className="w-6 h-6 text-white" />
-                          </div>
-                          <div>
-                            <h4 className="font-heading font-bold">{event.title}</h4>
-                            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                              <span>{event.date}</span>
-                              <span>•</span>
-                              <span>{event.location}</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <div className="font-heading font-bold text-primary">{event.price}</div>
-                          <div className="text-sm text-muted-foreground">{event.attendees} attending</div>
-                        </div>
-                      </div>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+          <h2 className="font-heading text-2xl font-bold text-foreground mb-8">
+            Browse by Category
+          </h2>
 
-            {/* Event Types */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="font-heading text-3xl font-bold mb-8 flex items-center">
-                <Filter className="w-8 h-8 mr-3 text-primary" />
-                Browse by Type
-              </h3>
-              <div className="grid gap-4">
-                {eventTypes.map((type, index) => (
-                  <motion.div
-                    key={type.name}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                  >
-                    <Card className="hover-lift p-4 cursor-pointer">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                            <type.icon className="w-5 h-5 text-primary" />
-                          </div>
-                          <span className="font-heading font-semibold">{type.name}</span>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {categories.map((category, index) => (
+              <motion.div
+                key={category.name}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                viewport={{ once: true }}
+              >
+                <Card className="hover-lift cursor-pointer p-6 text-center group">
+                  <div className={`w-12 h-12 mx-auto mb-3 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                    <category.icon className={`w-6 h-6 ${category.color}`} />
+                  </div>
+                  <h3 className="font-heading font-semibold mb-1">{category.name}</h3>
+                  <p className="text-sm text-muted-foreground">{category.count} Events</p>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Calendars */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="font-heading text-2xl font-bold text-foreground mb-8">
+            Featured Calendars
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featuredCalendars.map((calendar, index) => (
+              <motion.div
+                key={calendar.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Card className="hover-lift cursor-pointer group">
+                  <CardContent className="p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className={`w-16 h-16 ${calendar.color} rounded-2xl flex items-center justify-center text-white font-heading font-bold text-xl shadow-lg`}>
+                        {calendar.avatar}
+                      </div>
+                      <Button variant="outline" size="sm">
+                        <Bell className="w-4 h-4 mr-1" />
+                        Subscribe
+                      </Button>
+                    </div>
+                    
+                    <h3 className="font-heading text-lg font-bold mb-2 group-hover:text-primary transition-colors">
+                      {calendar.name}
+                    </h3>
+                    
+                    <p className="font-body text-sm text-muted-foreground mb-4 line-clamp-2">
+                      {calendar.description}
+                    </p>
+                    
+                    <div className="flex items-center justify-between text-sm">
+                      <div className="flex items-center space-x-1 text-muted-foreground">
+                        <MapPin className="w-4 h-4" />
+                        <span>{calendar.location}</span>
+                      </div>
+                      <span className="text-muted-foreground">{calendar.events} events</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Explore Local Events */}
+      <section className="py-16 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <h2 className="font-heading text-2xl font-bold text-foreground mb-8">
+            Explore Local Events
+          </h2>
+
+          <div className="space-y-8">
+            {localRegions.map((region, index) => (
+              <motion.div
+                key={region.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <div className="mb-4">
+                  <h3 className="font-heading text-lg font-semibold text-foreground">
+                    {region.name}
+                  </h3>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {region.cities.map((city) => (
+                    <Card key={city} className="hover-lift cursor-pointer p-4 group">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 rounded-full bg-gradient-hero flex items-center justify-center">
+                          <MapPin className="w-5 h-5 text-white" />
                         </div>
-                        <Badge variant="outline">{type.count} events</Badge>
+                        <div>
+                          <h4 className="font-heading font-semibold group-hover:text-primary transition-colors">
+                            {city}
+                          </h4>
+                          <p className="text-xs text-muted-foreground">
+                            {Math.floor(Math.random() * 50) + 10} Events
+                          </p>
+                        </div>
                       </div>
                     </Card>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

@@ -555,7 +555,7 @@ const CreateEvent = () => {
                       Event Visibility
                     </h3>
                     <p className="font-body text-sm text-muted-foreground mb-3">
-                      Your event will be featured on our events page and promoted to relevant communities.
+                      Your event will be featured on our events page and promoted to relevant audiences.
                     </p>
                     <div className="flex items-center space-x-2">
                       <Badge variant="secondary">Auto-promoted</Badge>

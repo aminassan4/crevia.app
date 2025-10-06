@@ -24,7 +24,7 @@ const Footer = () => {
               </span>
             </div>
             <p className="font-body text-muted-foreground mb-6 leading-relaxed">
-              Empowering African creators and entrepreneurs to build, share, and monetize their expertise through digital products, communities, and events.
+              Empowering African creators and entrepreneurs to build, share, and monetize their expertise through digital products and events.
             </p>
             <div className="space-y-2">
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">

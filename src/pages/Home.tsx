@@ -219,12 +219,6 @@ const Home = () => {
   const [activeFeature, setActiveFeature] = useState("courses");
   const features = [
     {
-      icon: Users,
-      title: "Communities",
-      description: "Connect with like-minded creators, share resources, and build meaningful relationships that drive success.",
-      color: "text-primary"
-    },
-    {
       icon: ShoppingBag,
       title: "Digital Products",
       description: "Sell courses, templates, eBooks, and guides. Create your own link-in-bio store and monetize your expertise.",
@@ -234,6 +228,12 @@ const Home = () => {
       icon: Calendar,
       title: "Events",
       description: "Host IRL or virtual events, masterclasses, and mentorship programs. Build your audience and impact.",
+      color: "text-primary"
+    },
+    {
+      icon: Bot,
+      title: "AI Assistant",
+      description: "Your AI-powered copilot for creation, planning, and growth. Write better, faster, and smarter.",
       color: "text-primary"
     }
   ];
@@ -388,10 +388,10 @@ const Home = () => {
             className="flex flex-wrap justify-center gap-4 mb-12"
           >
             {[
-              { name: "Community", demo: "community" },
               { name: "Events", demo: "events" },
               { name: "Digital Products", demo: "products" },
-              { name: "Courses", demo: "courses" }
+              { name: "Courses", demo: "courses" },
+              { name: "AI Assistant", demo: "ai" }
             ].map((feature, index) => (
               <motion.button
                 key={feature.name}
@@ -432,10 +432,10 @@ const Home = () => {
                   <div className="flex items-center space-x-4 font-body text-sm text-slate-600">
                     <span>Home</span>
                     <span className={`font-semibold ${activeFeature === 'courses' ? 'text-primary' : 'text-slate-600'}`}>
-                      {activeFeature === 'community' && 'Community'}
                       {activeFeature === 'events' && 'Events'}
                       {activeFeature === 'products' && 'Digital Products'}
                       {activeFeature === 'courses' && 'Courses'}
+                      {activeFeature === 'ai' && 'AI Assistant'}
                     </span>
                     <span>Members</span>
                     <span>Leaderboard</span>
@@ -468,30 +468,6 @@ const Home = () => {
                   </>
                 )}
 
-                {activeFeature === 'community' && (
-                  <>
-                    <div className="flex items-center justify-between mb-6">
-                      <h3 className="font-heading text-2xl font-bold text-slate-900">Community</h3>
-                      <button className="px-4 py-2 bg-primary text-white rounded-lg font-body text-sm">+ Create Group</button>
-                    </div>
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="bg-slate-50 rounded-xl p-6">
-                        <div className="flex items-center space-x-3 mb-4">
-                          <Users className="w-8 h-8 text-primary" />
-                          <div>
-                            <h4 className="font-body font-semibold text-slate-900">Design Community</h4>
-                            <p className="font-body text-sm text-slate-600">1,234 members</p>
-                          </div>
-                        </div>
-                        <p className="font-body text-sm text-slate-700 mb-4">Latest: New portfolio review session tomorrow!</p>
-                        <div className="flex space-x-2">
-                          <span className="bg-primary/10 text-primary px-2 py-1 rounded text-xs">Active</span>
-                          <span className="bg-slate-200 text-slate-600 px-2 py-1 rounded text-xs">Design</span>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                )}
 
                 {activeFeature === 'products' && (
                   <>
@@ -723,9 +699,9 @@ const Home = () => {
                 description: "Sell eBooks, courses, and digital resources"
               },
               {
-                icon: "👥",
-                title: "Community Building",
-                description: "Foster meaningful connections and engagement"
+                icon: "📅",
+                title: "Event Management",
+                description: "Plan and host successful virtual or IRL events"
               },
               {
                 icon: "🎯",
@@ -778,7 +754,7 @@ const Home = () => {
                 <div className="space-y-4 mb-6">
                   {[
                     { icon: Globe, name: "Professional Website Builder", replacedTools: "Wix, Squarespace", cost: "$25" },
-                    { icon: Users, name: "Community Platform", replacedTools: "Circle, Mighty Networks", cost: "$39" },
+                    { icon: Users, name: "Creator Profiles & Networking", replacedTools: "Linktree Pro, About.me", cost: "$19" },
                     { icon: ShoppingBag, name: "Digital Product Store", replacedTools: "Gumroad, Sellfy", cost: "$15" },
                     { icon: Calendar, name: "Event Management", replacedTools: "Eventbrite, Zoom", cost: "$29" },
                     { icon: Mail, name: "Email Marketing", replacedTools: "Mailchimp, ConvertKit", cost: "$35" },
@@ -964,7 +940,7 @@ const Home = () => {
                     </div>
                     <div className="flex items-center space-x-3">
                       <CheckCircle className="w-5 h-5 text-green-600" />
-                      <span className="font-body">Community Access</span>
+                      <span className="font-body">Creator Networking</span>
                     </div>
                     <div className="flex items-center space-x-3">
                       <CheckCircle className="w-5 h-5 text-green-600" />
@@ -1102,10 +1078,10 @@ const Home = () => {
             className="text-center mb-16"
           >
             <h2 className="font-heading text-5xl md:text-7xl font-black text-foreground mb-4 uppercase tracking-tight">
-              Love From The Community
+              Love From Our Creators
             </h2>
             <p className="font-body text-xl text-muted-foreground">
-              Love from the community
+              Hear from creators who are winning
             </p>
           </motion.div>
 

@@ -69,7 +69,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="font-body text-xl md:text-2xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed"
           >
-            Create communities, sell digital products, and host events—all in one place. 
+            Sell digital products and host events—all in one place. 
             Join thousands of African creators monetizing their expertise.
           </motion.p>
 

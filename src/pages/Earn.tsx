@@ -9,46 +9,15 @@ import {
   TrendingUp,
   DollarSign,
   Star,
-  Play
+  Play,
+  Video
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
 
 const Earn = () => {
-  const featuredCommunities = [
-    {
-      name: "African Tech Innovators",
-      members: 15400,
-      category: "Technology",
-      description: "A vibrant community of tech professionals and enthusiasts across Africa",
-      image: "gradient-hero"
-    },
-    {
-      name: "Creative Entrepreneurs Hub",
-      members: 12800,
-      category: "Business",
-      description: "Connect with creative business owners building the future",
-      image: "gradient-accent"
-    },
-    {
-      name: "Design Masters Africa",
-      members: 9200,
-      category: "Design",
-      description: "Where African designers collaborate and grow together",
-      image: "gradient-hero"
-    }
-  ];
-
   const earningSections = [
-    {
-      icon: Users,
-      title: "Communities",
-      description: "Create and join communities. Connect with like-minded creators and build meaningful relationships.",
-      color: "text-primary",
-      bgColor: "bg-primary/10",
-      features: ["Community Creation", "Member Management", "Discussion Forums", "Private Spaces"]
-    },
     {
       icon: ShoppingBag,
       title: "Digital Products",
@@ -64,6 +33,14 @@ const Earn = () => {
       color: "text-primary",
       bgColor: "bg-primary/10",
       features: ["Event Hosting", "Ticket Sales", "Virtual Meetings", "Workshop Creation"]
+    },
+    {
+      icon: Video,
+      title: "Workshops & Masterclasses",
+      description: "Share your expertise through live workshops, coaching sessions, and training programs.",
+      color: "text-primary",
+      bgColor: "bg-primary/10",
+      features: ["Live Sessions", "Recording Sales", "Group Coaching", "1-on-1 Mentorship"]
     }
   ];
 
@@ -139,7 +116,7 @@ const Earn = () => {
               Start <span className="bg-gradient-hero bg-clip-text text-transparent">Earning</span> Today
             </h1>
             <p className="font-body text-xl text-muted-foreground mb-8">
-              Multiple ways to monetize your skills and knowledge. Build communities, sell digital products, and host events.
+              Multiple ways to monetize your skills and knowledge. Sell digital products, host events, and share your expertise.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
               <Button variant="hero" size="xl" asChild>
@@ -149,8 +126,8 @@ const Earn = () => {
                 </Link>
               </Button>
               <Button variant="outline" size="xl" asChild>
-                <Link to="/community">
-                  Join a Community
+                <Link to="/events">
+                  Browse Events
                 </Link>
               </Button>
             </div>
@@ -203,7 +180,7 @@ const Earn = () => {
                       ))}
                     </ul>
                     <Button variant="default" className="w-full" asChild>
-                      <Link to={section.title === "Communities" ? "/communities" : section.title === "Events" ? "/events" : "/create-product"}>
+                      <Link to={section.title === "Events" ? "/events" : "/create-product"}>
                         Get Started
                       </Link>
                     </Button>
@@ -333,68 +310,6 @@ const Earn = () => {
                     }}>
                       Register Now
                     </Button>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Communities */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
-                Featured Communities
-              </h2>
-            </div>
-            <p className="font-body text-xl text-muted-foreground mb-6">
-              Join thriving communities of like-minded creators
-            </p>
-            <Button variant="outline" size="lg" asChild>
-              <Link to="/communities">
-                See All Communities
-              </Link>
-            </Button>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8 mt-12">
-            {featuredCommunities.map((community, index) => (
-              <motion.div
-                key={community.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                viewport={{ once: true }}
-              >
-                <Card className="hover-lift overflow-hidden h-full">
-                  <div className={`h-40 bg-${community.image} flex items-center justify-center`}>
-                    <Users className="w-16 h-16 text-white" />
-                  </div>
-                  <CardContent className="p-6">
-                    <div className="mb-3">
-                      <Badge variant="secondary">{community.category}</Badge>
-                    </div>
-                    <h3 className="font-heading text-xl font-bold mb-2">{community.name}</h3>
-                    <p className="font-body text-sm text-muted-foreground mb-4">
-                      {community.description}
-                    </p>
-                    <div className="flex items-center justify-between pt-4 border-t">
-                      <span className="font-body text-sm text-muted-foreground">
-                        👥 {community.members.toLocaleString()} members
-                      </span>
-                      <Button variant="ghost" size="sm" asChild>
-                        <Link to="/communities">Join</Link>
-                      </Button>
-                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
