@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { User, Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface SignInModalProps {
   open: boolean;
@@ -16,21 +18,47 @@ const SignInModal = ({ open, onOpenChange, onSwitchToSignUp }: SignInModalProps)
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
 
-  const handleSignIn = (e: React.FormEvent) => {
+  const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement actual sign in logic with Supabase
-    console.log("Sign in attempt:", { email, password });
-    onOpenChange(false);
+    setLoading(true);
+
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Welcome back!",
+        description: "You've successfully signed in.",
+      });
+      onOpenChange(false);
+    } catch (error: any) {
+      toast({
+        title: "Error signing in",
+        description: error.message,
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md bg-card border-border">
         <DialogHeader>
-          <DialogTitle className="font-heading text-2xl text-center">
-            Welcome Back
+          <DialogTitle className="font-heading text-2xl text-center text-foreground">
+            Welcome back
           </DialogTitle>
+          <p className="text-center text-sm text-muted-foreground mt-2">
+            Enter your credentials to access your account
+          </p>
         </DialogHeader>
         
         <form onSubmit={handleSignIn} className="space-y-6">
@@ -88,8 +116,12 @@ const SignInModal = ({ open, onOpenChange, onSwitchToSignUp }: SignInModalProps)
             </button>
           </div>
 
-          <Button type="submit" variant="hero" className="w-full">
-            <User className="w-4 h-4 mr-2" />
+          <Button 
+            type="submit" 
+            className="w-full bg-gradient-to-r from-[#3533cd] to-[#3533cd]/80 hover:shadow-[0_0_40px_rgba(53,51,205,0.4)] text-white"
+            disabled={loading}
+          >
+            {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
             Sign In
           </Button>
 

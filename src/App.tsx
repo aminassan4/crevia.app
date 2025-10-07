@@ -10,7 +10,7 @@ import Community from "./pages/Community";
 import Events from "./pages/Events";
 import Products from "./pages/Products";
 import CreateEvent from "./pages/CreateEvent";
-import Dashboard from "./pages/Dashboard";
+import CreatorDashboard from "./pages/Dashboard";
 import CreateProduct from "./pages/CreateProduct";
 import QoraAgent from "./pages/QoraAgent";
 import Pricing from "./pages/Pricing";
@@ -28,7 +28,7 @@ const AppContent = () => (
       <Route path="/events" element={<Events />} />
       <Route path="/products" element={<Products />} />
       <Route path="/create-event" element={<CreateEvent />} />
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/dashboard" element={<CreatorDashboard />} />
       <Route path="/create-product" element={<CreateProduct />} />
       <Route path="/qora-agent" element={<QoraAgent />} />
       <Route path="/pricing" element={<Pricing />} />

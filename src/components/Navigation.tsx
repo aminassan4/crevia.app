@@ -1,21 +1,70 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, User } from "lucide-react";
+import { Menu, X, User, LogOut, LayoutDashboard } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import SignInModal from "@/components/auth/SignInModal";
 import SignUpModal from "@/components/auth/SignUpModal";
+import { supabase } from "@/integrations/supabase/client";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import { useToast } from "@/hooks/use-toast";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showSignIn, setShowSignIn] = useState(false);
-  const [showSignUp, setShowSignUp] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authMode, setAuthMode] = useState<"signin" | "signup">("signup");
+  const [user, setUser] = useState<any>(null);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   // Scroll to top when route changes
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
+
+  useEffect(() => {
+    // Check auth state
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    toast({
+      title: "Signed out",
+      description: "You've been successfully signed out.",
+    });
+    navigate("/");
+  };
+
+  const handleJoinKaizen = () => {
+    setAuthMode("signup");
+    setShowAuthModal(true);
+  };
+
+  const switchToSignIn = () => {
+    setAuthMode("signin");
+  };
+
+  const switchToSignUp = () => {
+    setAuthMode("signup");
+  };
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -58,13 +107,37 @@ const Navigation = () => {
 
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="sm" onClick={() => setShowSignIn(true)}>
-              <User className="w-4 h-4 mr-2" />
-              Sign In
-            </Button>
-            <Button variant="hero" size="sm" onClick={() => setShowSignUp(true)}>
-              Join Kaizen
-            </Button>
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="outline" 
+                    className="border-[#3533cd]/30 hover:bg-[#3533cd]/5"
+                  >
+                    <User className="w-4 h-4 mr-2" />
+                    Profile
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  <DropdownMenuItem onClick={() => navigate("/dashboard")}>
+                    <LayoutDashboard className="w-4 h-4 mr-2" />
+                    Dashboard
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleSignOut}>
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button 
+                onClick={handleJoinKaizen}
+                className="font-body bg-gradient-to-r from-[#3533cd] to-[#3533cd]/80 hover:shadow-[0_0_40px_rgba(53,51,205,0.4)] text-white"
+              >
+                Join Kaizen
+              </Button>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -99,13 +172,25 @@ const Navigation = () => {
                   </Link>
                 ))}
                 <div className="flex flex-col space-y-2 pt-4">
-                  <Button variant="ghost" size="sm" onClick={() => { setShowSignIn(true); setIsOpen(false); }}>
-                    <User className="w-4 h-4 mr-2" />
-                    Sign In
-                  </Button>
-                  <Button variant="hero" size="sm" onClick={() => { setShowSignUp(true); setIsOpen(false); }}>
-                    Join Kaizen
-                  </Button>
+                  {user ? (
+                    <>
+                      <Button variant="outline" size="sm" onClick={() => { navigate("/dashboard"); setIsOpen(false); }}>
+                        <LayoutDashboard className="w-4 h-4 mr-2" />
+                        Dashboard
+                      </Button>
+                      <Button variant="ghost" size="sm" onClick={() => { handleSignOut(); setIsOpen(false); }}>
+                        <LogOut className="w-4 h-4 mr-2" />
+                        Sign Out
+                      </Button>
+                    </>
+                  ) : (
+                    <Button 
+                      onClick={() => { handleJoinKaizen(); setIsOpen(false); }}
+                      className="font-body bg-gradient-to-r from-[#3533cd] to-[#3533cd]/80 hover:shadow-[0_0_40px_rgba(53,51,205,0.4)] text-white"
+                    >
+                      Join Kaizen
+                    </Button>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -113,23 +198,20 @@ const Navigation = () => {
         </AnimatePresence>
       </div>
       
-      {/* Auth Modals */}
-      <SignInModal 
-        open={showSignIn} 
-        onOpenChange={setShowSignIn}
-        onSwitchToSignUp={() => {
-          setShowSignIn(false);
-          setShowSignUp(true);
-        }}
-      />
-      <SignUpModal 
-        open={showSignUp} 
-        onOpenChange={setShowSignUp}
-        onSwitchToSignIn={() => {
-          setShowSignUp(false);
-          setShowSignIn(true);
-        }}
-      />
+      {/* Auth Modal */}
+      {authMode === "signin" ? (
+        <SignInModal 
+          open={showAuthModal}
+          onOpenChange={setShowAuthModal}
+          onSwitchToSignUp={switchToSignUp}
+        />
+      ) : (
+        <SignUpModal 
+          open={showAuthModal}
+          onOpenChange={setShowAuthModal}
+          onSwitchToSignIn={switchToSignIn}
+        />
+      )}
     </nav>
   );
 };

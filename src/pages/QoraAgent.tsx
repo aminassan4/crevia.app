@@ -16,6 +16,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import Footer from "@/components/Footer";
+import QoraChatbot from "@/components/chat/QoraChatbot";
 
 const QoraAgent = () => {
   const [activePrompt, setActivePrompt] = useState(0);
@@ -304,6 +305,35 @@ const QoraAgent = () => {
                 </div>
               </CardHeader>
             </Card>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* AI Chatbot Section */}
+      <section className="py-24 px-4">
+        <div className="container mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Try Qora Agent Now
+            </h2>
+            <p className="font-body text-xl text-muted-foreground max-w-2xl mx-auto">
+              Experience the power of AI-assisted creation
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <QoraChatbot />
           </motion.div>
         </div>
       </section>

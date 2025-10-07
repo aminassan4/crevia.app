@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { User, Mail, Lock, Eye, EyeOff, UserPlus } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface SignUpModalProps {
   open: boolean;
@@ -15,49 +17,111 @@ interface SignUpModalProps {
 const SignUpModal = ({ open, onOpenChange, onSwitchToSignIn }: SignUpModalProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
-    fullName: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: ""
   });
 
-  const handleSignUp = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: Implement actual sign up logic with Supabase
-    console.log("Sign up attempt:", formData);
-    onOpenChange(false);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
-  const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+  const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (formData.password !== formData.confirmPassword) {
+      toast({
+        title: "Passwords don't match",
+        description: "Please make sure your passwords match.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (formData.password.length < 8) {
+      toast({
+        title: "Password too short",
+        description: "Password must be at least 8 characters long.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const { error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            full_name: `${formData.firstName} ${formData.lastName}`.trim(),
+          },
+          emailRedirectTo: `${window.location.origin}/`,
+        },
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Account created!",
+        description: "Welcome to Kaizen Afrika!",
+      });
+      onOpenChange(false);
+    } catch (error: any) {
+      toast({
+        title: "Error creating account",
+        description: error.message,
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto bg-card border-border">
         <DialogHeader>
-          <DialogTitle className="font-heading text-2xl text-center">
-            Join Kaizen Afrika
+          <DialogTitle className="font-heading text-2xl text-center text-foreground">
+            Create your account
           </DialogTitle>
         </DialogHeader>
         
         <form onSubmit={handleSignUp} className="space-y-6">
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="fullName" className="font-body">Full Name</Label>
-              <div className="relative">
-                <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input
-                  id="fullName"
-                  type="text"
-                  placeholder="Enter your full name"
-                  value={formData.fullName}
-                  onChange={(e) => handleInputChange("fullName", e.target.value)}
-                  className="pl-10 font-body"
-                  required
-                />
-              </div>
+              <Label htmlFor="firstName" className="font-body">First Name (Optional)</Label>
+              <Input
+                id="firstName"
+                name="firstName"
+                type="text"
+                placeholder="John"
+                value={formData.firstName}
+                onChange={handleInputChange}
+                className="font-body"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="lastName" className="font-body">Last Name (Optional)</Label>
+              <Input
+                id="lastName"
+                name="lastName"
+                type="text"
+                placeholder="Doe"
+                value={formData.lastName}
+                onChange={handleInputChange}
+                className="font-body"
+              />
             </div>
 
             <div className="space-y-2">
@@ -66,10 +130,11 @@ const SignUpModal = ({ open, onOpenChange, onSwitchToSignIn }: SignUpModalProps)
                 <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="email"
+                  name="email"
                   type="email"
                   placeholder="Enter your email"
                   value={formData.email}
-                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  onChange={handleInputChange}
                   className="pl-10 font-body"
                   required
                 />
@@ -82,13 +147,18 @@ const SignUpModal = ({ open, onOpenChange, onSwitchToSignIn }: SignUpModalProps)
                 <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="password"
+                  name="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Create a password"
                   value={formData.password}
-                  onChange={(e) => handleInputChange("password", e.target.value)}
+                  onChange={handleInputChange}
                   className="pl-10 pr-10 font-body"
+                  minLength={8}
                   required
                 />
+                <p className="text-xs text-muted-foreground mt-1">
+                  Must be at least 8 characters long
+                </p>
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
@@ -105,10 +175,11 @@ const SignUpModal = ({ open, onOpenChange, onSwitchToSignIn }: SignUpModalProps)
                 <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="confirmPassword"
+                  name="confirmPassword"
                   type={showConfirmPassword ? "text" : "password"}
                   placeholder="Confirm your password"
                   value={formData.confirmPassword}
-                  onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
+                  onChange={handleInputChange}
                   className="pl-10 pr-10 font-body"
                   required
                 />
@@ -123,19 +194,12 @@ const SignUpModal = ({ open, onOpenChange, onSwitchToSignIn }: SignUpModalProps)
             </div>
           </div>
 
-          <div className="text-xs font-body text-muted-foreground">
-            By signing up, you agree to our{" "}
-            <button type="button" className="text-primary hover:underline">
-              Terms of Service
-            </button>{" "}
-            and{" "}
-            <button type="button" className="text-primary hover:underline">
-              Privacy Policy
-            </button>
-          </div>
-
-          <Button type="submit" variant="hero" className="w-full">
-            <UserPlus className="w-4 h-4 mr-2" />
+          <Button 
+            type="submit" 
+            className="w-full bg-gradient-to-r from-[#3533cd] to-[#3533cd]/80 hover:shadow-[0_0_40px_rgba(53,51,205,0.4)] text-white"
+            disabled={loading}
+          >
+            {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
             Create Account
           </Button>
 
