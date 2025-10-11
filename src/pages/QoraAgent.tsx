@@ -76,7 +76,34 @@ const QoraAgent = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pt-16">
+      {/* AI Chatbot Section - Now First */}
+      <section className="py-24 px-4">
+        <div className="container mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Try Qora Agent Now
+            </h2>
+            <p className="font-body text-xl text-muted-foreground max-w-2xl mx-auto">
+              Experience the power of AI-assisted creation
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <QoraChatbot />
+          </motion.div>
+        </div>
+      </section>
+
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
         {/* Background gradient */}
@@ -116,7 +143,8 @@ const QoraAgent = () => {
             {/* AI Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.6 }}
               className="inline-flex items-center space-x-2 bg-[#3533cd]/10 border border-[#3533cd]/20 text-[#3533cd] px-4 py-2 rounded-full text-sm font-body mb-8"
             >
@@ -127,7 +155,8 @@ const QoraAgent = () => {
             {/* Main heading */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="font-heading text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight"
             >
@@ -137,7 +166,8 @@ const QoraAgent = () => {
             {/* Tagline */}
             <motion.p
               initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.4 }}
               className="font-body text-2xl md:text-3xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed"
             >
@@ -147,7 +177,8 @@ const QoraAgent = () => {
             {/* Interactive Demo Box */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.6 }}
               className="max-w-2xl mx-auto mb-12"
             >
@@ -192,7 +223,8 @@ const QoraAgent = () => {
             {/* CTA */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.8 }}
             >
               <Button 
@@ -305,35 +337,6 @@ const QoraAgent = () => {
                 </div>
               </CardHeader>
             </Card>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* AI Chatbot Section */}
-      <section className="py-24 px-4">
-        <div className="container mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12"
-          >
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Try Qora Agent Now
-            </h2>
-            <p className="font-body text-xl text-muted-foreground max-w-2xl mx-auto">
-              Experience the power of AI-assisted creation
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <QoraChatbot />
           </motion.div>
         </div>
       </section>

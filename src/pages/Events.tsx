@@ -295,12 +295,20 @@ const Events = () => {
         </div>
       </section>
 
-      {/* Featured Calendars */}
+      {/* Featured Communities */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <h2 className="font-heading text-2xl font-bold text-foreground mb-8">
-            Featured Calendars
-          </h2>
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="font-heading text-2xl font-bold text-foreground">
+              Featured Communities
+            </h2>
+            <Button variant="hero" size="sm" asChild>
+              <Link to="/create-community">
+                <Plus className="w-4 h-4 mr-2" />
+                Create Your Community
+              </Link>
+            </Button>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredCalendars.map((calendar, index) => (

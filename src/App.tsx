@@ -12,6 +12,7 @@ import Products from "./pages/Products";
 import CreateEvent from "./pages/CreateEvent";
 import CreatorDashboard from "./pages/Dashboard";
 import CreateProduct from "./pages/CreateProduct";
+import CreateCommunity from "./pages/CreateCommunity";
 import QoraAgent from "./pages/QoraAgent";
 import Pricing from "./pages/Pricing";
 import NotFound from "./pages/NotFound";
@@ -30,6 +31,7 @@ const AppContent = () => (
       <Route path="/create-event" element={<CreateEvent />} />
       <Route path="/dashboard" element={<CreatorDashboard />} />
       <Route path="/create-product" element={<CreateProduct />} />
+      <Route path="/create-community" element={<CreateCommunity />} />
       <Route path="/qora-agent" element={<QoraAgent />} />
       <Route path="/pricing" element={<Pricing />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
