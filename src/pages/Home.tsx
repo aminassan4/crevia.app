@@ -27,56 +27,32 @@ import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 
-// Auto-scroll testimonials component
-const AutoScrollTestimonials = ({ successStories }: { successStories: typeof Home.prototype.successStories }) => {
-  const [isPaused, setIsPaused] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
+// Manual navigation testimonials component
+const ManualNavigationTestimonials = ({ successStories }: { successStories: typeof Home.prototype.successStories }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const itemsPerPage = 3;
+  const maxIndex = Math.max(0, successStories.length - itemsPerPage);
 
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer || isPaused) return;
+  const handlePrevious = () => {
+    setCurrentIndex((prev) => Math.max(0, prev - 1));
+  };
 
-    const scrollWidth = scrollContainer.scrollWidth;
-    const clientWidth = scrollContainer.clientWidth;
-    let scrollPosition = 0;
+  const handleNext = () => {
+    setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
+  };
 
-    const scroll = () => {
-      if (!isPaused) {
-        scrollPosition += 1;
-        if (scrollPosition >= scrollWidth / 2) {
-          scrollPosition = 0;
-        }
-        if (scrollContainer) {
-          scrollContainer.scrollLeft = scrollPosition;
-        }
-      }
-    };
-
-    const intervalId = setInterval(scroll, 30);
-    return () => clearInterval(intervalId);
-  }, [isPaused]);
-
-  const duplicatedStories = [...successStories, ...successStories];
+  const visibleStories = successStories.slice(currentIndex, currentIndex + itemsPerPage);
 
   return (
-    <div 
-      className="relative overflow-hidden mb-16"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      <div 
-        ref={scrollRef}
-        className="flex gap-8 overflow-x-hidden"
-        style={{ scrollBehavior: 'auto' }}
-      >
-        {duplicatedStories.map((story, index) => (
+    <div className="relative mb-16">
+      <div className="flex gap-8 mb-8">
+        {visibleStories.map((story, index) => (
           <motion.div
             key={`${story.name}-${index}`}
             initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: (index % 3) * 0.15 }}
-            viewport={{ once: true }}
-            className="group flex-shrink-0 w-full md:w-[calc(33.333%-1.5rem)]"
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: index * 0.15 }}
+            className="group flex-1"
           >
             <Card className="hover-lift p-8 bg-background/80 backdrop-blur-sm border-primary/10 hover:border-primary/30 transition-all duration-300 group-hover:shadow-2xl h-full">
               <CardContent className="p-0 text-center">
@@ -128,61 +104,61 @@ const AutoScrollTestimonials = ({ successStories }: { successStories: typeof Hom
           </motion.div>
         ))}
       </div>
+
+      {/* Navigation Buttons */}
+      <div className="flex items-center justify-center space-x-4">
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={handlePrevious}
+          disabled={currentIndex === 0}
+          className="rounded-full w-12 h-12"
+        >
+          <ArrowRight className="w-5 h-5 rotate-180" />
+        </Button>
+        <div className="text-sm text-muted-foreground">
+          {currentIndex + 1} - {Math.min(currentIndex + itemsPerPage, successStories.length)} of {successStories.length}
+        </div>
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={handleNext}
+          disabled={currentIndex >= maxIndex}
+          className="rounded-full w-12 h-12"
+        >
+          <ArrowRight className="w-5 h-5" />
+        </Button>
+      </div>
     </div>
   );
 };
 
-// Clean auto-scroll testimonials component (inspired by reference design)
-const CleanAutoScrollTestimonials = ({ testimonials }: { testimonials: { quote: string; author: string; role: string }[] }) => {
-  const [isPaused, setIsPaused] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
+// Clean manual navigation testimonials component
+const CleanManualNavigationTestimonials = ({ testimonials }: { testimonials: { quote: string; author: string; role: string }[] }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const itemsPerPage = 3;
+  const maxIndex = Math.max(0, testimonials.length - itemsPerPage);
 
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer || isPaused) return;
+  const handlePrevious = () => {
+    setCurrentIndex((prev) => Math.max(0, prev - 1));
+  };
 
-    const scrollWidth = scrollContainer.scrollWidth;
-    const clientWidth = scrollContainer.clientWidth;
-    let scrollPosition = 0;
+  const handleNext = () => {
+    setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
+  };
 
-    const scroll = () => {
-      if (!isPaused) {
-        scrollPosition += 0.5;
-        if (scrollPosition >= scrollWidth / 2) {
-          scrollPosition = 0;
-        }
-        if (scrollContainer) {
-          scrollContainer.scrollLeft = scrollPosition;
-        }
-      }
-    };
-
-    const intervalId = setInterval(scroll, 30);
-    return () => clearInterval(intervalId);
-  }, [isPaused]);
-
-  // Duplicate testimonials for infinite scroll
-  const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
+  const visibleTestimonials = testimonials.slice(currentIndex, currentIndex + itemsPerPage);
 
   return (
-    <div 
-      className="relative overflow-hidden"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      <div 
-        ref={scrollRef}
-        className="flex gap-6 overflow-x-hidden pb-4"
-        style={{ scrollBehavior: 'auto' }}
-      >
-        {duplicatedTestimonials.map((testimonial, index) => (
+    <div className="relative">
+      <div className="flex gap-6 pb-4 mb-8">
+        {visibleTestimonials.map((testimonial, index) => (
           <motion.div
-            key={`testimonial-${index}`}
+            key={`testimonial-${currentIndex}-${index}`}
             initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="flex-shrink-0 w-full md:w-[400px]"
+            className="flex-1"
           >
             <Card className="p-8 bg-background hover:shadow-xl transition-all duration-300 border border-border h-full group relative">
               <CardContent className="p-0 flex flex-col h-full">
@@ -210,6 +186,31 @@ const CleanAutoScrollTestimonials = ({ testimonials }: { testimonials: { quote: 
             </Card>
           </motion.div>
         ))}
+      </div>
+
+      {/* Navigation Buttons */}
+      <div className="flex items-center justify-center space-x-4">
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={handlePrevious}
+          disabled={currentIndex === 0}
+          className="rounded-full w-12 h-12"
+        >
+          <ArrowRight className="w-5 h-5 rotate-180" />
+        </Button>
+        <div className="text-sm text-muted-foreground">
+          {currentIndex + 1} - {Math.min(currentIndex + itemsPerPage, testimonials.length)} of {testimonials.length}
+        </div>
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={handleNext}
+          disabled={currentIndex >= maxIndex}
+          className="rounded-full w-12 h-12"
+        >
+          <ArrowRight className="w-5 h-5" />
+        </Button>
       </div>
     </div>
   );
@@ -896,8 +897,8 @@ const Home = () => {
             </p>
           </motion.div>
 
-          {/* Auto-scroll testimonials with clean design */}
-          <CleanAutoScrollTestimonials testimonials={testimonials} />
+          {/* Manual navigation testimonials with clean design */}
+          <CleanManualNavigationTestimonials testimonials={testimonials} />
         </div>
       </section>
 

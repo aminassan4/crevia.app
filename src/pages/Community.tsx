@@ -7,7 +7,8 @@ import {
   DollarSign,
   Users,
   Target,
-  Lightbulb
+  Lightbulb,
+  ArrowRight
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -87,54 +88,29 @@ const AutoScrollEventGallery = () => {
   );
 };
 
-// Auto-scroll component for past events
-const AutoScrollPastEvents = ({ events }: { events: any[] }) => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [isPaused, setIsPaused] = useState(false);
+// Manual navigation component for past events
+const ManualNavigationPastEvents = ({ events }: { events: any[] }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const itemsPerPage = 3;
+  const maxIndex = Math.max(0, events.length - itemsPerPage);
 
-  // Duplicate for seamless loop
-  const allEvents = [...events, ...events];
+  const handlePrevious = () => {
+    setCurrentIndex((prev) => Math.max(0, prev - 1));
+  };
 
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer || isPaused) return;
+  const handleNext = () => {
+    setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
+  };
 
-    const scrollSpeed = 1;
-    let animationId: number;
-
-    const scroll = () => {
-      if (scrollContainer) {
-        scrollContainer.scrollLeft += scrollSpeed;
-        
-        // Reset scroll when halfway through
-        if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
-          scrollContainer.scrollLeft = 0;
-        }
-        
-        animationId = requestAnimationFrame(scroll);
-      }
-    };
-
-    animationId = requestAnimationFrame(scroll);
-
-    return () => cancelAnimationFrame(animationId);
-  }, [isPaused]);
+  const visibleEvents = events.slice(currentIndex, currentIndex + itemsPerPage);
 
   return (
-    <div 
-      className="relative"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      <div 
-        ref={scrollRef}
-        className="flex gap-8 overflow-x-hidden scroll-smooth"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-      >
-        {allEvents.map((event, index) => (
+    <div className="relative">
+      <div className="flex gap-8 mb-8">
+        {visibleEvents.map((event, index) => (
           <div 
             key={`${event.title}-${index}`}
-            className="flex-shrink-0 w-96"
+            className="flex-1"
           >
             <Card className="hover-lift h-full">
               <CardHeader>
@@ -160,6 +136,31 @@ const AutoScrollPastEvents = ({ events }: { events: any[] }) => {
             </Card>
           </div>
         ))}
+      </div>
+
+      {/* Navigation Buttons */}
+      <div className="flex items-center justify-center space-x-4">
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={handlePrevious}
+          disabled={currentIndex === 0}
+          className="rounded-full w-12 h-12"
+        >
+          <ArrowRight className="w-4 h-4 rotate-180" />
+        </Button>
+        <div className="text-sm text-muted-foreground">
+          {currentIndex + 1} - {Math.min(currentIndex + itemsPerPage, events.length)} of {events.length}
+        </div>
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={handleNext}
+          disabled={currentIndex >= maxIndex}
+          className="rounded-full w-12 h-12"
+        >
+          <ArrowRight className="w-4 h-4" />
+        </Button>
       </div>
     </div>
   );
@@ -413,10 +414,43 @@ const Community = () => {
             </p>
           </motion.div>
 
-          <AutoScrollPastEvents events={pastEvents} />
+          <ManualNavigationPastEvents events={pastEvents} />
         </div>
       </section>
 
+
+      {/* Qlova Academy Section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto text-center"
+          >
+            <div className="inline-flex items-center space-x-2 bg-primary/10 border border-primary/20 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
+              <span>Coming Soon</span>
+            </div>
+            
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-6">
+              Qlova Academy
+            </h2>
+            
+            <p className="font-body text-xl text-muted-foreground mb-8 leading-relaxed">
+              A comprehensive learning platform designed to help African creators and entrepreneurs master the skills they need to thrive. 
+              From business fundamentals to advanced digital strategies, Qlova Academy will be your gateway to continuous growth and success.
+            </p>
+            
+            <Button variant="hero" size="xl" onClick={() => {
+              // TODO: Implement waitlist functionality with Supabase
+              console.log("Join Qlova Academy waitlist");
+            }}>
+              Join the Waitlist
+            </Button>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Donation Section */}
       <section className="py-20 bg-gradient-hero">

@@ -174,51 +174,6 @@ const QoraAgent = () => {
               Your AI Partner for Creation, Community, and Growth.
             </motion.p>
 
-            {/* Interactive Demo Box */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="max-w-2xl mx-auto mb-12"
-            >
-              <Card className="border-2 border-[#3533cd]/20 shadow-2xl bg-card/50 backdrop-blur-sm">
-                <CardContent className="p-6">
-                  <div className="flex items-center space-x-3 mb-4">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#3533cd] to-[#fdcb08] flex items-center justify-center">
-                      <MessageSquare className="w-5 h-5 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-sm text-muted-foreground">Try asking me:</p>
-                    </div>
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    >
-                      <Sparkles className="w-5 h-5 text-[#fdcb08]" />
-                    </motion.div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    {examplePrompts.map((prompt, index) => (
-                      <motion.button
-                        key={index}
-                        onClick={() => handlePromptClick(index)}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className={`w-full text-left p-4 rounded-lg transition-all duration-300 ${
-                          activePrompt === index
-                            ? "bg-[#3533cd]/10 border-2 border-[#3533cd]/30"
-                            : "bg-muted/50 border-2 border-transparent hover:border-[#3533cd]/20"
-                        }`}
-                      >
-                        <p className="font-body text-sm md:text-base">{prompt}</p>
-                      </motion.button>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
 
             {/* CTA */}
             <motion.div

@@ -303,9 +303,8 @@ const Events = () => {
               Featured Communities
             </h2>
             <Button variant="hero" size="sm" asChild>
-              <Link to="/create-community">
-                <Plus className="w-4 h-4 mr-2" />
-                Create Your Community
+              <Link to="/communities">
+                See All Communities
               </Link>
             </Button>
           </div>
