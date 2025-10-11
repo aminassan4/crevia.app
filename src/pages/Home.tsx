@@ -133,10 +133,31 @@ const ManualNavigationTestimonials = ({ successStories }: { successStories: type
   );
 };
 
-// Clean manual navigation testimonials component
+// Clean manual navigation testimonials component - Mobile Responsive
 const CleanManualNavigationTestimonials = ({ testimonials }: { testimonials: { quote: string; author: string; role: string }[] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerPage = 3;
+  
+  // Show 1 card on mobile, 3 on desktop
+  const getItemsPerPage = () => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768 ? 1 : 3;
+    }
+    return 3;
+  };
+  
+  const [itemsPerPage, setItemsPerPage] = useState(getItemsPerPage());
+  
+  useEffect(() => {
+    const handleResize = () => {
+      setItemsPerPage(getItemsPerPage());
+      // Reset to first item on resize to prevent index issues
+      setCurrentIndex(0);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
   const maxIndex = Math.max(0, testimonials.length - itemsPerPage);
 
   const handlePrevious = () => {
@@ -151,19 +172,18 @@ const CleanManualNavigationTestimonials = ({ testimonials }: { testimonials: { q
 
   return (
     <div className="relative">
-      <div className="flex gap-6 pb-4 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pb-4 mb-8">
         {visibleTestimonials.map((testimonial, index) => (
           <motion.div
             key={`testimonial-${currentIndex}-${index}`}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="flex-1"
           >
-            <Card className="p-8 bg-background hover:shadow-xl transition-all duration-300 border border-border h-full group relative">
+            <Card className="p-6 md:p-8 bg-background hover:shadow-xl transition-all duration-300 border border-border h-full group relative">
               <CardContent className="p-0 flex flex-col h-full">
                 {/* Arrow icon in top right */}
-                <div className="absolute top-6 right-6 w-8 h-8 rounded-full bg-muted/50 group-hover:bg-primary/10 flex items-center justify-center transition-all">
+                <div className="absolute top-4 md:top-6 right-4 md:right-6 w-8 h-8 rounded-full bg-muted/50 group-hover:bg-primary/10 flex items-center justify-center transition-all">
                   <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
                 </div>
 
@@ -173,7 +193,7 @@ const CleanManualNavigationTestimonials = ({ testimonials }: { testimonials: { q
                 </div>
 
                 {/* Testimonial text */}
-                <p className="font-body text-base text-foreground leading-relaxed mb-6 flex-grow">
+                <p className="font-body text-sm md:text-base text-foreground leading-relaxed mb-6 flex-grow">
                   {testimonial.quote}
                 </p>
 
@@ -195,11 +215,11 @@ const CleanManualNavigationTestimonials = ({ testimonials }: { testimonials: { q
           size="icon"
           onClick={handlePrevious}
           disabled={currentIndex === 0}
-          className="rounded-full w-12 h-12"
+          className="rounded-full w-10 h-10 md:w-12 md:h-12"
         >
-          <ArrowRight className="w-5 h-5 rotate-180" />
+          <ArrowRight className="w-4 h-4 md:w-5 md:h-5 rotate-180" />
         </Button>
-        <div className="text-sm text-muted-foreground">
+        <div className="text-xs md:text-sm text-muted-foreground">
           {currentIndex + 1} - {Math.min(currentIndex + itemsPerPage, testimonials.length)} of {testimonials.length}
         </div>
         <Button
@@ -207,9 +227,9 @@ const CleanManualNavigationTestimonials = ({ testimonials }: { testimonials: { q
           size="icon"
           onClick={handleNext}
           disabled={currentIndex >= maxIndex}
-          className="rounded-full w-12 h-12"
+          className="rounded-full w-10 h-10 md:w-12 md:h-12"
         >
-          <ArrowRight className="w-5 h-5" />
+          <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
         </Button>
       </div>
     </div>

@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
 import Earn from "./pages/Earn";
 import Community from "./pages/Community";
+import Communities from "./pages/Communities";
 import Events from "./pages/Events";
 import Products from "./pages/Products";
 import CreateEvent from "./pages/CreateEvent";
@@ -26,6 +27,7 @@ const AppContent = () => (
       <Route path="/" element={<Home />} />
       <Route path="/earn" element={<Earn />} />
       <Route path="/community" element={<Community />} />
+      <Route path="/communities" element={<Communities />} />
       <Route path="/events" element={<Events />} />
       <Route path="/products" element={<Products />} />
       <Route path="/create-event" element={<CreateEvent />} />
