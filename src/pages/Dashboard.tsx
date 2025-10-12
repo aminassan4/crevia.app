@@ -32,7 +32,8 @@ import {
   Award,
   ArrowLeft,
   Home,
-  Mail
+  Mail,
+  Zap
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Footer from "@/components/Footer";
@@ -41,7 +42,7 @@ const Dashboard = () => {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"overview" | "store" | "events" | "community" | "earnings" | "marketing" | "affiliate" | "settings" | "profile">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "store" | "events" | "community" | "earnings" | "marketing" | "affiliate" | "integrations" | "settings" | "profile">("overview");
   const [copied, setCopied] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -190,6 +191,7 @@ const Dashboard = () => {
     { id: "earnings" as const, icon: DollarSign, label: "Earnings" },
     { id: "marketing" as const, icon: TrendingUp, label: "Marketing" },
     { id: "affiliate" as const, icon: Award, label: "Affiliate" },
+    { id: "integrations" as const, icon: Zap, label: "Integrations" },
     { id: "settings" as const, icon: Settings, label: "Settings" },
     { id: "profile" as const, icon: UserCircle, label: "Profile" }
   ];
@@ -699,6 +701,84 @@ const Dashboard = () => {
                   Earn commission by inviting other creators to join Qlova
                 </p>
                 <Badge className="bg-amber-100 text-amber-700 px-4 py-2">Coming Soon</Badge>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+      )}
+
+      {activeTab === "integrations" && (
+        <section className="py-8 px-4">
+          <div className="container mx-auto max-w-4xl">
+            <Card>
+              <CardHeader>
+                <CardTitle className="font-heading text-2xl flex items-center">
+                  <Zap className="w-6 h-6 mr-2 text-primary" />
+                  Integrations
+                </CardTitle>
+                <CardDescription>Connect your favorite tools and services to Qlova</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid gap-4">
+                  <div className="flex items-center justify-between p-4 border-2 rounded-lg hover:border-primary/30 transition-all">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500/10 to-blue-500/5 flex items-center justify-center">
+                        <Mail className="w-6 h-6 text-blue-500" />
+                      </div>
+                      <div>
+                        <h3 className="font-heading font-semibold">Email Marketing</h3>
+                        <p className="text-sm text-muted-foreground">Connect Mailchimp, ConvertKit, or Beehiiv</p>
+                      </div>
+                    </div>
+                    <Button variant="outline" size="sm">Connect</Button>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-4 border-2 rounded-lg hover:border-primary/30 transition-all">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-500/10 to-green-500/5 flex items-center justify-center">
+                        <DollarSign className="w-6 h-6 text-green-500" />
+                      </div>
+                      <div>
+                        <h3 className="font-heading font-semibold">Payment Processors</h3>
+                        <p className="text-sm text-muted-foreground">Stripe, PayPal, or Flutterwave</p>
+                      </div>
+                    </div>
+                    <Button variant="outline" size="sm">Connect</Button>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-4 border-2 rounded-lg hover:border-primary/30 transition-all">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500/10 to-purple-500/5 flex items-center justify-center">
+                        <Video className="w-6 h-6 text-purple-500" />
+                      </div>
+                      <div>
+                        <h3 className="font-heading font-semibold">Video Platforms</h3>
+                        <p className="text-sm text-muted-foreground">YouTube, Vimeo, or Wistia</p>
+                      </div>
+                    </div>
+                    <Button variant="outline" size="sm">Connect</Button>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-4 border-2 rounded-lg hover:border-primary/30 transition-all">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-orange-500/10 to-orange-500/5 flex items-center justify-center">
+                        <Calendar className="w-6 h-6 text-orange-500" />
+                      </div>
+                      <div>
+                        <h3 className="font-heading font-semibold">Calendar Services</h3>
+                        <p className="text-sm text-muted-foreground">Google Calendar, Calendly, or Cal.com</p>
+                      </div>
+                    </div>
+                    <Button variant="outline" size="sm">Connect</Button>
+                  </div>
+                </div>
+                
+                <div className="mt-6 p-4 bg-muted/30 rounded-lg">
+                  <p className="text-sm text-center text-muted-foreground">
+                    More integrations coming soon. Need something specific?{" "}
+                    <a href="mailto:support@qlova.com" className="text-primary hover:underline">Let us know</a>
+                  </p>
+                </div>
               </CardContent>
             </Card>
           </div>
