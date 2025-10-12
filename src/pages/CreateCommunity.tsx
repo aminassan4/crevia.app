@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Label } from "@/components/ui/label";
 import { Calendar } from "@/components/ui/calendar";
 import { motion } from "framer-motion";
-import { ArrowLeft, Upload, Calendar as CalendarIcon, Plus, X } from "lucide-react";
+import { ArrowLeft, Upload, Calendar as CalendarIcon, Plus, X, Facebook, Twitter, Instagram, Linkedin, Youtube } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import Footer from "@/components/Footer";
@@ -30,6 +30,13 @@ const CreateCommunity = () => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [eventTitle, setEventTitle] = useState("");
   const [eventType, setEventType] = useState<"past" | "upcoming">("upcoming");
+  const [socialLinks, setSocialLinks] = useState({
+    facebook: "",
+    twitter: "",
+    instagram: "",
+    linkedin: "",
+    youtube: ""
+  });
 
   const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -198,6 +205,79 @@ const CreateCommunity = () => {
                   onChange={(e) => setAbout(e.target.value)}
                   rows={5}
                 />
+              </div>
+
+              {/* Social Media Links */}
+              <div className="space-y-4">
+                <Label>Social Media Links</Label>
+                <p className="text-sm text-muted-foreground">Connect your social media accounts</p>
+                
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="facebook" className="flex items-center gap-2">
+                      <Facebook className="w-4 h-4 text-blue-600" />
+                      Facebook
+                    </Label>
+                    <Input
+                      id="facebook"
+                      placeholder="https://facebook.com/yourpage"
+                      value={socialLinks.facebook}
+                      onChange={(e) => setSocialLinks({...socialLinks, facebook: e.target.value})}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="twitter" className="flex items-center gap-2">
+                      <Twitter className="w-4 h-4 text-sky-500" />
+                      Twitter/X
+                    </Label>
+                    <Input
+                      id="twitter"
+                      placeholder="https://twitter.com/yourhandle"
+                      value={socialLinks.twitter}
+                      onChange={(e) => setSocialLinks({...socialLinks, twitter: e.target.value})}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="instagram" className="flex items-center gap-2">
+                      <Instagram className="w-4 h-4 text-pink-600" />
+                      Instagram
+                    </Label>
+                    <Input
+                      id="instagram"
+                      placeholder="https://instagram.com/yourhandle"
+                      value={socialLinks.instagram}
+                      onChange={(e) => setSocialLinks({...socialLinks, instagram: e.target.value})}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="linkedin" className="flex items-center gap-2">
+                      <Linkedin className="w-4 h-4 text-blue-700" />
+                      LinkedIn
+                    </Label>
+                    <Input
+                      id="linkedin"
+                      placeholder="https://linkedin.com/in/yourprofile"
+                      value={socialLinks.linkedin}
+                      onChange={(e) => setSocialLinks({...socialLinks, linkedin: e.target.value})}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="youtube" className="flex items-center gap-2">
+                      <Youtube className="w-4 h-4 text-red-600" />
+                      YouTube
+                    </Label>
+                    <Input
+                      id="youtube"
+                      placeholder="https://youtube.com/@yourchannel"
+                      value={socialLinks.youtube}
+                      onChange={(e) => setSocialLinks({...socialLinks, youtube: e.target.value})}
+                    />
+                  </div>
+                </div>
               </div>
 
               {/* Events Section */}

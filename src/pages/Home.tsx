@@ -393,10 +393,10 @@ const Home = () => {
             className="text-center mb-16"
           >
             <h2 className="font-heading text-4xl md:text-6xl font-bold text-white mb-6">
-              Where all-in-one meets best-in-class
+              One Platform, Unlimited Potential 💰
             </h2>
             <p className="font-body text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
-              You don't need another tool. You need a platform to power your vision.
+              Stop paying for multiple tools. Qlova brings everything you need in one place.
             </p>
           </motion.div>
 
@@ -411,7 +411,7 @@ const Home = () => {
             {[
               { name: "Events", demo: "events" },
               { name: "Digital Products", demo: "products" },
-              { name: "Courses", demo: "courses" },
+              { name: "Community", demo: "courses" },
               { name: "AI Assistant", demo: "ai" }
             ].map((feature, index) => (
               <motion.button
@@ -455,7 +455,7 @@ const Home = () => {
                     <span className={`font-semibold ${activeFeature === 'courses' ? 'text-primary' : 'text-slate-600'}`}>
                       {activeFeature === 'events' && 'Events'}
                       {activeFeature === 'products' && 'Digital Products'}
-                      {activeFeature === 'courses' && 'Courses'}
+                      {activeFeature === 'courses' && 'Community'}
                       {activeFeature === 'ai' && 'AI Assistant'}
                     </span>
                     <span>Members</span>
@@ -469,7 +469,7 @@ const Home = () => {
                 {activeFeature === 'courses' && (
                   <>
                     <div className="flex items-center justify-between mb-6">
-                      <h3 className="font-heading text-2xl font-bold text-slate-900">Courses</h3>
+                      <h3 className="font-heading text-2xl font-bold text-slate-900">Community</h3>
                       <div className="flex items-center space-x-2">
                         <button className="px-4 py-2 bg-slate-900 text-white rounded-full font-body text-sm font-medium">All</button>
                         <button className="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-full font-body text-sm">Fitness</button>
@@ -480,9 +480,9 @@ const Home = () => {
                       <div className="bg-slate-50 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300">
                         <div className="h-40 bg-gradient-to-br from-orange-400 to-pink-400"></div>
                         <div className="p-4">
-                          <span className="bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-medium">NEW</span>
-                          <h4 className="font-body font-semibold text-slate-900 mt-2 mb-2">Morning Yoga Flow</h4>
-                          <p className="font-body text-sm text-slate-600">Start your day with intention</p>
+                          <span className="bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-medium">ACTIVE</span>
+                          <h4 className="font-body font-semibold text-slate-900 mt-2 mb-2">Wellness Warriors</h4>
+                          <p className="font-body text-sm text-slate-600">Join our thriving community</p>
                         </div>
                       </div>
                     </div>

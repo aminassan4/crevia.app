@@ -10,7 +10,9 @@ import {
   Users,
   TrendingUp,
   Award,
-  Rocket
+  Rocket,
+  DollarSign,
+  X
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
@@ -20,8 +22,27 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useState } from "react";
 
 const Pricing = () => {
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "weekly" | "yearly">("monthly");
+
+  const getProPrice = () => {
+    switch(billingCycle) {
+      case "weekly": return "$5";
+      case "monthly": return "$20";
+      case "yearly": return "$200";
+    }
+  };
+
+  const getProBillingLabel = () => {
+    switch(billingCycle) {
+      case "weekly": return "/week";
+      case "monthly": return "/month";
+      case "yearly": return "/year (Save $40)";
+    }
+  };
+
   const faqs = [
     {
       question: "What can I sell on Qlova?",
@@ -225,9 +246,46 @@ const Pricing = () => {
                   </div>
                   
                   <div className="mb-10">
+                    {/* Billing Cycle Toggle */}
+                    <div className="flex items-center justify-center gap-2 mb-6 p-1 bg-muted rounded-lg">
+                      <button
+                        onClick={() => setBillingCycle("weekly")}
+                        className={`flex-1 px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                          billingCycle === "weekly"
+                            ? "bg-primary text-white shadow-sm"
+                            : "text-muted-foreground hover:text-foreground"
+                        }`}
+                      >
+                        Weekly
+                      </button>
+                      <button
+                        onClick={() => setBillingCycle("monthly")}
+                        className={`flex-1 px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                          billingCycle === "monthly"
+                            ? "bg-primary text-white shadow-sm"
+                            : "text-muted-foreground hover:text-foreground"
+                        }`}
+                      >
+                        Monthly
+                      </button>
+                      <button
+                        onClick={() => setBillingCycle("yearly")}
+                        className={`flex-1 px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                          billingCycle === "yearly"
+                            ? "bg-primary text-white shadow-sm"
+                            : "text-muted-foreground hover:text-foreground"
+                        }`}
+                      >
+                        Yearly
+                        {billingCycle === "yearly" && (
+                          <Badge className="ml-2 bg-green-600 text-white text-xs">Save $40</Badge>
+                        )}
+                      </button>
+                    </div>
+
                     <div className="flex items-baseline space-x-2 mb-4">
-                      <span className="font-heading text-6xl font-black text-primary">$20</span>
-                      <span className="font-body text-lg text-muted-foreground">/month</span>
+                      <span className="font-heading text-6xl font-black text-primary">{getProPrice()}</span>
+                      <span className="font-body text-lg text-muted-foreground">{getProBillingLabel()}</span>
                     </div>
                     <div className="bg-primary/10 border-2 border-primary/30 rounded-xl p-4">
                       <p className="font-body text-sm text-primary font-bold">
@@ -303,6 +361,110 @@ const Pricing = () => {
                 Migration support included
               </span>
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Value Breakdown Section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
+              <Sparkles className="w-3 h-3 mr-1" />
+              Value Breakdown
+            </Badge>
+            <h2 className="font-heading text-4xl md:text-6xl font-bold text-foreground mb-6">
+              One Platform, Unlimited Potential 💰
+            </h2>
+            <p className="font-body text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Stop paying for multiple tools. Qlova brings everything you need in one place.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto"
+          >
+            <Card className="p-8 md:p-12 bg-gradient-to-br from-primary/5 via-background to-secondary/5 border-2 border-primary/20 shadow-2xl">
+              <CardContent className="p-0">
+                {/* Individual Tools Breakdown */}
+                <div className="space-y-4 mb-6">
+                  {[
+                    { tool: "Professional Website Builder", price: "$25/mo", replaced: "Wix, Squarespace" },
+                    { tool: "Creator Profiles & Networking", price: "$20/mo", replaced: "LinkedIn Premium" },
+                    { tool: "Course & Content Platform", price: "$119/mo", replaced: "Teachable, Kajabi" },
+                    { tool: "Email Marketing Tools", price: "$49/mo", replaced: "Mailchimp, ConvertKit" },
+                    { tool: "Payment Processing", price: "$39/mo", replaced: "Stripe, PayPal Pro" },
+                    { tool: "Event Management", price: "$29/mo", replaced: "Eventbrite, Zoom" }
+                  ].map((item, index) => (
+                    <motion.div
+                      key={item.tool}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4, delay: index * 0.05 }}
+                      viewport={{ once: true }}
+                      className="flex items-start justify-between p-4 bg-background/80 rounded-lg border border-primary/10"
+                    >
+                      <div className="flex-1">
+                        <h4 className="font-body font-semibold text-foreground mb-1">{item.tool}</h4>
+                        <p className="text-xs text-muted-foreground">Replaces: {item.replaced}</p>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <span className="font-heading text-lg font-bold text-muted-foreground line-through">{item.price}</span>
+                        <X className="w-4 h-4 text-destructive" />
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+
+                <div className="border-t-2 border-dashed border-primary/30 pt-6 mb-6">
+                  <div className="flex items-center justify-between">
+                    <span className="font-body text-lg text-muted-foreground">Total if purchased separately:</span>
+                    <span className="font-heading text-3xl font-bold text-muted-foreground line-through">$281/mo</span>
+                  </div>
+                </div>
+
+                {/* Qlova Price */}
+                <div className="bg-gradient-hero rounded-2xl p-8 text-white text-center">
+                  <p className="font-body text-white/80 mb-2">Your price with Qlova Pro:</p>
+                  <div className="flex items-center justify-center space-x-3 mb-4">
+                    <span className="font-heading text-6xl font-black">$20</span>
+                    <span className="font-body text-xl">/month</span>
+                  </div>
+                  <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full">
+                    <Sparkles className="w-5 h-5" />
+                    <span className="font-body font-bold text-lg">Save $3,024 per year</span>
+                  </div>
+                </div>
+
+                {/* Additional Benefits */}
+                <div className="mt-8 grid md:grid-cols-2 gap-4">
+                  <div className="flex items-start space-x-3 p-4 bg-green-50 dark:bg-green-950/30 rounded-lg border border-green-200 dark:border-green-800">
+                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h5 className="font-body font-semibold text-green-900 dark:text-green-100">0% Transaction Fees</h5>
+                      <p className="text-xs text-green-700 dark:text-green-300">Keep 100% of your earnings</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3 p-4 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-800">
+                    <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h5 className="font-body font-semibold text-blue-900 dark:text-blue-100">All-in-One Platform</h5>
+                      <p className="text-xs text-blue-700 dark:text-blue-300">Everything you need in one place</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </motion.div>
         </div>
       </section>

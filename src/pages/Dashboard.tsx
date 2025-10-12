@@ -31,7 +31,8 @@ import {
   Settings,
   Award,
   ArrowLeft,
-  Home
+  Home,
+  Mail
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Footer from "@/components/Footer";
@@ -40,8 +41,7 @@ const Dashboard = () => {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"overview" | "store">("overview");
-  const [sidebarSection, setSidebarSection] = useState<"profile" | "members" | "events" | "community" | "settings" | "affiliate">("profile");
+  const [activeTab, setActiveTab] = useState<"overview" | "store" | "events" | "community" | "earnings" | "marketing" | "affiliate" | "settings" | "profile">("overview");
   const [copied, setCopied] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -183,12 +183,15 @@ const Dashboard = () => {
   const profileLink = `qlova.app/${username}`;
 
   const sidebarItems = [
-    { id: "profile" as const, icon: UserCircle, label: "Profile" },
-    { id: "members" as const, icon: Users, label: "Members" },
+    { id: "overview" as const, icon: LayoutDashboard, label: "Overview" },
+    { id: "store" as const, icon: Store, label: "My Store" },
     { id: "events" as const, icon: Calendar, label: "Events" },
-    { id: "community" as const, icon: Users, label: "Community" },
+    { id: "community" as const, icon: Home, label: "Community" },
+    { id: "earnings" as const, icon: DollarSign, label: "Earnings" },
+    { id: "marketing" as const, icon: TrendingUp, label: "Marketing" },
+    { id: "affiliate" as const, icon: Award, label: "Affiliate" },
     { id: "settings" as const, icon: Settings, label: "Settings" },
-    { id: "affiliate" as const, icon: Award, label: "Affiliate" }
+    { id: "profile" as const, icon: UserCircle, label: "Profile" }
   ];
 
   return (
@@ -237,25 +240,6 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Tab Navigation */}
-          <div className="flex items-center space-x-2 mt-6">
-            <Button
-              variant={activeTab === "overview" ? "default" : "ghost"}
-              onClick={() => setActiveTab("overview")}
-              className="rounded-full"
-            >
-              <TrendingUp className="w-4 h-4 mr-2" />
-              Overview
-            </Button>
-            <Button
-              variant={activeTab === "store" ? "default" : "ghost"}
-              onClick={() => setActiveTab("store")}
-              className="rounded-full"
-            >
-              <Store className="w-4 h-4 mr-2" />
-              My Store
-            </Button>
-          </div>
         </div>
       </section>
 
@@ -266,9 +250,9 @@ const Dashboard = () => {
             {sidebarItems.map((item) => (
               <Button
                 key={item.id}
-                variant={sidebarSection === item.id ? "default" : "ghost"}
+                variant={activeTab === item.id ? "default" : "ghost"}
                 size="sm"
-                onClick={() => setSidebarSection(item.id)}
+                onClick={() => setActiveTab(item.id)}
                 className="flex-shrink-0 rounded-full"
               >
                 <item.icon className="w-4 h-4 mr-2" />
@@ -580,6 +564,220 @@ const Dashboard = () => {
                 </CardContent>
               </Card>
             )}
+          </div>
+        </section>
+      )}
+
+      {activeTab === "events" && (
+        <section className="py-8 px-4">
+          <div className="container mx-auto max-w-4xl">
+            <Card>
+              <CardHeader>
+                <CardTitle className="font-heading text-2xl">Events Management</CardTitle>
+                <CardDescription>Create and manage your events</CardDescription>
+              </CardHeader>
+              <CardContent className="text-center py-12">
+                <Calendar className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+                <h3 className="font-heading text-xl font-bold mb-2">No events yet</h3>
+                <p className="text-muted-foreground mb-6">Create your first event to get started</p>
+                <Button onClick={() => navigate("/create-event")} className="bg-gradient-to-r from-[#3533cd] to-[#3533cd]/80">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Create Event
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+      )}
+
+      {activeTab === "community" && (
+        <section className="py-8 px-4">
+          <div className="container mx-auto max-w-4xl">
+            <Card>
+              <CardHeader>
+                <CardTitle className="font-heading text-2xl">Community Management</CardTitle>
+                <CardDescription>Build and engage with your community</CardDescription>
+              </CardHeader>
+              <CardContent className="text-center py-12">
+                <Users className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+                <h3 className="font-heading text-xl font-bold mb-2">Build your community</h3>
+                <p className="text-muted-foreground mb-6">Create a space for your audience to connect</p>
+                <Button onClick={() => navigate("/create-community")} className="bg-gradient-to-r from-[#3533cd] to-[#3533cd]/80">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Create Community
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+      )}
+
+      {activeTab === "earnings" && (
+        <section className="py-8 px-4">
+          <div className="container mx-auto max-w-4xl">
+            <Card>
+              <CardHeader>
+                <CardTitle className="font-heading text-2xl">Earnings Overview</CardTitle>
+                <CardDescription>Track your revenue and payouts</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-3 gap-6 mb-8">
+                  <Card className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950/30 dark:to-green-900/20 border-green-200">
+                    <CardContent className="p-6 text-center">
+                      <DollarSign className="w-8 h-8 text-green-600 mx-auto mb-2" />
+                      <div className="text-3xl font-bold text-green-600">$0</div>
+                      <p className="text-sm text-green-700 dark:text-green-400 mt-1">Total Earnings</p>
+                    </CardContent>
+                  </Card>
+                  <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/30 dark:to-blue-900/20 border-blue-200">
+                    <CardContent className="p-6 text-center">
+                      <TrendingUp className="w-8 h-8 text-blue-600 mx-auto mb-2" />
+                      <div className="text-3xl font-bold text-blue-600">$0</div>
+                      <p className="text-sm text-blue-700 dark:text-blue-400 mt-1">This Month</p>
+                    </CardContent>
+                  </Card>
+                  <Card className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950/30 dark:to-purple-900/20 border-purple-200">
+                    <CardContent className="p-6 text-center">
+                      <Package className="w-8 h-8 text-purple-600 mx-auto mb-2" />
+                      <div className="text-3xl font-bold text-purple-600">0</div>
+                      <p className="text-sm text-purple-700 dark:text-purple-400 mt-1">Total Sales</p>
+                    </CardContent>
+                  </Card>
+                </div>
+                <p className="text-center text-muted-foreground">Start selling to track your earnings</p>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+      )}
+
+      {activeTab === "marketing" && (
+        <section className="py-8 px-4">
+          <div className="container mx-auto max-w-4xl">
+            <Card>
+              <CardHeader>
+                <CardTitle className="font-heading text-2xl">Marketing Tools</CardTitle>
+                <CardDescription>Grow your audience and find customers</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <Card className="border-2 hover:border-primary/30 transition-all cursor-pointer">
+                    <CardContent className="p-6">
+                      <Mail className="w-8 h-8 text-primary mb-3" />
+                      <h3 className="font-heading font-bold mb-2">Email Campaigns</h3>
+                      <p className="text-sm text-muted-foreground">Send newsletters and promotions to your audience</p>
+                      <Badge className="mt-3 bg-amber-100 text-amber-700">Coming Soon</Badge>
+                    </CardContent>
+                  </Card>
+                  <Card className="border-2 hover:border-primary/30 transition-all cursor-pointer">
+                    <CardContent className="p-6">
+                      <Share2 className="w-8 h-8 text-primary mb-3" />
+                      <h3 className="font-heading font-bold mb-2">Social Media</h3>
+                      <p className="text-sm text-muted-foreground">Share your content across platforms</p>
+                      <Badge className="mt-3 bg-amber-100 text-amber-700">Coming Soon</Badge>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+      )}
+
+      {activeTab === "affiliate" && (
+        <section className="py-8 px-4">
+          <div className="container mx-auto max-w-4xl">
+            <Card>
+              <CardHeader>
+                <CardTitle className="font-heading text-2xl">Affiliate Program</CardTitle>
+                <CardDescription>Earn by referring other creators</CardDescription>
+              </CardHeader>
+              <CardContent className="text-center py-12">
+                <Award className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+                <h3 className="font-heading text-xl font-bold mb-2">Join the Affiliate Program</h3>
+                <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+                  Earn commission by inviting other creators to join Qlova
+                </p>
+                <Badge className="bg-amber-100 text-amber-700 px-4 py-2">Coming Soon</Badge>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+      )}
+
+      {activeTab === "settings" && (
+        <section className="py-8 px-4">
+          <div className="container mx-auto max-w-4xl">
+            <Card>
+              <CardHeader>
+                <CardTitle className="font-heading text-2xl">Settings</CardTitle>
+                <CardDescription>Manage your account preferences</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-4 border rounded-lg">
+                    <div>
+                      <h3 className="font-heading font-semibold">Account Information</h3>
+                      <p className="text-sm text-muted-foreground">Update your email and password</p>
+                    </div>
+                    <Button variant="outline" size="sm">Edit</Button>
+                  </div>
+                  <div className="flex items-center justify-between p-4 border rounded-lg">
+                    <div>
+                      <h3 className="font-heading font-semibold">Notifications</h3>
+                      <p className="text-sm text-muted-foreground">Manage your notification preferences</p>
+                    </div>
+                    <Button variant="outline" size="sm">Configure</Button>
+                  </div>
+                  <div className="flex items-center justify-between p-4 border rounded-lg">
+                    <div>
+                      <h3 className="font-heading font-semibold">Payment Methods</h3>
+                      <p className="text-sm text-muted-foreground">Add or update payment information</p>
+                    </div>
+                    <Button variant="outline" size="sm">Manage</Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+      )}
+
+      {activeTab === "profile" && (
+        <section className="py-8 px-4">
+          <div className="container mx-auto max-w-4xl">
+            <Card>
+              <CardHeader>
+                <CardTitle className="font-heading text-2xl">Profile Settings</CardTitle>
+                <CardDescription>Update your public profile information</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="flex items-center gap-6">
+                  <div className="w-24 h-24 rounded-full bg-gradient-hero flex items-center justify-center text-white font-bold text-2xl">
+                    {profile?.full_name?.charAt(0) || user?.email?.charAt(0)}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-heading text-xl font-bold">{profile?.full_name || "Your Name"}</h3>
+                    <p className="text-muted-foreground">{user?.email}</p>
+                    <Button variant="outline" size="sm" className="mt-2">
+                      <Edit className="w-4 h-4 mr-2" />
+                      Edit Profile
+                    </Button>
+                  </div>
+                </div>
+                <Separator />
+                <div className="space-y-4">
+                  <div>
+                    <label className="font-body font-semibold text-sm">Bio</label>
+                    <p className="text-muted-foreground text-sm mt-1">{profile?.bio || "Tell us about yourself"}</p>
+                  </div>
+                  <div>
+                    <label className="font-body font-semibold text-sm">Profile URL</label>
+                    <code className="block mt-1 p-2 bg-muted rounded text-sm">{profileLink}</code>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </section>
       )}
