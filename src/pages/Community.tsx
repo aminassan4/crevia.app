@@ -181,6 +181,17 @@ const Community = () => {
   ];
 
 
+  const upcomingEvents = [
+    {
+      title: "AI for African Creators Summit",
+      date: "January 2025",
+      location: "Accra, Ghana",
+      attendees: "500+ Expected",
+      type: "Summit",
+      status: "Early Bird"
+    }
+  ];
+
   const pastEvents = [
     {
       title: "Freelancers Summit 2024",
@@ -202,8 +213,17 @@ const Community = () => {
       location: "Cape Town, SA",
       attendees: 800,
       type: "Conference"
+    },
+    {
+      title: "Entrepreneur Bootcamp",
+      date: "August 2024",
+      location: "Kigali, Rwanda",
+      attendees: 450,
+      type: "Bootcamp"
     }
   ];
+
+  const [eventView, setEventView] = useState<"upcoming" | "previous">("upcoming");
 
 
   return (
@@ -354,7 +374,7 @@ const Community = () => {
                   
                   <div className="space-y-4 font-body text-lg text-muted-foreground leading-relaxed">
                     <p>
-                      At Kaizen Afrika, we believe in the power of African creativity and entrepreneurship. Our mission is to empower every creator on the continent with the tools and community they need to transform their passion into sustainable income.
+                      At Qlova, we believe in the power of African creativity and entrepreneurship. Our mission is to empower every creator on the continent with the tools and community they need to transform their passion into sustainable income.
                     </p>
                     <p>
                       We're not just building a platform—we're building a movement. A movement that celebrates African innovation, connects creators across borders, and proves that the future of work is creative, collaborative, and unmistakably African.
@@ -383,7 +403,7 @@ const Community = () => {
               Our 5-Year Goal
             </h2>
             <p className="font-body text-2xl text-muted-foreground mb-8">
-              What does success mean to Kaizen Afrika in the next 5 years?
+              What does success mean to Qlova in the next 5 years?
             </p>
             <div className="bg-gradient-hero text-white rounded-2xl p-12 max-w-2xl mx-auto">
               <div className="font-heading text-6xl font-bold mb-4">1 Million</div>
@@ -397,24 +417,119 @@ const Community = () => {
 
       {/* Events Archive */}
       <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-6">
               <Calendar className="w-12 h-12 inline-block mr-4 text-primary" />
-              Past Events
+              Our Events
             </h2>
-            <p className="font-body text-xl text-muted-foreground">
-              Highlights from our community gatherings across Africa
+            <p className="font-body text-xl text-muted-foreground mb-8">
+              Join us at upcoming events or see what we've accomplished
             </p>
+            
+            {/* Toggle Buttons */}
+            <div className="flex items-center justify-center gap-3 mb-8">
+              <Button
+                variant={eventView === "upcoming" ? "default" : "outline"}
+                onClick={() => setEventView("upcoming")}
+                className="rounded-full px-8"
+              >
+                Upcoming Events
+              </Button>
+              <Button
+                variant={eventView === "previous" ? "default" : "outline"}
+                onClick={() => setEventView("previous")}
+                className="rounded-full px-8"
+              >
+                Previous Events
+              </Button>
+            </div>
           </motion.div>
 
-          <ManualNavigationPastEvents events={pastEvents} />
+          {/* Upcoming Events - Single Column */}
+          {eventView === "upcoming" && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="max-w-2xl mx-auto"
+            >
+              {upcomingEvents.map((event, index) => (
+                <Card key={index} className="hover-lift border-2 border-primary/20">
+                  <CardHeader>
+                    <div className="flex items-start justify-between mb-2">
+                      <Badge variant="default" className="bg-primary">{event.type}</Badge>
+                      <Badge variant="secondary" className="bg-accent">{event.status}</Badge>
+                    </div>
+                    <CardTitle className="font-heading text-2xl md:text-3xl">{event.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3 mb-6">
+                      <p className="font-body text-base text-muted-foreground flex items-center">
+                        <Calendar className="w-5 h-5 mr-3 text-primary" />
+                        {event.date}
+                      </p>
+                      <p className="font-body text-base text-muted-foreground flex items-center">
+                        <span className="mr-3 text-primary">📍</span>
+                        {event.location}
+                      </p>
+                      <p className="font-body text-base text-muted-foreground flex items-center">
+                        <Users className="w-5 h-5 mr-3 text-primary" />
+                        {event.attendees}
+                      </p>
+                    </div>
+                    <Button className="w-full bg-gradient-hero">
+                      Register Now
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </motion.div>
+          )}
+
+          {/* Previous Events - Two Column Grid */}
+          {eventView === "previous" && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            >
+              {pastEvents.map((event, index) => (
+                <Card key={index} className="hover-lift h-full">
+                  <CardHeader>
+                    <Badge variant="outline" className="w-fit mb-2">{event.type}</Badge>
+                    <CardTitle className="font-heading text-xl">{event.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-2 mb-4">
+                      <p className="font-body text-sm text-muted-foreground flex items-center">
+                        <Calendar className="w-4 h-4 mr-2 text-primary" />
+                        {event.date}
+                      </p>
+                      <p className="font-body text-sm text-muted-foreground flex items-center">
+                        <span className="mr-2">📍</span>
+                        {event.location}
+                      </p>
+                      <p className="font-body text-sm text-muted-foreground flex items-center">
+                        <Users className="w-4 h-4 mr-2 text-primary" />
+                        {event.attendees} attendees
+                      </p>
+                    </div>
+                    <Button variant="ghost" className="w-full">
+                      View Highlights
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </motion.div>
+          )}
         </div>
       </section>
 
@@ -520,7 +635,7 @@ const Community = () => {
                 </div>
                 <div>
                   <p className="font-body font-semibold">Email</p>
-                  <p className="font-body text-muted-foreground">kaizenafrika@gmail.com</p>
+                  <p className="font-body text-muted-foreground">contact@qlova.com</p>
                 </div>
               </div>
             </div>

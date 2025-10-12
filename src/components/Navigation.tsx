@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, User, LogOut, LayoutDashboard } from "lucide-react";
+import { Menu, X, User, LogOut, LayoutDashboard, Users } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import SignInModal from "@/components/auth/SignInModal";
 import SignUpModal from "@/components/auth/SignUpModal";
@@ -53,7 +53,7 @@ const Navigation = () => {
     navigate("/");
   };
 
-  const handleJoinKaizen = () => {
+  const handleJoinQlova = () => {
     setAuthMode("signup");
     setShowAuthModal(true);
   };
@@ -86,7 +86,7 @@ const Navigation = () => {
               <span className="text-white font-heading font-bold text-lg">K</span>
             </div>
             <span className="font-heading text-xl font-bold text-foreground">
-              Kaizen Afrika
+              Qlova
             </span>
           </Link>
 
@@ -132,10 +132,11 @@ const Navigation = () => {
               </DropdownMenu>
             ) : (
               <Button 
-                onClick={handleJoinKaizen}
+                onClick={handleJoinQlova}
                 className="font-body bg-gradient-to-r from-[#3533cd] to-[#3533cd]/80 hover:shadow-[0_0_40px_rgba(53,51,205,0.4)] text-white"
               >
-                Join Kaizen
+                <Users className="w-4 h-4 mr-2" />
+                Join Qlova
               </Button>
             )}
           </div>
@@ -185,10 +186,11 @@ const Navigation = () => {
                     </>
                   ) : (
                     <Button 
-                      onClick={() => { handleJoinKaizen(); setIsOpen(false); }}
+                      onClick={() => { handleJoinQlova(); setIsOpen(false); }}
                       className="font-body bg-gradient-to-r from-[#3533cd] to-[#3533cd]/80 hover:shadow-[0_0_40px_rgba(53,51,205,0.4)] text-white"
                     >
-                      Join Kaizen
+                      <Users className="w-5 h-5 mr-2" />
+                      Join Qlova
                     </Button>
                   )}
                 </div>

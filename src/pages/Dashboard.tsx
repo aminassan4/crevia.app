@@ -26,7 +26,12 @@ import {
   Share2,
   Eye,
   Copy,
-  Check
+  Check,
+  UserCircle,
+  Settings,
+  Award,
+  ArrowLeft,
+  Home
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Footer from "@/components/Footer";
@@ -36,6 +41,7 @@ const Dashboard = () => {
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<"overview" | "store">("overview");
+  const [sidebarSection, setSidebarSection] = useState<"profile" | "members" | "events" | "community" | "settings" | "affiliate">("profile");
   const [copied, setCopied] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -76,7 +82,7 @@ const Dashboard = () => {
 
   const handleCopyLink = () => {
     const username = profile?.full_name?.toLowerCase().replace(/\s+/g, '') || user?.email?.split('@')[0];
-    const profileLink = `https://kaizen.app/${username}`;
+    const profileLink = `https://qlova.app/${username}`;
     navigator.clipboard.writeText(profileLink);
     setCopied(true);
     toast({
@@ -174,7 +180,16 @@ const Dashboard = () => {
   }
 
   const username = profile?.full_name?.toLowerCase().replace(/\s+/g, '') || user?.email?.split('@')[0];
-  const profileLink = `kaizen.app/${username}`;
+  const profileLink = `qlova.app/${username}`;
+
+  const sidebarItems = [
+    { id: "profile" as const, icon: UserCircle, label: "Profile" },
+    { id: "members" as const, icon: Users, label: "Members" },
+    { id: "events" as const, icon: Calendar, label: "Events" },
+    { id: "community" as const, icon: Users, label: "Community" },
+    { id: "settings" as const, icon: Settings, label: "Settings" },
+    { id: "affiliate" as const, icon: Award, label: "Affiliate" }
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -182,13 +197,23 @@ const Dashboard = () => {
       <section className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <div>
-              <h1 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-1">
-                Creator Dashboard
-              </h1>
-              <p className="font-body text-sm text-muted-foreground">
-                Welcome back, {profile?.full_name || user?.email}
-              </p>
+            <div className="flex items-center gap-3">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => navigate("/")}
+                className="rounded-full"
+              >
+                <ArrowLeft className="w-5 h-5" />
+              </Button>
+              <div>
+                <h1 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-1">
+                  Creator Dashboard
+                </h1>
+                <p className="font-body text-sm text-muted-foreground">
+                  Welcome back, {profile?.full_name || user?.email}
+                </p>
+              </div>
             </div>
             <div className="flex flex-wrap gap-2">
               <Button
@@ -230,6 +255,26 @@ const Dashboard = () => {
               <Store className="w-4 h-4 mr-2" />
               My Store
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Sidebar Navigation (Mobile Responsive) */}
+      <section className="border-b border-border bg-muted/30">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
+            {sidebarItems.map((item) => (
+              <Button
+                key={item.id}
+                variant={sidebarSection === item.id ? "default" : "ghost"}
+                size="sm"
+                onClick={() => setSidebarSection(item.id)}
+                className="flex-shrink-0 rounded-full"
+              >
+                <item.icon className="w-4 h-4 mr-2" />
+                {item.label}
+              </Button>
+            ))}
           </div>
         </div>
       </section>

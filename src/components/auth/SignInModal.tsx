@@ -140,7 +140,7 @@ const SignInModal = ({ open, onOpenChange, onSwitchToSignUp }: SignInModalProps)
                 onClick={onSwitchToSignUp}
                 className="text-primary hover:underline font-semibold"
               >
-                Join Kaizen
+                Join Qlova
               </button>
             </span>
           </div>

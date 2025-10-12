@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { 
   Sparkles, 
   MessageSquare, 
@@ -10,9 +10,10 @@ import {
   FileText,
   Calendar,
   ArrowRight,
-  Wand2
+  Wand2,
+  ArrowUp
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import Footer from "@/components/Footer";
@@ -20,8 +21,22 @@ import QoraChatbot from "@/components/chat/QoraChatbot";
 
 const QoraAgent = () => {
   const [activePrompt, setActivePrompt] = useState(0);
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   
   const examplePrompts = [
     "Write a product description for my eBook",
@@ -295,6 +310,26 @@ const QoraAgent = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Scroll to Top Button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            className="fixed bottom-8 right-8 z-50"
+          >
+            <Button
+              onClick={scrollToTop}
+              size="icon"
+              className="w-12 h-12 rounded-full bg-gradient-to-r from-[#3533cd] to-[#3533cd]/80 hover:shadow-[0_0_40px_rgba(53,51,205,0.4)] text-white"
+            >
+              <ArrowUp className="w-5 h-5" />
+            </Button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Footer */}
       <Footer />

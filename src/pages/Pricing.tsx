@@ -24,7 +24,7 @@ import {
 const Pricing = () => {
   const faqs = [
     {
-      question: "What can I sell on Kaizen Afrika?",
+      question: "What can I sell on Qlova?",
       answer: "You can sell digital products like eBooks, templates, courses, workshops, event tickets, memberships, and any other digital content you create."
     },
     {
@@ -36,7 +36,7 @@ const Pricing = () => {
       answer: "Free plan: 5% transaction fee on each sale. Pro plan ($20/mo): 0% transaction fees - keep everything you earn!"
     },
     {
-      question: "Can I use Kaizen Afrika for memberships?",
+      question: "Can I use Qlova for memberships?",
       answer: "Yes! You can create and manage membership tiers and recurring subscriptions for your audience through events and digital products."
     },
     {
@@ -321,7 +321,7 @@ const Pricing = () => {
               Frequently Asked Questions
             </h2>
             <p className="font-body text-lg text-muted-foreground">
-              Everything you need to know about Kaizen Afrika
+              Everything you need to know about Qlova
             </p>
           </motion.div>
 
