@@ -55,7 +55,7 @@ const QoraAgent = () => {
   const handleGetStarted = () => {
     toast({
       title: "Coming Soon! 🚀",
-      description: "Qlova Agent will be available soon. Join our waitlist to be notified when it launches!",
+      description: "Crevia AI Agent will be available soon. Join our waitlist to be notified when it launches!",
     });
   };
 
@@ -67,7 +67,7 @@ const QoraAgent = () => {
     setActivePrompt(index);
     toast({
       title: "Try this prompt",
-      description: `"${examplePrompts[index]}" - This is a preview of what Qlova Agent can do!`,
+      description: `"${examplePrompts[index]}" - This is a preview of what Crevia AI can do!`,
     });
   };
 
@@ -131,7 +131,7 @@ const QoraAgent = () => {
     {
       icon: Globe,
       title: "Platform-Integrated",
-      description: "Seamlessly works with all Qlova tools and features"
+      description: "Seamlessly works with all Crevia tools and features"
     },
     {
       icon: TrendingUp,
@@ -194,7 +194,7 @@ const QoraAgent = () => {
               className="font-heading text-6xl md:text-8xl font-bold mb-8 leading-tight"
             >
               <span className="bg-gradient-to-r from-[#3533cd] via-[#3533cd] to-[#fdcb08] bg-clip-text text-transparent">
-                Qlova Agent
+                Crevia AI Agent
               </span>
             </motion.h1>
 
@@ -214,7 +214,7 @@ const QoraAgent = () => {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="font-body text-lg md:text-xl text-muted-foreground/80 mb-12 max-w-3xl mx-auto"
             >
-              From ideation to execution, Qlova Agent helps you create, market, and grow your creator business with AI-powered assistance at every step.
+              From ideation to execution, Crevia AI Agent helps you create, market, and grow your creator business with AI-powered assistance at every step.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -274,7 +274,7 @@ const QoraAgent = () => {
             className="text-center mb-12"
           >
             <h2 className="font-heading text-4xl md:text-6xl font-bold text-foreground mb-4">
-              Experience Qlova Agent
+              Experience Crevia AI Agent
             </h2>
             <p className="font-body text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
               Try our AI assistant right now and see how it can transform your creator workflow
@@ -303,7 +303,7 @@ const QoraAgent = () => {
             className="text-center mb-16"
           >
             <h2 className="font-heading text-4xl md:text-6xl font-bold text-foreground mb-6">
-              What Qlova Agent Can Do For You
+              What Crevia AI Agent Can Do For You
             </h2>
             <p className="font-body text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
               Your all-in-one AI assistant for every aspect of your creator journey
@@ -361,10 +361,10 @@ const QoraAgent = () => {
                 </div>
                 
                 <CardTitle className="font-heading text-3xl md:text-4xl font-bold mb-4">
-                  Seamlessly Integrated with Qlova
+                  Seamlessly Integrated with Crevia
                 </CardTitle>
                 <CardDescription className="font-body text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Qlova Agent works natively with all your products, communities, events, and marketing tools—no setup required.
+                  Crevia AI Agent works natively with all your products, communities, events, and marketing tools—no setup required.
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -397,7 +397,7 @@ const QoraAgent = () => {
                   Ready to Supercharge Your Creator Business?
                 </CardTitle>
                 <CardDescription className="font-body text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-10">
-                  Join thousands of creators using Qlova Agent to build, market, and grow faster than ever before.
+                  Join thousands of creators using Crevia AI Agent to build, market, and grow faster than ever before.
                 </CardDescription>
                 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -406,7 +406,7 @@ const QoraAgent = () => {
                     onClick={handleUpgrade}
                     className="bg-gradient-to-r from-[#3533cd] to-[#3533cd]/80 hover:shadow-[0_0_60px_rgba(53,51,205,0.5)] text-white group text-lg px-8 py-6"
                   >
-                    Upgrade to Qlova Pro
+                    Upgrade to Crevia Pro
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Button>
                   <Button 

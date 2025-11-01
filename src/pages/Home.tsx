@@ -263,7 +263,7 @@ const Home = () => {
     {
       name: "Amara Okafor",
       role: "Digital Designer",
-      story: "Increased my income by 300% through Qlova's community and digital products platform.",
+      story: "Increased my income by 300% through Crevia's community and digital products platform.",
       avatar: "A.O"
     },
     {
@@ -282,7 +282,7 @@ const Home = () => {
 
   const testimonials = [
     {
-      quote: "Qlova changed my perspective on what's possible as an African creator. The community is incredible and the platform makes it so easy to monetize my skills.",
+      quote: "Crevia changed my perspective on what's possible as an African creator. The community is incredible and the platform makes it so easy to monetize my skills.",
       author: "Sarah Mwangi",
       role: "UX Designer"
     },
@@ -292,12 +292,12 @@ const Home = () => {
       role: "Business Coach"
     },
     {
-      quote: "I got early access to Qlova and it's making history! Watch as I easily create content and build my community with this powerful platform.",
+      quote: "I got early access to Crevia and it's making history! Watch as I easily create content and build my community with this powerful platform.",
       author: "Aisha Kamara",
       role: "Content Creator"
     },
     {
-      quote: "Amazing is an understatement for how Qlova looks and interacts with users! The tricky thing about platforms is it's not always intuitive, but these folks nailed it! Can't wait to see what's next.",
+      quote: "Amazing is an understatement for how Crevia looks and interacts with users! The tricky thing about platforms is it's not always intuitive, but these folks nailed it! Can't wait to see what's next.",
       author: "David Mensah",
       role: "Digital Entrepreneur"
     },
@@ -323,7 +323,7 @@ const Home = () => {
             className="text-center mb-16"
           >
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-6">
-              See Qlova In Action
+              See Crevia In Action
             </h2>
             <p className="font-body text-xl text-muted-foreground max-w-2xl mx-auto">
               Watch how our platform empowers African creators to build, sell, and grow their digital empire
@@ -396,7 +396,7 @@ const Home = () => {
               One Platform, Unlimited Potential 💰
             </h2>
             <p className="font-body text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
-              Stop paying for multiple tools. Qlova brings everything you need in one place.
+              Stop paying for multiple tools. Crevia brings everything you need in one place.
             </p>
           </motion.div>
 
@@ -448,7 +448,7 @@ const Home = () => {
                     <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
                       <span className="text-white text-sm font-bold">✓</span>
                     </div>
-                    <span className="font-body font-semibold text-slate-700">QlovaWellness</span>
+                    <span className="font-body font-semibold text-slate-700">CreviaWellness</span>
                   </div>
                   <div className="flex items-center space-x-4 font-body text-sm text-slate-600">
                     <span>Home</span>
@@ -758,7 +758,7 @@ const Home = () => {
               One Platform, Unlimited Potential 💰
             </h2>
             <p className="font-body text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Stop paying for multiple tools. Qlova brings everything you need in one place.
+              Stop paying for multiple tools. Crevia brings everything you need in one place.
             </p>
           </motion.div>
 
@@ -821,7 +821,7 @@ const Home = () => {
                         <CheckCircle className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <span className="font-body text-white/90 block text-sm">Join Qlova Pro ✨</span>
+                        <span className="font-body text-white/90 block text-sm">Join Crevia Pro ✨</span>
                         <span className="font-body text-white font-semibold">All features included</span>
                       </div>
                     </div>

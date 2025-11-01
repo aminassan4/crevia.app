@@ -83,7 +83,7 @@ const Dashboard = () => {
 
   const handleCopyLink = () => {
     const username = profile?.full_name?.toLowerCase().replace(/\s+/g, '') || user?.email?.split('@')[0];
-    const profileLink = `https://qlova.app/${username}`;
+    const profileLink = `https://crevia.app/${username}`;
     navigator.clipboard.writeText(profileLink);
     setCopied(true);
     toast({
@@ -181,7 +181,7 @@ const Dashboard = () => {
   }
 
   const username = profile?.full_name?.toLowerCase().replace(/\s+/g, '') || user?.email?.split('@')[0];
-  const profileLink = `qlova.app/${username}`;
+  const profileLink = `crevia.app/${username}`;
 
   const sidebarItems = [
     { id: "overview" as const, icon: LayoutDashboard, label: "Overview" },
@@ -698,7 +698,7 @@ const Dashboard = () => {
                 <Award className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
                 <h3 className="font-heading text-xl font-bold mb-2">Join the Affiliate Program</h3>
                 <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-                  Earn commission by inviting other creators to join Qlova
+                  Earn commission by inviting other creators to join Crevia
                 </p>
                 <Badge className="bg-amber-100 text-amber-700 px-4 py-2">Coming Soon</Badge>
               </CardContent>
@@ -716,7 +716,7 @@ const Dashboard = () => {
                   <Zap className="w-6 h-6 mr-2 text-primary" />
                   Integrations
                 </CardTitle>
-                <CardDescription>Connect your favorite tools and services to Qlova</CardDescription>
+                <CardDescription>Connect your favorite tools and services to Crevia</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid gap-4">
@@ -776,7 +776,7 @@ const Dashboard = () => {
                 <div className="mt-6 p-4 bg-muted/30 rounded-lg">
                   <p className="text-sm text-center text-muted-foreground">
                     More integrations coming soon. Need something specific?{" "}
-                    <a href="mailto:support@qlova.com" className="text-primary hover:underline">Let us know</a>
+                    <a href="mailto:support@crevia.com" className="text-primary hover:underline">Let us know</a>
                   </p>
                 </div>
               </CardContent>

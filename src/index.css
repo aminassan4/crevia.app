@@ -2,56 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Qlova Design System - Pan-African Tech Aesthetic 
-All colors MUST be HSL. Fonts: Libre Baskerville (headlines), IBM Plex Mono (body)
+/* Crevia Design System
+All colors MUST be HSL. Fonts: Vollkorn (headlines), Poppins (body)
 */
-
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700&display=swap');
 
 @layer base {
   :root {
-    /* Qlova Brand Colors */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
+    /* Crevia Brand Colors */
+    --background: 37 75% 93%;
+    --foreground: 0 41% 24%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
+    --card: 37 80% 96%;
+    --card-foreground: 0 41% 24%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
+    --popover: 37 80% 96%;
+    --popover-foreground: 0 41% 24%;
 
-    /* Primary: Darker Vivid Blue */
-    --primary: 239 81% 47%;
-    --primary-foreground: 0 0% 100%;
-    --primary-glow: 239 81% 57%;
+    /* Primary: #7B1E1E */
+    --primary: 0 61% 30%;
+    --primary-foreground: 37 75% 93%;
+    --primary-glow: 0 61% 40%;
 
-    /* Secondary: Qlova Yellow */
-    --secondary: 46 98% 52%;
-    --secondary-foreground: 0 0% 0%;
-    --secondary-glow: 46 98% 62%;
+    /* Secondary: #FFF4DB Tones */
+    --secondary: 37 65% 88%;
+    --secondary-foreground: 0 41% 24%;
+    --secondary-glow: 37 65% 78%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 37 45% 90%;
+    --muted-foreground: 0 20% 45%;
 
-    --accent: 46 98% 52%;
-    --accent-foreground: 0 0% 0%;
+    --accent: 37 75% 85%;
+    --accent-foreground: 0 41% 24%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 95%;
-    --ring: 239 81% 57%;
+    --border: 37 40% 85%;
+    --input: 37 40% 85%;
+    --ring: 0 61% 30%;
 
-    /* Custom Qlova Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-accent: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-glow)));
-    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)));
+    /* Custom Crevia Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(0, 61%, 30%), hsl(0, 61%, 40%));
+    --gradient-accent: linear-gradient(135deg, hsl(37, 75%, 85%), hsl(37, 65%, 88%));
+    --gradient-subtle: linear-gradient(180deg, hsl(37, 75%, 93%), hsl(37, 80%, 96%));
 
     /* Shadows with brand colors */
-    --shadow-elegant: 0 20px 40px -12px hsl(var(--primary) / 0.15);
-    --shadow-glow: 0 0 60px hsl(var(--primary-glow) / 0.3);
-    --shadow-accent: 0 8px 32px -8px hsl(var(--secondary) / 0.3);
+    --shadow-elegant: 0 10px 30px -10px hsl(0 61% 30% / 0.3);
+    --shadow-glow: 0 0 40px hsl(0 61% 40% / 0.4);
+    --shadow-accent: 0 8px 24px -8px hsl(37 75% 85% / 0.5);
 
     /* Smooth animations */
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -77,44 +75,44 @@ All colors MUST be HSL. Fonts: Libre Baskerville (headlines), IBM Plex Mono (bod
   }
 
   .dark {
-    --background: 0 0% 5%;
-    --foreground: 0 0% 95%;
+    --background: 0 20% 12%;
+    --foreground: 37 75% 93%;
 
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 95%;
+    --card: 0 20% 14%;
+    --card-foreground: 37 75% 93%;
 
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 0 20% 14%;
+    --popover-foreground: 37 75% 93%;
 
-    --primary: 239 81% 57%;
-    --primary-foreground: 0 0% 5%;
-    --primary-glow: 239 81% 67%;
+    --primary: 0 61% 40%;
+    --primary-foreground: 37 75% 93%;
+    --primary-glow: 0 61% 50%;
 
-    --secondary: 46 98% 62%;
-    --secondary-foreground: 0 0% 5%;
-    --secondary-glow: 46 98% 72%;
+    --secondary: 0 20% 22%;
+    --secondary-foreground: 37 75% 93%;
+    --secondary-glow: 0 20% 32%;
 
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 0 20% 20%;
+    --muted-foreground: 37 45% 65%;
 
-    --accent: 46 98% 62%;
-    --accent-foreground: 0 0% 5%;
+    --accent: 0 20% 22%;
+    --accent-foreground: 37 75% 93%;
 
-    --destructive: 0 84% 70%;
-    --destructive-foreground: 0 0% 5%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 12%;
-    --ring: 239 81% 67%;
+    --border: 0 20% 22%;
+    --input: 0 20% 22%;
+    --ring: 0 61% 40%;
 
     /* Dark mode gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-accent: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-glow)));
-    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)));
+    --gradient-hero: linear-gradient(135deg, hsl(0, 61%, 35%), hsl(0, 61%, 45%));
+    --gradient-accent: linear-gradient(135deg, hsl(0, 20%, 20%), hsl(0, 20%, 25%));
+    --gradient-subtle: linear-gradient(180deg, hsl(0, 20%, 12%), hsl(0, 20%, 14%));
 
-    --shadow-elegant: 0 20px 40px -12px hsl(var(--primary) / 0.25);
-    --shadow-glow: 0 0 60px hsl(var(--primary-glow) / 0.4);
-    --shadow-accent: 0 8px 32px -8px hsl(var(--secondary) / 0.4);
+    --shadow-elegant: 0 10px 30px -10px hsl(0 61% 35% / 0.5);
+    --shadow-glow: 0 0 40px hsl(0 61% 45% / 0.6);
+    --shadow-accent: 0 8px 24px -8px hsl(0 20% 20% / 0.5);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -132,17 +130,17 @@ All colors MUST be HSL. Fonts: Libre Baskerville (headlines), IBM Plex Mono (bod
   }
 
   body {
-    @apply bg-background text-foreground font-mono text-base;
-    font-family: 'IBM Plex Mono', monospace;
+    @apply bg-background text-foreground text-base;
+    font-family: 'Poppins', sans-serif;
   }
 
   /* Typography classes */
   .font-heading {
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Vollkorn', serif;
   }
 
   .font-body {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'Poppins', sans-serif;
   }
 
   /* Custom animations */
