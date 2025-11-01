@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { 
   Search, 
   Rocket, 
@@ -10,13 +12,32 @@ import {
   Users,
   Target,
   DollarSign,
-  TrendingUp
+  TrendingUp,
+  Store,
+  Plus,
+  Copy,
+  Share2,
+  Eye,
+  Check,
+  ShoppingBag,
+  Video,
+  BookOpen,
+  Edit,
+  ExternalLink
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { CreatorMarketplace } from "@/components/brand/CreatorMarketplace";
+import { CampaignManager } from "@/components/brand/CampaignManager";
+import { BrandAnalytics } from "@/components/brand/BrandAnalytics";
+import { BrandSettings } from "@/components/brand/BrandSettings";
+import { useToast } from "@/hooks/use-toast";
 
 const BrandDashboard = () => {
   const [activeTab, setActiveTab] = useState<string>("overview");
+  const [copied, setCopied] = useState(false);
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   const tabs = [
     { id: "overview", label: "Overview" },
@@ -61,7 +82,7 @@ const BrandDashboard = () => {
       icon: Rocket,
       title: "Launch Campaign",
       description: "Create a new collaboration",
-      action: () => alert("Campaign creation modal would open here")
+      action: () => setActiveTab("campaigns")
     },
     {
       icon: BarChart3,
@@ -70,6 +91,51 @@ const BrandDashboard = () => {
       action: () => setActiveTab("insights")
     }
   ];
+
+  // Crevia Link items (same as My Store from creator dashboard)
+  const creviaLinkItems = [
+    {
+      id: 1,
+      type: "product",
+      title: "Brand Collaboration Packages",
+      description: "Exclusive partnership opportunities for creators",
+      price: "$2,500",
+      image: "gradient-hero",
+      status: "active"
+    },
+    {
+      id: 2,
+      type: "event",
+      title: "Brand Workshop Series",
+      description: "Monthly workshops on brand partnerships",
+      price: "$299",
+      image: "gradient-accent",
+      status: "upcoming"
+    },
+    {
+      id: 3,
+      type: "program",
+      title: "Brand Ambassador Program",
+      description: "Long-term partnership opportunities",
+      price: "$5K/mo",
+      image: "gradient-hero",
+      status: "active"
+    }
+  ];
+
+  const handleCopyLink = () => {
+    const brandName = "yourbrand"; // This would come from user data
+    const profileLink = `https://crevia.app/${brandName}`;
+    navigator.clipboard.writeText(profileLink);
+    setCopied(true);
+    toast({
+      title: "Link copied!",
+      description: "Your Crevia Link has been copied to clipboard.",
+    });
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const brandLink = "crevia.app/yourbrand"; // This would come from user data
 
   return (
     <div className="min-h-screen bg-background pt-16">
@@ -87,12 +153,10 @@ const BrandDashboard = () => {
             </div>
             <div className="flex items-center gap-4">
               <Button 
-                className="bg-primary hover:bg-primary-glow text-primary-foreground"
-                asChild
+                className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                onClick={() => navigate("/crevia-connect")}
               >
-                <Link to="/crevia-connect">
-                  Crevia Connect
-                </Link>
+                Crevia Connect
               </Button>
             </div>
           </div>
@@ -199,118 +263,202 @@ const BrandDashboard = () => {
         )}
 
         {activeTab === "find-creators" && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Card>
-              <CardContent className="p-12 text-center">
-                <Search className="w-16 h-16 text-primary mx-auto mb-4" />
-                <h3 className="font-heading text-2xl font-bold text-primary mb-2">
-                  Creator Marketplace
-                </h3>
-                <p className="font-body text-muted-foreground mb-6">
-                  Browse and connect with talented creators for your campaigns
-                </p>
-                <Button className="bg-primary hover:bg-primary-glow text-primary-foreground">
-                  Explore Creators
-                </Button>
-              </CardContent>
-            </Card>
-          </motion.div>
+          <CreatorMarketplace />
         )}
 
         {activeTab === "campaigns" && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Card>
-              <CardContent className="p-12 text-center">
-                <Rocket className="w-16 h-16 text-primary mx-auto mb-4" />
-                <h3 className="font-heading text-2xl font-bold text-primary mb-2">
-                  Campaign Management
-                </h3>
-                <p className="font-body text-muted-foreground mb-6">
-                  Create, manage, and track all your brand campaigns
-                </p>
-                <Button className="bg-primary hover:bg-primary-glow text-primary-foreground">
-                  Create Campaign
-                </Button>
-              </CardContent>
-            </Card>
-          </motion.div>
+          <CampaignManager />
         )}
 
         {activeTab === "insights" && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Card>
-              <CardContent className="p-12 text-center">
-                <BarChart3 className="w-16 h-16 text-primary mx-auto mb-4" />
-                <h3 className="font-heading text-2xl font-bold text-primary mb-2">
-                  Analytics & Insights
-                </h3>
-                <p className="font-body text-muted-foreground mb-6">
-                  Track performance metrics and campaign ROI
-                </p>
-                <Button className="bg-primary hover:bg-primary-glow text-primary-foreground">
-                  View Reports
-                </Button>
-              </CardContent>
-            </Card>
-          </motion.div>
+          <BrandAnalytics />
         )}
 
         {activeTab === "my-crevia-link" && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Card>
-              <CardContent className="p-12 text-center">
-                <LinkIcon className="w-16 h-16 text-primary mx-auto mb-4" />
-                <h3 className="font-heading text-2xl font-bold text-primary mb-2">
-                  My Crevia Link
-                </h3>
-                <p className="font-body text-muted-foreground mb-6">
-                  Showcase your brand's digital assets, offers, and collaborations
-                </p>
-                <Button className="bg-primary hover:bg-primary-glow text-primary-foreground">
-                  Manage Your Link
+          <section className="py-8 px-4">
+            <div className="container mx-auto max-w-4xl">
+              {/* Profile Link Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Card className="border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-background mb-8">
+                  <CardHeader>
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <CardTitle className="font-heading text-2xl mb-2 flex items-center">
+                          <LinkIcon className="w-5 h-5 mr-2 text-primary" />
+                          Your Crevia Link
+                        </CardTitle>
+                        <CardDescription className="text-base">
+                          Share this link to showcase all your brand offers, partnerships, and collaborations in one place
+                        </CardDescription>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="flex items-center space-x-2 p-4 bg-background rounded-lg border-2 border-dashed border-primary/30">
+                      <LinkIcon className="w-5 h-5 text-primary flex-shrink-0" />
+                      <code className="flex-1 font-mono text-sm md:text-base text-foreground">
+                        {brandLink}
+                      </code>
+                    </div>
+                    
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      <Button 
+                        onClick={handleCopyLink}
+                        className="flex-1 bg-gradient-to-r from-primary to-primary/80"
+                      >
+                        {copied ? (
+                          <>
+                            <Check className="w-4 h-4 mr-2" />
+                            Copied!
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-4 h-4 mr-2" />
+                            Copy Link
+                          </>
+                        )}
+                      </Button>
+                      <Button variant="outline" className="flex-1">
+                        <Share2 className="w-4 h-4 mr-2" />
+                        Share
+                      </Button>
+                      <Button variant="outline" className="flex-1">
+                        <Eye className="w-4 h-4 mr-2" />
+                        Preview
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Store Header */}
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">
+                    My Crevia Link Content
+                  </h2>
+                  <p className="font-body text-sm text-muted-foreground mt-1">
+                    Manage all your brand offers, events, and programs
+                  </p>
+                </div>
+                <Button 
+                  onClick={() => navigate("/create-product")}
+                  className="bg-gradient-to-r from-primary to-primary/80"
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add New
                 </Button>
-              </CardContent>
-            </Card>
-          </motion.div>
+              </div>
+
+              {/* Link Items */}
+              <div className="space-y-4">
+                {creviaLinkItems.length === 0 ? (
+                  <Card className="border-2 border-dashed border-border">
+                    <CardContent className="flex flex-col items-center justify-center py-16">
+                      <Store className="w-16 h-16 text-muted-foreground mb-4" />
+                      <h3 className="font-heading text-xl font-bold mb-2">Your Crevia Link is empty</h3>
+                      <p className="font-body text-muted-foreground text-center mb-6 max-w-md">
+                        Start building your brand presence by adding offers, events, or programs
+                      </p>
+                      <div className="flex flex-col sm:flex-row gap-3">
+                        <Button 
+                          onClick={() => navigate("/create-product")}
+                          className="bg-gradient-to-r from-primary to-primary/80"
+                        >
+                          <Plus className="w-4 h-4 mr-2" />
+                          Add Content
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ) : (
+                  creviaLinkItems.map((item, index) => (
+                    <motion.div
+                      key={item.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                    >
+                      <Card className="border-2 hover:border-primary/30 transition-all duration-300 group">
+                        <CardContent className="p-4 md:p-6">
+                          <div className="flex flex-col md:flex-row gap-4">
+                            {/* Item Image */}
+                            <div className={`w-full md:w-32 h-32 rounded-lg bg-${item.image} flex items-center justify-center flex-shrink-0`}>
+                              {item.type === "product" && <ShoppingBag className="w-12 h-12 text-white" />}
+                              {item.type === "event" && <Video className="w-12 h-12 text-white" />}
+                              {item.type === "program" && <BookOpen className="w-12 h-12 text-white" />}
+                            </div>
+
+                            {/* Item Details */}
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-start justify-between mb-2">
+                                <div className="flex-1 min-w-0">
+                                  <h3 className="font-heading text-lg font-bold text-foreground mb-1 truncate">
+                                    {item.title}
+                                  </h3>
+                                  <p className="font-body text-sm text-muted-foreground line-clamp-2">
+                                    {item.description}
+                                  </p>
+                                </div>
+                                <Badge 
+                                  variant={item.status === "active" ? "default" : "secondary"}
+                                  className="ml-2 flex-shrink-0"
+                                >
+                                  {item.status}
+                                </Badge>
+                              </div>
+
+                              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mt-4">
+                                <div className="font-heading text-2xl font-bold text-primary">
+                                  {item.price}
+                                </div>
+                                <div className="flex gap-2 w-full sm:w-auto">
+                                  <Button variant="outline" size="sm" className="flex-1 sm:flex-initial">
+                                    <Edit className="w-4 h-4 mr-2" />
+                                    Edit
+                                  </Button>
+                                  <Button variant="ghost" size="sm" className="flex-1 sm:flex-initial">
+                                    <ExternalLink className="w-4 h-4 mr-2" />
+                                    View
+                                  </Button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))
+                )}
+              </div>
+
+              {/* Add More Section */}
+              {creviaLinkItems.length > 0 && (
+                <Card className="border-2 border-dashed border-primary/20 mt-6 hover:border-primary/40 transition-all cursor-pointer group"
+                      onClick={() => navigate("/create-product")}>
+                  <CardContent className="flex items-center justify-center py-12">
+                    <div className="text-center">
+                      <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <Plus className="w-8 h-8 text-primary" />
+                      </div>
+                      <h3 className="font-heading text-lg font-bold mb-2">Add More to Your Crevia Link</h3>
+                      <p className="font-body text-sm text-muted-foreground">
+                        Expand your offerings with more content and partnerships
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+          </section>
         )}
 
         {activeTab === "settings" && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Card>
-              <CardContent className="p-12 text-center">
-                <SettingsIcon className="w-16 h-16 text-primary mx-auto mb-4" />
-                <h3 className="font-heading text-2xl font-bold text-primary mb-2">
-                  Account Settings
-                </h3>
-                <p className="font-body text-muted-foreground mb-6">
-                  Manage your brand profile, billing, and preferences
-                </p>
-                <Button className="bg-primary hover:bg-primary-glow text-primary-foreground">
-                  Edit Settings
-                </Button>
-              </CardContent>
-            </Card>
-          </motion.div>
+          <BrandSettings />
         )}
       </div>
     </div>
