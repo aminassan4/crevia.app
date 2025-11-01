@@ -18,6 +18,7 @@ const SignUpModal = ({ open, onOpenChange, onSwitchToSignIn }: SignUpModalProps)
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [userRole, setUserRole] = useState<"creator" | "brand" | null>(null);
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     firstName: "",
@@ -36,6 +37,15 @@ const SignUpModal = ({ open, onOpenChange, onSwitchToSignIn }: SignUpModalProps)
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!userRole) {
+      toast({
+        title: "Please select a role",
+        description: "Choose whether you're joining as a Creator or Brand.",
+        variant: "destructive",
+      });
+      return;
+    }
 
     if (formData.password !== formData.confirmPassword) {
       toast({
@@ -64,6 +74,7 @@ const SignUpModal = ({ open, onOpenChange, onSwitchToSignIn }: SignUpModalProps)
         options: {
           data: {
             full_name: `${formData.firstName} ${formData.lastName}`.trim(),
+            user_role: userRole,
           },
           emailRedirectTo: `${window.location.origin}/`,
         },
@@ -73,7 +84,7 @@ const SignUpModal = ({ open, onOpenChange, onSwitchToSignIn }: SignUpModalProps)
 
       toast({
         title: "Account created!",
-        description: "Welcome to Qlova!",
+        description: "Welcome to Crevia!",
       });
       onOpenChange(false);
     } catch (error: any) {
@@ -97,6 +108,43 @@ const SignUpModal = ({ open, onOpenChange, onSwitchToSignIn }: SignUpModalProps)
         </DialogHeader>
         
         <form onSubmit={handleSignUp} className="space-y-6">
+          {/* Role Selection */}
+          <div className="space-y-3">
+            <Label className="font-body text-sm font-semibold">I'm joining as *</Label>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() => setUserRole("creator")}
+                className={`p-4 rounded-lg border-2 transition-all ${
+                  userRole === "creator"
+                    ? "border-primary bg-primary/10"
+                    : "border-border hover:border-primary/50"
+                }`}
+              >
+                <div className="text-center">
+                  <div className="text-2xl mb-1">👤</div>
+                  <div className="font-heading font-semibold text-sm">Creator</div>
+                  <div className="text-xs text-muted-foreground mt-1">Sell products & services</div>
+                </div>
+              </button>
+              <button
+                type="button"
+                onClick={() => setUserRole("brand")}
+                className={`p-4 rounded-lg border-2 transition-all ${
+                  userRole === "brand"
+                    ? "border-primary bg-primary/10"
+                    : "border-border hover:border-primary/50"
+                }`}
+              >
+                <div className="text-center">
+                  <div className="text-2xl mb-1">🏢</div>
+                  <div className="font-heading font-semibold text-sm">Brand</div>
+                  <div className="text-xs text-muted-foreground mt-1">Find & hire creators</div>
+                </div>
+              </button>
+            </div>
+          </div>
+
           <div className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="firstName" className="font-body">First Name (Optional)</Label>

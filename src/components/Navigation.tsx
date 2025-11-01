@@ -77,6 +77,11 @@ const Navigation = () => {
     { name: "About", path: "/community" },
   ];
 
+  const handleSignIn = () => {
+    setAuthMode("signin");
+    setShowAuthModal(true);
+  };
+
   const isActive = (path: string) => location.pathname === path;
 
   return (
@@ -96,7 +101,7 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
             <NavigationMenu>
-              <NavigationMenuList>
+              <NavigationMenuList className="flex items-center">
                 {navLinks.map((link) => (
                   <Link
                     key={link.name}
@@ -114,7 +119,7 @@ const Navigation = () => {
           </div>
 
           {/* Desktop Auth Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-3">
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -139,13 +144,21 @@ const Navigation = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Button 
-                onClick={handleJoinCrevia}
-                className="font-body bg-primary hover:bg-primary-glow text-primary-foreground shadow-elegant"
-              >
-                <Users className="w-4 h-4 mr-2" />
-                Join Crevia
-              </Button>
+              <>
+                <Button 
+                  variant="outline"
+                  onClick={handleSignIn}
+                  className="font-body border-primary/30 hover:bg-primary/5"
+                >
+                  Log In
+                </Button>
+                <Button 
+                  onClick={handleJoinCrevia}
+                  className="font-body bg-primary hover:bg-primary-glow text-primary-foreground shadow-elegant"
+                >
+                  Sign Up
+                </Button>
+              </>
             )}
           </div>
 
@@ -193,13 +206,21 @@ const Navigation = () => {
                       </Button>
                     </>
                   ) : (
-                    <Button 
-                      onClick={() => { handleJoinCrevia(); setIsOpen(false); }}
-                      className="font-body bg-primary hover:bg-primary-glow text-primary-foreground shadow-elegant"
-                    >
-                      <Users className="w-5 h-5 mr-2" />
-                      Join Crevia
-                    </Button>
+                    <>
+                      <Button 
+                        variant="outline"
+                        onClick={() => { handleSignIn(); setIsOpen(false); }}
+                        className="font-body border-primary/30"
+                      >
+                        Log In
+                      </Button>
+                      <Button 
+                        onClick={() => { handleJoinCrevia(); setIsOpen(false); }}
+                        className="font-body bg-primary hover:bg-primary-glow text-primary-foreground shadow-elegant"
+                      >
+                        Sign Up
+                      </Button>
+                    </>
                   )}
                 </div>
               </div>

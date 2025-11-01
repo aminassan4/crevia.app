@@ -158,49 +158,50 @@ const CreateProduct = () => {
         </div>
       </section>
 
-      {/* Product Type Selection */}
+      {/* Template Pack Feature - Only Option */}
       {!productType && (
         <section className="py-20">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4 max-w-2xl">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-center mb-16"
+              className="text-center mb-12"
             >
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
-                What would you like to create?
+                Create Your Template Pack
               </h2>
               <p className="font-body text-lg text-muted-foreground">
-                Choose the type of product that best fits your expertise
+                Share professional templates, tools, and resources with your audience
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {productTypes.map((type, index) => (
-                <motion.div
-                  key={type.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                >
-                  <Card 
-                    className="hover-lift cursor-pointer transition-all hover:border-primary"
-                    onClick={() => setProductType(type.id)}
-                  >
-                    <CardContent className="p-8 text-center">
-                      <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-primary/10 flex items-center justify-center ${type.color}`}>
-                        <type.icon className="w-8 h-8" />
-                      </div>
-                      <h3 className="font-heading text-xl font-bold mb-2">{type.title}</h3>
-                      <p className="font-body text-sm text-muted-foreground">
-                        {type.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Card 
+                className="hover-lift cursor-pointer transition-all hover:border-primary border-2"
+                onClick={() => setProductType("template")}
+              >
+                <CardContent className="p-12 text-center">
+                  <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+                    <Download className="w-10 h-10" />
+                  </div>
+                  <h3 className="font-heading text-2xl font-bold mb-4">Template Pack</h3>
+                  <p className="font-body text-base text-muted-foreground mb-6">
+                    Professional templates, tools, and resources for immediate use
+                  </p>
+                  <div className="grid grid-cols-2 gap-3 text-sm">
+                    <Badge variant="secondary" className="justify-center py-2">Multiple Formats</Badge>
+                    <Badge variant="secondary" className="justify-center py-2">Commercial License</Badge>
+                    <Badge variant="secondary" className="justify-center py-2">Video Tutorials</Badge>
+                    <Badge variant="secondary" className="justify-center py-2">Free Updates</Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           </div>
         </section>
       )}

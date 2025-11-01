@@ -16,6 +16,7 @@ import CreateProduct from "./pages/CreateProduct";
 import CreateCommunity from "./pages/CreateCommunity";
 import CreviaAI from "./pages/CreviaAI";
 import CreviaConnect from "./pages/CreviaConnect";
+import CreatorConnect from "./pages/CreatorConnect";
 import BrandDashboard from "./pages/BrandDashboard";
 import Pricing from "./pages/Pricing";
 import NotFound from "./pages/NotFound";
@@ -38,6 +39,7 @@ const AppContent = () => (
       <Route path="/create-community" element={<CreateCommunity />} />
       <Route path="/crevia-ai" element={<CreviaAI />} />
       <Route path="/crevia-connect" element={<CreviaConnect />} />
+      <Route path="/creator-connect" element={<CreatorConnect />} />
       <Route path="/brand-dashboard" element={<BrandDashboard />} />
       <Route path="/pricing" element={<Pricing />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

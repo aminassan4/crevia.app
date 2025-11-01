@@ -222,13 +222,22 @@ const Dashboard = () => {
             </div>
             <div className="flex flex-wrap gap-2">
               <Button
+                variant="default"
+                size="sm"
+                onClick={() => navigate("/creator-connect")}
+                className="bg-primary hover:bg-primary-glow"
+              >
+                <Users className="w-4 h-4 mr-2" />
+                Crevia Connect
+              </Button>
+              <Button
                 variant="outline"
                 size="sm"
-                onClick={() => navigate("/qora-agent")}
-                className="border-[#3533cd]/30 hover:bg-[#3533cd]/5"
+                onClick={() => navigate("/crevia-ai")}
+                className="border-primary/30 hover:bg-primary/5"
               >
                 <LayoutDashboard className="w-4 h-4 mr-2" />
-                Qora Agent
+                Crevia AI
               </Button>
               <Button
                 variant="outline"
