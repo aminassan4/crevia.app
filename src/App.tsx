@@ -14,7 +14,9 @@ import CreateEvent from "./pages/CreateEvent";
 import CreatorDashboard from "./pages/Dashboard";
 import CreateProduct from "./pages/CreateProduct";
 import CreateCommunity from "./pages/CreateCommunity";
-import QoraAgent from "./pages/QoraAgent";
+import CreviaAI from "./pages/CreviaAI";
+import CreviaConnect from "./pages/CreviaConnect";
+import BrandDashboard from "./pages/BrandDashboard";
 import Pricing from "./pages/Pricing";
 import NotFound from "./pages/NotFound";
 
@@ -34,7 +36,9 @@ const AppContent = () => (
       <Route path="/dashboard" element={<CreatorDashboard />} />
       <Route path="/create-product" element={<CreateProduct />} />
       <Route path="/create-community" element={<CreateCommunity />} />
-      <Route path="/qora-agent" element={<QoraAgent />} />
+      <Route path="/crevia-ai" element={<CreviaAI />} />
+      <Route path="/crevia-connect" element={<CreviaConnect />} />
+      <Route path="/brand-dashboard" element={<BrandDashboard />} />
       <Route path="/pricing" element={<Pricing />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />

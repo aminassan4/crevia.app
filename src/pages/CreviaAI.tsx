@@ -27,7 +27,7 @@ import { useToast } from "@/hooks/use-toast";
 import Footer from "@/components/Footer";
 import QoraChatbot from "@/components/chat/QoraChatbot";
 
-const QoraAgent = () => {
+const CreviaAI = () => {
   const [activePrompt, setActivePrompt] = useState(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const navigate = useNavigate();
@@ -55,7 +55,7 @@ const QoraAgent = () => {
   const handleGetStarted = () => {
     toast({
       title: "Coming Soon! 🚀",
-      description: "Qlova Agent will be available soon. Join our waitlist to be notified when it launches!",
+      description: "Crevia AI will be available soon. Join our waitlist to be notified when it launches!",
     });
   };
 
@@ -67,7 +67,7 @@ const QoraAgent = () => {
     setActivePrompt(index);
     toast({
       title: "Try this prompt",
-      description: `"${examplePrompts[index]}" - This is a preview of what Qlova Agent can do!`,
+      description: `"${examplePrompts[index]}" - This is a preview of what Crevia AI can do!`,
     });
   };
 
@@ -76,49 +76,49 @@ const QoraAgent = () => {
       icon: Lightbulb,
       title: "Smart Content Creation",
       description: "Generate compelling product descriptions, sales copy, and marketing materials that convert.",
-      gradient: "from-[#3533cd]/10 to-[#3533cd]/5"
+      gradient: "from-primary/10 to-primary/5"
     },
     {
       icon: Target,
       title: "Community Engagement",
       description: "Create engaging posts, announcements, and conversation starters that build stronger connections.",
-      gradient: "from-[#fdcb08]/10 to-[#fdcb08]/5"
+      gradient: "from-accent/10 to-accent/5"
     },
     {
       icon: Calendar,
       title: "Event Planning Assistant",
       description: "Design and structure compelling workshops, masterclasses, and community events effortlessly.",
-      gradient: "from-[#3533cd]/10 to-[#3533cd]/5"
+      gradient: "from-primary/10 to-primary/5"
     },
     {
       icon: Mail,
       title: "Email & Messaging",
       description: "Craft professional, personalized emails and messages that resonate with your audience.",
-      gradient: "from-[#fdcb08]/10 to-[#fdcb08]/5"
+      gradient: "from-accent/10 to-accent/5"
     },
     {
       icon: Megaphone,
       title: "Marketing Strategy",
       description: "Get AI-powered insights for campaigns, launches, and promotional strategies tailored to your niche.",
-      gradient: "from-[#3533cd]/10 to-[#3533cd]/5"
+      gradient: "from-primary/10 to-primary/5"
     },
     {
       icon: Video,
       title: "Content Ideas",
       description: "Never run out of ideas for videos, courses, podcasts, or social media content.",
-      gradient: "from-[#fdcb08]/10 to-[#fdcb08]/5"
+      gradient: "from-accent/10 to-accent/5"
     },
     {
       icon: ShoppingBag,
       title: "Product Development",
       description: "Brainstorm new digital products, pricing strategies, and positioning for maximum impact.",
-      gradient: "from-[#3533cd]/10 to-[#3533cd]/5"
+      gradient: "from-primary/10 to-primary/5"
     },
     {
       icon: BarChart,
       title: "Analytics Insights",
       description: "Get help interpreting your data and making data-driven decisions to grow your creator business.",
-      gradient: "from-[#fdcb08]/10 to-[#fdcb08]/5"
+      gradient: "from-accent/10 to-accent/5"
     }
   ];
 
@@ -131,7 +131,7 @@ const QoraAgent = () => {
     {
       icon: Globe,
       title: "Platform-Integrated",
-      description: "Seamlessly works with all Qlova tools and features"
+      description: "Seamlessly works with all Crevia tools and features"
     },
     {
       icon: TrendingUp,
@@ -156,7 +156,7 @@ const QoraAgent = () => {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#3533cd]/30 rounded-full blur-[100px]"
+            className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/30 rounded-full blur-[100px]"
           />
           <motion.div
             animate={{
@@ -169,7 +169,7 @@ const QoraAgent = () => {
               ease: "easeInOut",
               delay: 1.5,
             }}
-            className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[#fdcb08]/30 rounded-full blur-[100px]"
+            className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-accent/30 rounded-full blur-[100px]"
           />
         </div>
 
@@ -180,7 +180,7 @@ const QoraAgent = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center space-x-2 bg-[#3533cd]/10 border-2 border-[#3533cd]/20 text-[#3533cd] px-6 py-3 rounded-full text-sm font-semibold mb-8"
+              className="inline-flex items-center space-x-2 bg-primary/10 border-2 border-primary/20 text-primary px-6 py-3 rounded-full text-sm font-semibold mb-8"
             >
               <Wand2 className="w-5 h-5" />
               <span>Powered by Advanced AI Technology</span>
@@ -193,8 +193,8 @@ const QoraAgent = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="font-heading text-6xl md:text-8xl font-bold mb-8 leading-tight"
             >
-              <span className="bg-gradient-to-r from-[#3533cd] via-[#3533cd] to-[#fdcb08] bg-clip-text text-transparent">
-                Qlova Agent
+              <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">
+                Crevia AI
               </span>
             </motion.h1>
 
@@ -214,7 +214,7 @@ const QoraAgent = () => {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="font-body text-lg md:text-xl text-muted-foreground/80 mb-12 max-w-3xl mx-auto"
             >
-              From ideation to execution, Qlova Agent helps you create, market, and grow your creator business with AI-powered assistance at every step.
+              From ideation to execution, Crevia AI helps you create, market, and grow your creator business with AI-powered assistance at every step.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -227,7 +227,7 @@ const QoraAgent = () => {
               <Button 
                 size="xl" 
                 onClick={handleGetStarted}
-                className="group bg-gradient-to-r from-[#3533cd] to-[#3533cd]/80 hover:shadow-[0_0_60px_rgba(53,51,205,0.5)] text-white text-lg px-8 py-6"
+                className="group bg-primary hover:bg-primary-glow text-primary-foreground shadow-elegant text-lg px-8 py-6"
               >
                 Start Creating with AI
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -236,7 +236,7 @@ const QoraAgent = () => {
                 size="xl" 
                 variant="outline"
                 onClick={() => navigate("/dashboard")}
-                className="border-2 border-[#3533cd]/30 hover:bg-[#3533cd]/5 text-lg px-8 py-6"
+                className="border-2 border-primary/30 hover:bg-primary/5 text-lg px-8 py-6"
               >
                 Go to Dashboard
               </Button>
@@ -254,7 +254,7 @@ const QoraAgent = () => {
                   key={index}
                   className="flex items-center space-x-2 bg-card/50 backdrop-blur-sm border border-border/50 px-4 py-2 rounded-full"
                 >
-                  <feature.icon className="w-4 h-4 text-[#3533cd]" />
+                  <feature.icon className="w-4 h-4 text-primary" />
                   <span className="text-sm font-medium">{feature.title}</span>
                 </div>
               ))}
@@ -274,7 +274,7 @@ const QoraAgent = () => {
             className="text-center mb-12"
           >
             <h2 className="font-heading text-4xl md:text-6xl font-bold text-foreground mb-4">
-              Experience Qlova Agent
+              Experience Crevia AI
             </h2>
             <p className="font-body text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
               Try our AI assistant right now and see how it can transform your creator workflow
@@ -303,7 +303,7 @@ const QoraAgent = () => {
             className="text-center mb-16"
           >
             <h2 className="font-heading text-4xl md:text-6xl font-bold text-foreground mb-6">
-              What Qlova Agent Can Do For You
+              What Crevia AI Can Do For You
             </h2>
             <p className="font-body text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
               Your all-in-one AI assistant for every aspect of your creator journey
@@ -319,10 +319,10 @@ const QoraAgent = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
               >
-                <Card className="h-full border-2 hover:border-[#3533cd]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#3533cd]/10 group cursor-pointer">
+                <Card className="h-full border-2 hover:border-primary/40 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10 group cursor-pointer">
                   <CardHeader className="pb-4">
                     <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${useCase.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                      <useCase.icon className="w-8 h-8 text-[#3533cd]" />
+                      <useCase.icon className="w-8 h-8 text-primary" />
                     </div>
                     <CardTitle className="font-heading text-xl mb-2">
                       {useCase.title}
@@ -347,24 +347,24 @@ const QoraAgent = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <Card className="border-2 border-[#3533cd]/20 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#3533cd]/5 via-transparent to-[#fdcb08]/5" />
+            <Card className="border-2 border-primary/20 overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
               <CardHeader className="text-center relative z-10 py-12">
                 <div className="flex items-center justify-center gap-4 mb-6">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#3533cd] to-[#3533cd]/80 flex items-center justify-center">
-                    <Sparkles className="w-8 h-8 text-white" />
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary-glow flex items-center justify-center">
+                    <Sparkles className="w-8 h-8 text-primary-foreground" />
                   </div>
                   <span className="text-4xl font-bold text-muted-foreground">×</span>
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#fdcb08] to-[#fdcb08]/80 flex items-center justify-center">
-                    <Globe className="w-8 h-8 text-white" />
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center">
+                    <Globe className="w-8 h-8 text-foreground" />
                   </div>
                 </div>
                 
                 <CardTitle className="font-heading text-3xl md:text-4xl font-bold mb-4">
-                  Seamlessly Integrated with Qlova
+                  Seamlessly Integrated with Crevia
                 </CardTitle>
                 <CardDescription className="font-body text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Qlova Agent works natively with all your products, communities, events, and marketing tools—no setup required.
+                  Crevia AI works natively with all your products, communities, events, and marketing tools—no setup required.
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -382,38 +382,38 @@ const QoraAgent = () => {
             transition={{ duration: 0.8 }}
             className="max-w-5xl mx-auto"
           >
-            <Card className="border-2 border-[#3533cd]/20 bg-card/50 backdrop-blur-sm overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#3533cd]/10 via-transparent to-[#fdcb08]/10" />
+            <Card className="border-2 border-primary/20 bg-card/50 backdrop-blur-sm overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10" />
               <CardHeader className="text-center relative z-10 py-16">
                 <motion.div
                   animate={{ rotate: [0, 360] }}
                   transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                  className="w-20 h-20 mx-auto mb-8 rounded-full bg-gradient-to-br from-[#3533cd] to-[#fdcb08] flex items-center justify-center"
+                  className="w-20 h-20 mx-auto mb-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center"
                 >
-                  <Sparkles className="w-10 h-10 text-white" />
+                  <Sparkles className="w-10 h-10 text-primary-foreground" />
                 </motion.div>
                 
                 <CardTitle className="font-heading text-4xl md:text-6xl font-bold mb-6">
                   Ready to Supercharge Your Creator Business?
                 </CardTitle>
                 <CardDescription className="font-body text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-10">
-                  Join thousands of creators using Qlova Agent to build, market, and grow faster than ever before.
+                  Join thousands of creators using Crevia AI to build, market, and grow faster than ever before.
                 </CardDescription>
                 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <Button 
                     size="xl"
                     onClick={handleUpgrade}
-                    className="bg-gradient-to-r from-[#3533cd] to-[#3533cd]/80 hover:shadow-[0_0_60px_rgba(53,51,205,0.5)] text-white group text-lg px-8 py-6"
+                    className="bg-primary hover:bg-primary-glow text-primary-foreground shadow-elegant group text-lg px-8 py-6"
                   >
-                    Upgrade to Qlova Pro
+                    Upgrade to Crevia Pro
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Button>
                   <Button 
                     size="xl"
                     variant="outline"
                     onClick={handleGetStarted}
-                    className="border-2 border-[#3533cd]/30 hover:bg-[#3533cd]/5 text-lg px-8 py-6"
+                    className="border-2 border-primary/30 hover:bg-primary/5 text-lg px-8 py-6"
                   >
                     Learn More
                   </Button>
@@ -436,7 +436,7 @@ const QoraAgent = () => {
             <Button
               onClick={scrollToTop}
               size="icon"
-              className="w-14 h-14 rounded-full bg-gradient-to-r from-[#3533cd] to-[#3533cd]/80 hover:shadow-[0_0_40px_rgba(53,51,205,0.4)] text-white shadow-xl"
+              className="w-14 h-14 rounded-full bg-primary hover:bg-primary-glow text-primary-foreground shadow-elegant"
             >
               <ArrowUp className="w-6 h-6" />
             </Button>
@@ -450,4 +450,4 @@ const QoraAgent = () => {
   );
 };
 
-export default QoraAgent;
+export default CreviaAI;

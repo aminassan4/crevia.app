@@ -13,7 +13,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import {
+  NavigationMenu,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
 import { useToast } from "@/hooks/use-toast";
+import ProductsDropdown from "./ProductsDropdown";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,7 +58,7 @@ const Navigation = () => {
     navigate("/");
   };
 
-  const handleJoinQlova = () => {
+  const handleJoinCrevia = () => {
     setAuthMode("signup");
     setShowAuthModal(true);
   };
@@ -68,8 +73,6 @@ const Navigation = () => {
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Earn", path: "/earn" },
-    { name: "Agent", path: "/qora-agent" },
     { name: "Pricing", path: "/pricing" },
     { name: "About", path: "/community" },
   ];
@@ -83,26 +86,31 @@ const Navigation = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-hero rounded-lg flex items-center justify-center">
-              <span className="text-white font-heading font-bold text-lg">K</span>
+              <span className="text-primary-foreground font-heading font-bold text-lg">C</span>
             </div>
-            <span className="font-heading text-xl font-bold text-foreground">
-              Qlova
+            <span className="font-heading text-xl font-bold text-primary">
+              Crevia
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                className={`font-body text-sm transition-colors hover:text-primary ${
-                  isActive(link.path) ? "text-primary font-semibold" : "text-muted-foreground"
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
+          <div className="hidden md:flex items-center space-x-6">
+            <NavigationMenu>
+              <NavigationMenuList>
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className={`font-body text-sm transition-colors hover:text-primary px-3 ${
+                      isActive(link.path) ? "text-primary font-semibold" : "text-muted-foreground"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+                <ProductsDropdown />
+              </NavigationMenuList>
+            </NavigationMenu>
           </div>
 
           {/* Desktop Auth Buttons */}
@@ -112,7 +120,7 @@ const Navigation = () => {
                 <DropdownMenuTrigger asChild>
                   <Button 
                     variant="outline" 
-                    className="border-[#3533cd]/30 hover:bg-[#3533cd]/5"
+                    className="border-primary/30 hover:bg-primary/5"
                   >
                     <User className="w-4 h-4 mr-2" />
                     Profile
@@ -132,11 +140,11 @@ const Navigation = () => {
               </DropdownMenu>
             ) : (
               <Button 
-                onClick={handleJoinQlova}
-                className="font-body bg-gradient-to-r from-[#3533cd] to-[#3533cd]/80 hover:shadow-[0_0_40px_rgba(53,51,205,0.4)] text-white"
+                onClick={handleJoinCrevia}
+                className="font-body bg-primary hover:bg-primary-glow text-primary-foreground shadow-elegant"
               >
                 <Users className="w-4 h-4 mr-2" />
-                Join Qlova
+                Join Crevia
               </Button>
             )}
           </div>
@@ -186,11 +194,11 @@ const Navigation = () => {
                     </>
                   ) : (
                     <Button 
-                      onClick={() => { handleJoinQlova(); setIsOpen(false); }}
-                      className="font-body bg-gradient-to-r from-[#3533cd] to-[#3533cd]/80 hover:shadow-[0_0_40px_rgba(53,51,205,0.4)] text-white"
+                      onClick={() => { handleJoinCrevia(); setIsOpen(false); }}
+                      className="font-body bg-primary hover:bg-primary-glow text-primary-foreground shadow-elegant"
                     >
                       <Users className="w-5 h-5 mr-2" />
-                      Join Qlova
+                      Join Crevia
                     </Button>
                   )}
                 </div>
