@@ -73,7 +73,7 @@ const SignUpModal = ({ open, onOpenChange, onSwitchToSignIn }: SignUpModalProps)
 
       toast({
         title: "Account created!",
-        description: "Welcome to Crevia!",
+        description: "Welcome to Qlova!",
       });
       onOpenChange(false);
     } catch (error: any) {

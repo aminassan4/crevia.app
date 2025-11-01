@@ -374,7 +374,7 @@ const Community = () => {
                   
                   <div className="space-y-4 font-body text-lg text-muted-foreground leading-relaxed">
                     <p>
-                      At Crevia, we believe in the power of African creativity and entrepreneurship. Our mission is to empower every creator on the continent with the tools and community they need to transform their passion into sustainable income.
+                      At Qlova, we believe in the power of African creativity and entrepreneurship. Our mission is to empower every creator on the continent with the tools and community they need to transform their passion into sustainable income.
                     </p>
                     <p>
                       We're not just building a platform—we're building a movement. A movement that celebrates African innovation, connects creators across borders, and proves that the future of work is creative, collaborative, and unmistakably African.
@@ -403,7 +403,7 @@ const Community = () => {
               Our 5-Year Goal
             </h2>
             <p className="font-body text-2xl text-muted-foreground mb-8">
-              What does success mean to Crevia in the next 5 years?
+              What does success mean to Qlova in the next 5 years?
             </p>
             <div className="bg-gradient-hero text-white rounded-2xl p-12 max-w-2xl mx-auto">
               <div className="font-heading text-6xl font-bold mb-4">1 Million</div>
@@ -534,7 +534,7 @@ const Community = () => {
       </section>
 
 
-      {/* Crevia Academy Section */}
+      {/* Qlova Academy Section */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <motion.div
@@ -549,17 +549,17 @@ const Community = () => {
             </div>
             
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Crevia Academy
+              Qlova Academy
             </h2>
             
             <p className="font-body text-xl text-muted-foreground mb-8 leading-relaxed">
               A comprehensive learning platform designed to help African creators and entrepreneurs master the skills they need to thrive. 
-              From business fundamentals to advanced digital strategies, Crevia Academy will be your gateway to continuous growth and success.
+              From business fundamentals to advanced digital strategies, Qlova Academy will be your gateway to continuous growth and success.
             </p>
             
             <Button variant="hero" size="xl" onClick={() => {
               // TODO: Implement waitlist functionality with Supabase
-              console.log("Join Crevia Academy waitlist");
+              console.log("Join Qlova Academy waitlist");
             }}>
               Join the Waitlist
             </Button>
@@ -635,7 +635,7 @@ const Community = () => {
                 </div>
                 <div>
                   <p className="font-body font-semibold">Email</p>
-                  <p className="font-body text-muted-foreground">contact@crevia.com</p>
+                  <p className="font-body text-muted-foreground">contact@qlova.com</p>
                 </div>
               </div>
             </div>

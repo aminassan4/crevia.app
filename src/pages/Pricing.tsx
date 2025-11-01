@@ -45,7 +45,7 @@ const Pricing = () => {
 
   const faqs = [
     {
-      question: "What can I sell on Crevia?",
+      question: "What can I sell on Qlova?",
       answer: "You can sell digital products like eBooks, templates, courses, workshops, event tickets, memberships, and any other digital content you create."
     },
     {
@@ -57,7 +57,7 @@ const Pricing = () => {
       answer: "Free plan: 5% transaction fee on each sale. Pro plan ($20/mo): 0% transaction fees - keep everything you earn!"
     },
     {
-      question: "Can I use Crevia for memberships?",
+      question: "Can I use Qlova for memberships?",
       answer: "Yes! You can create and manage membership tiers and recurring subscriptions for your audience through events and digital products."
     },
     {
@@ -383,7 +383,7 @@ const Pricing = () => {
               One Platform, Unlimited Potential 💰
             </h2>
             <p className="font-body text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Stop paying for multiple tools. Crevia brings everything you need in one place.
+              Stop paying for multiple tools. Qlova brings everything you need in one place.
             </p>
           </motion.div>
 
@@ -433,9 +433,9 @@ const Pricing = () => {
                   </div>
                 </div>
 
-                {/* Crevia Price */}
+                {/* Qlova Price */}
                 <div className="bg-gradient-hero rounded-2xl p-8 text-white text-center">
-                  <p className="font-body text-white/80 mb-2">Your price with Crevia Pro:</p>
+                  <p className="font-body text-white/80 mb-2">Your price with Qlova Pro:</p>
                   <div className="flex items-center justify-center space-x-3 mb-4">
                     <span className="font-heading text-6xl font-black">$20</span>
                     <span className="font-body text-xl">/month</span>
@@ -483,7 +483,7 @@ const Pricing = () => {
               Frequently Asked Questions
             </h2>
             <p className="font-body text-lg text-muted-foreground">
-              Everything you need to know about Crevia
+              Everything you need to know about Qlova
             </p>
           </motion.div>
 

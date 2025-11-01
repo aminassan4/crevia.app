@@ -61,9 +61,9 @@ export default {
         },
       },
       fontFamily: {
-        heading: ['Vollkorn', 'serif'],
-        body: ['Poppins', 'sans-serif'],
-        mono: ['Poppins', 'sans-serif'],
+        heading: ['IBM Plex Mono', 'monospace'],
+        body: ['Libre Baskerville', 'serif'],
+        mono: ['IBM Plex Mono', 'monospace'],
       },
       backgroundImage: {
         'gradient-hero': 'var(--gradient-hero)',

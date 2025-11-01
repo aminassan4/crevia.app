@@ -17,10 +17,10 @@ const Footer = () => {
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-2 mb-6">
               <div className="w-10 h-10 bg-gradient-hero rounded-lg flex items-center justify-center">
-                <span className="text-white font-heading font-bold text-xl">C</span>
+                <span className="text-white font-heading font-bold text-xl">K</span>
               </div>
               <span className="font-heading text-2xl font-bold text-foreground">
-                Crevia
+                Qlova
               </span>
             </div>
             <p className="font-body text-muted-foreground mb-6 leading-relaxed">
@@ -33,7 +33,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Mail className="w-4 h-4" />
-                <span>contact@crevia.com</span>
+                <span>contact@qlova.com</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <MapPin className="w-4 h-4" />
@@ -179,7 +179,7 @@ const Footer = () => {
         <div className="pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             <p className="font-body text-sm text-muted-foreground text-center md:text-left">
-              © 2024 Crevia. All rights reserved. Building Africa's digital creator economy.
+              © 2024 Qlova. All rights reserved. Building Africa's digital creator economy.
             </p>
             <div className="flex items-center space-x-1 text-sm text-muted-foreground">
               <span>Made with</span>
