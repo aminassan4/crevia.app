@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, User, LogOut, LayoutDashboard, Users } from "lucide-react";
+import { Menu, X, User, LogOut, LayoutDashboard, Users, Package, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import SignInModal from "@/components/auth/SignInModal";
 import SignUpModal from "@/components/auth/SignUpModal";
@@ -102,18 +102,38 @@ const Navigation = () => {
           <div className="hidden md:flex items-center space-x-6">
             <NavigationMenu>
               <NavigationMenuList className="flex items-center">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    to={link.path}
-                    className={`font-body text-sm transition-colors hover:text-primary px-3 ${
-                      isActive(link.path) ? "text-primary font-semibold" : "text-muted-foreground"
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
-                ))}
+                {/* Home */}
+                <Link
+                  to="/"
+                  className={`font-body text-sm transition-colors hover:text-primary px-3 ${
+                    isActive("/") ? "text-primary font-semibold" : "text-muted-foreground"
+                  }`}
+                >
+                  Home
+                </Link>
+                
+                {/* Our Products Dropdown */}
                 <ProductsDropdown />
+                
+                {/* Pricing */}
+                <Link
+                  to="/pricing"
+                  className={`font-body text-sm transition-colors hover:text-primary px-3 ${
+                    isActive("/pricing") ? "text-primary font-semibold" : "text-muted-foreground"
+                  }`}
+                >
+                  Pricing
+                </Link>
+                
+                {/* About */}
+                <Link
+                  to="/community"
+                  className={`font-body text-sm transition-colors hover:text-primary px-3 ${
+                    isActive("/community") ? "text-primary font-semibold" : "text-muted-foreground"
+                  }`}
+                >
+                  About
+                </Link>
               </NavigationMenuList>
             </NavigationMenu>
           </div>
@@ -131,7 +151,7 @@ const Navigation = () => {
                     Profile
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuContent align="end" className="w-48 bg-card border-border z-50">
                   <DropdownMenuItem onClick={() => navigate("/dashboard")}>
                     <LayoutDashboard className="w-4 h-4 mr-2" />
                     Dashboard
@@ -181,18 +201,70 @@ const Navigation = () => {
               className="md:hidden border-t border-border"
             >
               <div className="py-4 space-y-4">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    to={link.path}
-                    onClick={() => setIsOpen(false)}
-                    className={`block font-body text-sm transition-colors hover:text-primary ${
-                      isActive(link.path) ? "text-primary font-semibold" : "text-muted-foreground"
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
-                ))}
+                {/* Home */}
+                <Link
+                  to="/"
+                  onClick={() => setIsOpen(false)}
+                  className={`block font-body text-sm transition-colors hover:text-primary ${
+                    isActive("/") ? "text-primary font-semibold" : "text-muted-foreground"
+                  }`}
+                >
+                  Home
+                </Link>
+                
+                {/* Our Products - Mobile Accordion */}
+                <div className="space-y-2">
+                  <div className="font-body text-sm font-semibold text-foreground">Our Products</div>
+                  <div className="pl-4 space-y-2">
+                    <Link
+                      to="/crevia-connect"
+                      onClick={() => setIsOpen(false)}
+                      className="flex items-center gap-2 font-body text-sm text-muted-foreground hover:text-primary"
+                    >
+                      <Users className="w-4 h-4" />
+                      Crevia Connect
+                    </Link>
+                    <Link
+                      to="/create-product"
+                      onClick={() => setIsOpen(false)}
+                      className="flex items-center gap-2 font-body text-sm text-muted-foreground hover:text-primary"
+                    >
+                      <Package className="w-4 h-4" />
+                      Crevia Digital Products
+                    </Link>
+                    <Link
+                      to="/crevia-ai"
+                      onClick={() => setIsOpen(false)}
+                      className="flex items-center gap-2 font-body text-sm text-muted-foreground hover:text-primary"
+                    >
+                      <Sparkles className="w-4 h-4" />
+                      Crevia AI
+                    </Link>
+                  </div>
+                </div>
+                
+                {/* Pricing */}
+                <Link
+                  to="/pricing"
+                  onClick={() => setIsOpen(false)}
+                  className={`block font-body text-sm transition-colors hover:text-primary ${
+                    isActive("/pricing") ? "text-primary font-semibold" : "text-muted-foreground"
+                  }`}
+                >
+                  Pricing
+                </Link>
+                
+                {/* About */}
+                <Link
+                  to="/community"
+                  onClick={() => setIsOpen(false)}
+                  className={`block font-body text-sm transition-colors hover:text-primary ${
+                    isActive("/community") ? "text-primary font-semibold" : "text-muted-foreground"
+                  }`}
+                >
+                  About
+                </Link>
+                
                 <div className="flex flex-col space-y-2 pt-4">
                   {user ? (
                     <>
