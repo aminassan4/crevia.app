@@ -7,13 +7,17 @@ import {
   Search,
   Plus,
   Star,
-  Filter,
   Play,
   Download,
   BookOpen,
   FileText,
   Video,
-  Code
+  Code,
+  Users,
+  TrendingUp,
+  Zap,
+  Sparkles,
+  ArrowRight
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -37,7 +41,8 @@ const Products = () => {
       image: "gradient-hero",
       type: "Course",
       category: "design",
-      tags: ["UI/UX", "Design", "Figma"]
+      tags: ["UI/UX", "Design", "Figma"],
+      trending: true
     },
     {
       id: 2,
@@ -65,7 +70,8 @@ const Products = () => {
       image: "gradient-hero",
       type: "eBook",
       category: "marketing",
-      tags: ["Content", "Social Media", "Growth"]
+      tags: ["Content", "Social Media", "Growth"],
+      bestseller: true
     },
     {
       id: 4,
@@ -79,7 +85,8 @@ const Products = () => {
       image: "gradient-accent",
       type: "Course",
       category: "development",
-      tags: ["Web Dev", "React", "Node.js"]
+      tags: ["Web Dev", "React", "Node.js"],
+      trending: true
     },
     {
       id: 5,
@@ -121,7 +128,8 @@ const Products = () => {
       image: "gradient-hero",
       type: "Course",
       category: "marketing",
-      tags: ["Marketing", "SEO", "Social Media"]
+      tags: ["Marketing", "SEO", "Social Media"],
+      bestseller: true
     },
     {
       id: 8,
@@ -155,10 +163,10 @@ const Products = () => {
 
   const categories = [
     { id: "all", name: "All Products", count: allProducts.length, icon: ShoppingBag },
-    { id: "design", name: "Design", count: allProducts.filter(p => p.category === "design").length, icon: Star },
+    { id: "design", name: "Design", count: allProducts.filter(p => p.category === "design").length, icon: Sparkles },
     { id: "development", name: "Development", count: allProducts.filter(p => p.category === "development").length, icon: Code },
     { id: "business", name: "Business", count: allProducts.filter(p => p.category === "business").length, icon: FileText },
-    { id: "marketing", name: "Marketing", count: allProducts.filter(p => p.category === "marketing").length, icon: Video }
+    { id: "marketing", name: "Marketing", count: allProducts.filter(p => p.category === "marketing").length, icon: TrendingUp }
   ];
 
   const filteredProducts = selectedCategory === "all" 
@@ -175,67 +183,144 @@ const Products = () => {
   };
 
   return (
-    <div className="min-h-screen pt-16">
-      {/* Header */}
-      <section className="py-20 bg-gradient-subtle">
+    <div className="min-h-screen pt-16 bg-background">
+      {/* Animated Background Elements */}
+      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            rotate: [0, 90, 0],
+            opacity: [0.03, 0.05, 0.03],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute -top-1/4 -right-1/4 w-1/2 h-1/2 bg-primary/20 rounded-full blur-3xl"
+        />
+        <motion.div
+          animate={{
+            scale: [1, 1.3, 1],
+            rotate: [0, -90, 0],
+            opacity: [0.03, 0.06, 0.03],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute -bottom-1/4 -left-1/4 w-1/2 h-1/2 bg-secondary/20 rounded-full blur-3xl"
+        />
+      </div>
+
+      {/* Hero Section */}
+      <section className="relative py-24 md:py-32 overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center max-w-3xl mx-auto"
+            className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="font-heading text-5xl md:text-6xl font-bold text-foreground mb-6">
-              Digital <span className="bg-gradient-hero bg-clip-text text-transparent">Products</span>
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 mb-6"
+            >
+              <Badge className="bg-primary/10 text-primary border-primary/20 px-4 py-2 text-sm">
+                <Sparkles className="w-4 h-4 mr-2" />
+                Premium Digital Products
+              </Badge>
+            </motion.div>
+
+            {/* Headline */}
+            <h1 className="font-heading text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
+              Discover World-Class
+              <br />
+              <span className="bg-gradient-hero bg-clip-text text-transparent">Digital Products</span>
             </h1>
-            <p className="font-body text-xl text-muted-foreground mb-8">
-              Discover courses, templates, eBooks, and digital resources created by African experts.
-              Learn new skills and grow your business.
+
+            {/* Description */}
+            <p className="font-body text-xl md:text-2xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
+              Learn from African experts. Courses, templates, and eBooks designed to accelerate your growth.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-              <Button variant="hero" size="xl" asChild>
+
+            {/* Search Bar & CTA */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-2xl mx-auto">
+              <div className="relative w-full sm:flex-1">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Input
+                  placeholder="Search products, courses, templates..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-12 h-14 text-base border-2 focus:border-primary"
+                />
+              </div>
+              <Button variant="hero" size="xl" asChild className="w-full sm:w-auto">
                 <Link to="/create-product">
                   <Plus className="w-5 h-5 mr-2" />
                   Sell Your Product
                 </Link>
               </Button>
-              <div className="relative w-full sm:w-96">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                <Input
-                  placeholder="Search products..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 h-12"
-                />
-              </div>
             </div>
+
+            {/* Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="flex items-center justify-center gap-8 mt-12 flex-wrap"
+            >
+              <div className="text-center">
+                <div className="font-heading text-3xl font-bold text-foreground">10,000+</div>
+                <div className="font-body text-sm text-muted-foreground">Students</div>
+              </div>
+              <div className="w-px h-8 bg-border" />
+              <div className="text-center">
+                <div className="font-heading text-3xl font-bold text-foreground">500+</div>
+                <div className="font-body text-sm text-muted-foreground">Products</div>
+              </div>
+              <div className="w-px h-8 bg-border" />
+              <div className="text-center">
+                <div className="font-heading text-3xl font-bold text-foreground">4.8★</div>
+                <div className="font-body text-sm text-muted-foreground">Avg Rating</div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
       {/* Categories */}
-      <section className="py-12 bg-muted/30">
+      <section className="py-8 sticky top-16 z-20 bg-background/80 backdrop-blur-xl border-y border-border">
         <div className="container mx-auto px-4">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
             className="flex items-center justify-center gap-3 flex-wrap"
           >
-            {categories.map((category) => (
-              <Button
+            {categories.map((category, index) => (
+              <motion.div
                 key={category.id}
-                variant={selectedCategory === category.id ? "default" : "outline"}
-                onClick={() => setSelectedCategory(category.id)}
-                className="gap-2"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
               >
-                <category.icon className="w-4 h-4" />
-                {category.name}
-                <Badge variant="secondary" className="ml-1">
-                  {category.count}
-                </Badge>
-              </Button>
+                <Button
+                  variant={selectedCategory === category.id ? "default" : "outline"}
+                  onClick={() => setSelectedCategory(category.id)}
+                  className="gap-2 h-11 px-6 transition-all duration-300"
+                >
+                  <category.icon className="w-4 h-4" />
+                  {category.name}
+                  <Badge variant="secondary" className="ml-1 font-semibold">
+                    {category.count}
+                  </Badge>
+                </Button>
+              </motion.div>
             ))}
           </motion.div>
         </div>
@@ -251,76 +336,116 @@ const Products = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-6">
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
               {selectedCategory === "all" ? "All Products" : categories.find(c => c.id === selectedCategory)?.name}
             </h2>
-            <p className="font-body text-xl text-muted-foreground">
-              {filteredProducts.length} products available
+            <p className="font-body text-lg text-muted-foreground">
+              {filteredProducts.length} premium products • Handpicked by experts
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProducts.map((product, index) => {
               const ProductIcon = getProductIcon(product.type);
               return (
                 <motion.div
                   key={product.id}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <Card className="hover-lift overflow-hidden h-full flex flex-col">
-                    <div className={`h-48 bg-${product.image} flex items-center justify-center relative`}>
-                      <ProductIcon className="w-16 h-16 text-white" />
-                      <div className="absolute top-4 right-4">
-                        <Badge className="bg-white/20 backdrop-blur-sm text-white border-white/40">
+                  <Card className="group overflow-hidden h-full flex flex-col border-2 hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+                    {/* Image/Icon Section */}
+                    <div className={`relative h-56 bg-${product.image} overflow-hidden`}>
+                      <div className="absolute inset-0 bg-gradient-to-br from-black/20 to-black/40 group-hover:from-black/40 group-hover:to-black/60 transition-all duration-500" />
+                      
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <motion.div
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <ProductIcon className="w-20 h-20 text-white drop-shadow-2xl" />
+                        </motion.div>
+                      </div>
+                      
+                      {/* Badges */}
+                      <div className="absolute top-4 left-4 right-4 flex items-start justify-between">
+                        <Badge className="bg-white/95 backdrop-blur-sm text-foreground border-0 font-semibold shadow-lg">
                           {product.type}
                         </Badge>
+                        <div className="flex flex-col gap-2">
+                          {product.trending && (
+                            <Badge className="bg-orange-500 text-white border-0 font-semibold shadow-lg">
+                              <TrendingUp className="w-3 h-3 mr-1" />
+                              Trending
+                            </Badge>
+                          )}
+                          {product.bestseller && (
+                            <Badge className="bg-green-500 text-white border-0 font-semibold shadow-lg">
+                              <Zap className="w-3 h-3 mr-1" />
+                              Bestseller
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Rating Overlay */}
+                      <div className="absolute bottom-4 left-4">
+                        <div className="flex items-center gap-1 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-lg">
+                          <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+                          <span className="font-body text-sm font-bold">{product.rating}</span>
+                          <span className="font-body text-xs text-muted-foreground">
+                            ({product.reviews})
+                          </span>
+                        </div>
                       </div>
                     </div>
+
+                    {/* Content Section */}
                     <CardContent className="p-6 flex flex-col flex-1">
                       <div className="mb-4">
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center space-x-1">
-                            <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                            <span className="font-body text-sm font-semibold">{product.rating}</span>
-                            <span className="font-body text-xs text-muted-foreground">
-                              ({product.reviews} reviews)
-                            </span>
-                          </div>
-                        </div>
-                        <h3 className="font-heading text-xl font-bold mb-2">{product.title}</h3>
+                        <h3 className="font-heading text-xl font-bold mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                          {product.title}
+                        </h3>
                         <p className="font-body text-sm text-muted-foreground mb-3">
-                          by {product.creator}
+                          by <span className="font-semibold text-foreground">{product.creator}</span>
                         </p>
-                        <p className="font-body text-sm text-muted-foreground line-clamp-2">
+                        <p className="font-body text-sm text-muted-foreground line-clamp-2 leading-relaxed">
                           {product.description}
                         </p>
                       </div>
 
-                      <div className="flex flex-wrap gap-1 mb-4">
-                        {product.tags.map((tag) => (
-                          <Badge key={tag} variant="outline" className="text-xs">
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {product.tags.slice(0, 3).map((tag) => (
+                          <Badge key={tag} variant="outline" className="text-xs font-medium">
                             {tag}
                           </Badge>
                         ))}
                       </div>
 
-                      <div className="mt-auto pt-4 border-t">
-                        <div className="flex items-center justify-between mb-3">
-                          <span className="font-heading text-2xl font-bold text-primary">
-                            {product.price}
-                          </span>
-                          <span className="font-body text-sm text-muted-foreground">
-                            {product.students 
-                              ? `${product.students.toLocaleString()} students` 
-                              : `${product.downloads.toLocaleString()} downloads`
-                            }
-                          </span>
+                      {/* Footer */}
+                      <div className="mt-auto pt-4 border-t border-border">
+                        <div className="flex items-center justify-between mb-4">
+                          <div>
+                            <span className="font-heading text-3xl font-bold text-primary">
+                              {product.price}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1 text-muted-foreground">
+                            <Users className="w-4 h-4" />
+                            <span className="font-body text-sm font-medium">
+                              {product.students 
+                                ? product.students.toLocaleString()
+                                : product.downloads.toLocaleString()
+                              }
+                            </span>
+                          </div>
                         </div>
-                        <Button variant="default" className="w-full">
+                        <Button variant="default" className="w-full h-12 text-base group/btn">
                           {product.type === "Course" ? "Enroll Now" : "Purchase"}
+                          <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
                         </Button>
                       </div>
                     </CardContent>
@@ -333,28 +458,89 @@ const Products = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-hero">
-        <div className="container mx-auto px-4 text-center">
+      <section className="relative py-32 overflow-hidden">
+        {/* Background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-secondary" />
+        
+        {/* Animated background elements */}
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.1, 0.2, 0.1],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"
+        />
+        <motion.div
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.1, 0.15, 0.1],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"
+        />
+
+        <div className="container mx-auto px-4 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="max-w-2xl mx-auto"
+            className="max-w-3xl mx-auto"
           >
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-white mb-6">
+            <Sparkles className="w-16 h-16 text-white/90 mx-auto mb-6" />
+            <h2 className="font-heading text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
               Ready to Share Your Expertise?
             </h2>
-            <p className="font-body text-xl text-white/90 mb-8">
-              Turn your knowledge into income. Create and sell digital products to thousands of learners.
-              Start earning today.
+            <p className="font-body text-xl md:text-2xl text-white/90 mb-10 leading-relaxed">
+              Turn your knowledge into income. Create and sell digital products to thousands of eager learners worldwide.
             </p>
-            <Button variant="glass" size="xl" asChild>
-              <Link to="/create-product">
-                <Plus className="w-5 h-5 mr-2" />
-                Create Your Product
-              </Link>
-            </Button>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button variant="glass" size="xl" asChild className="group">
+                <Link to="/create-product">
+                  <Plus className="w-5 h-5 mr-2" />
+                  Create Your Product
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+              <Button variant="outline" size="xl" asChild className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary">
+                <Link to="/pricing">
+                  View Pricing
+                </Link>
+              </Button>
+            </div>
+
+            {/* Success metrics */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="flex items-center justify-center gap-8 mt-16 flex-wrap"
+            >
+              <div className="text-center">
+                <div className="font-heading text-4xl font-bold text-white mb-1">$2M+</div>
+                <div className="font-body text-sm text-white/80">Creator Earnings</div>
+              </div>
+              <div className="w-px h-12 bg-white/30" />
+              <div className="text-center">
+                <div className="font-heading text-4xl font-bold text-white mb-1">15K+</div>
+                <div className="font-body text-sm text-white/80">Happy Creators</div>
+              </div>
+              <div className="w-px h-12 bg-white/30" />
+              <div className="text-center">
+                <div className="font-heading text-4xl font-bold text-white mb-1">98%</div>
+                <div className="font-body text-sm text-white/80">Success Rate</div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
