@@ -124,32 +124,24 @@ const CleanManualNavigationTestimonials = ({ testimonials }: { testimonials: { q
 };
 
 const Home = () => {
-  const [activeFeature, setActiveFeature] = useState("products");
-
   const features = [
     {
-      icon: ShoppingBag,
-      title: "Digital Products",
-      description: "Sell courses, templates, eBooks, and guides. Create your own link-in-bio store.",
-      demo: "products"
-    },
-    {
-      icon: Calendar,
-      title: "Events",
-      description: "Host IRL or virtual events, masterclasses, and mentorship programs.",
-      demo: "events"
-    },
-    {
       icon: Users,
-      title: "Community",
-      description: "Build and engage with your audience. Foster meaningful connections.",
-      demo: "community"
+      title: "Crevia Connect",
+      description: "Connect creators with brands for authentic collaborations and partnerships.",
+      link: "/crevia-connect"
+    },
+    {
+      icon: ShoppingBag,
+      title: "Crevia Digital Products",
+      description: "Sell and host premium templates and digital products with ease.",
+      link: "/products"
     },
     {
       icon: Bot,
-      title: "AI Assistant",
-      description: "Your AI-powered copilot for creation, planning, and growth.",
-      demo: "ai"
+      title: "Crevia AI",
+      description: "Your AI-powered copilot for content creation, planning, and growth.",
+      link: "/crevia-ai"
     }
   ];
 
@@ -192,6 +184,58 @@ const Home = () => {
     <div className="min-h-screen bg-background">
       <Hero />
       
+      {/* Demo Video Section */}
+      <section className="py-20 bg-background relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
+              <Video className="w-3 h-3 mr-1" />
+              See It In Action
+            </Badge>
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Watch Crevia in Action
+            </h2>
+            <p className="font-body text-xl text-muted-foreground max-w-2xl mx-auto">
+              Discover how Crevia empowers creators to build, sell, and grow their digital empire
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="max-w-5xl mx-auto"
+          >
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-primary/20 bg-muted">
+              <div className="relative aspect-video">
+                <video 
+                  className="w-full h-full object-cover"
+                  controls
+                  poster="/placeholder.svg"
+                >
+                  <source src="/path-to-your-demo-video.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                
+                {/* Play Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/30 transition-all cursor-pointer pointer-events-none">
+                  <div className="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center">
+                    <Video className="w-10 h-10 text-primary ml-1" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Stats Section */}
       <section className="py-20 bg-muted/30 relative overflow-hidden">
         <motion.div
@@ -253,7 +297,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Features Section - The 3 Crevia Products */}
       <section className="py-32 relative overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.div
@@ -265,17 +309,17 @@ const Home = () => {
           >
             <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
               <Sparkles className="w-3 h-3 mr-1" />
-              All-in-One Platform
+              Our Products
             </Badge>
             <h2 className="font-heading text-4xl md:text-6xl font-bold text-foreground mb-6">
-              Everything You Need to <span className="bg-gradient-hero bg-clip-text text-transparent">Succeed</span>
+              Three Powerful <span className="bg-gradient-hero bg-clip-text text-transparent">Products</span>
             </h2>
             <p className="font-body text-xl text-muted-foreground max-w-3xl mx-auto">
-              One platform with all the tools you need to create, sell, and grow your digital business
+              Everything you need to connect, create, and grow as a digital creator
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -284,19 +328,25 @@ const Home = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="group p-8 h-full hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-primary/50 bg-background cursor-pointer">
-                  <CardContent className="p-0">
-                    <div className="w-14 h-14 mb-6 rounded-2xl bg-gradient-hero flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                      <feature.icon className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="font-heading text-xl font-bold mb-3 group-hover:text-primary transition-colors">
-                      {feature.title}
-                    </h3>
-                    <p className="font-body text-muted-foreground leading-relaxed">
-                      {feature.description}
-                    </p>
-                  </CardContent>
-                </Card>
+                <Link to={feature.link}>
+                  <Card className="group p-8 h-full hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-primary/50 bg-background cursor-pointer">
+                    <CardContent className="p-0">
+                      <div className="w-16 h-16 mb-6 rounded-2xl bg-gradient-hero flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                        <feature.icon className="w-8 h-8 text-white" />
+                      </div>
+                      <h3 className="font-heading text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
+                        {feature.title}
+                      </h3>
+                      <p className="font-body text-muted-foreground leading-relaxed text-lg">
+                        {feature.description}
+                      </p>
+                      <div className="mt-6 flex items-center text-primary font-semibold group-hover:translate-x-2 transition-transform">
+                        Learn More
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
               </motion.div>
             ))}
           </div>
