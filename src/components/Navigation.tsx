@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, User, LogOut, LayoutDashboard, Users, Package, Sparkles } from "lucide-react";
+import creviaLogo from "@/assets/crevia-logo.jpg";
 import { motion, AnimatePresence } from "framer-motion";
 import SignInModal from "@/components/auth/SignInModal";
 import SignUpModal from "@/components/auth/SignUpModal";
@@ -90,9 +91,11 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-hero rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-heading font-bold text-lg">C</span>
-            </div>
+            <img 
+              src={creviaLogo} 
+              alt="Crevia Logo" 
+              className="w-10 h-10 rounded-full object-cover"
+            />
             <span className="font-heading text-xl font-bold text-primary">
               Crevia
             </span>
