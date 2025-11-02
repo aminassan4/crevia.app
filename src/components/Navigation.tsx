@@ -30,10 +30,6 @@ const Navigation = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  // Scroll to top when route changes
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [location.pathname]);
 
   useEffect(() => {
     // Check auth state
