@@ -224,7 +224,7 @@ const Navigation = () => {
                       Crevia Connect
                     </Link>
                     <Link
-                      to="/create-product"
+                      to="/products"
                       onClick={() => setIsOpen(false)}
                       className="flex items-center gap-2 font-body text-sm text-muted-foreground hover:text-primary"
                     >
