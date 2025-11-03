@@ -43,7 +43,7 @@ const Dashboard = () => {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"overview" | "store" | "events" | "community" | "earnings" | "marketing" | "affiliate" | "integrations" | "settings" | "profile">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "store" | "products" | "earnings" | "marketing" | "affiliate" | "integrations" | "settings" | "profile">("overview");
   const [copied, setCopied] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -187,8 +187,7 @@ const Dashboard = () => {
   const sidebarItems = [
     { id: "overview" as const, icon: LayoutDashboard, label: "Overview" },
     { id: "store" as const, icon: Store, label: "My Crevia Link" },
-    { id: "events" as const, icon: Calendar, label: "Events" },
-    { id: "community" as const, icon: Home, label: "Community" },
+    { id: "products" as const, icon: Package, label: "My Digital Products" },
     { id: "earnings" as const, icon: DollarSign, label: "Earnings" },
     { id: "marketing" as const, icon: TrendingUp, label: "Marketing" },
     { id: "affiliate" as const, icon: Award, label: "Affiliate" },
@@ -397,43 +396,21 @@ const Dashboard = () => {
         </section>
       )}
 
-      {activeTab === "events" && (
+      {activeTab === "products" && (
         <section className="py-8 px-4">
           <div className="container mx-auto max-w-4xl">
             <Card>
               <CardHeader>
-                <CardTitle className="font-heading text-2xl">Events Management</CardTitle>
-                <CardDescription>Create and manage your events</CardDescription>
+                <CardTitle className="font-heading text-2xl">My Digital Products</CardTitle>
+                <CardDescription>Manage your template packs and digital products</CardDescription>
               </CardHeader>
               <CardContent className="text-center py-12">
-                <Calendar className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-                <h3 className="font-heading text-xl font-bold mb-2">No events yet</h3>
-                <p className="text-muted-foreground mb-6">Create your first event to get started</p>
-                <Button onClick={() => navigate("/create-event")} className="bg-gradient-to-r from-[#3533cd] to-[#3533cd]/80">
+                <Package className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+                <h3 className="font-heading text-xl font-bold mb-2">No products yet</h3>
+                <p className="text-muted-foreground mb-6">Create your first template pack to start earning</p>
+                <Button onClick={() => navigate("/create-product")} className="bg-gradient-to-r from-[#3533cd] to-[#3533cd]/80">
                   <Plus className="w-4 h-4 mr-2" />
-                  Create Event
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-      )}
-
-      {activeTab === "community" && (
-        <section className="py-8 px-4">
-          <div className="container mx-auto max-w-4xl">
-            <Card>
-              <CardHeader>
-                <CardTitle className="font-heading text-2xl">Community Management</CardTitle>
-                <CardDescription>Build and engage with your community</CardDescription>
-              </CardHeader>
-              <CardContent className="text-center py-12">
-                <Users className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-                <h3 className="font-heading text-xl font-bold mb-2">Build your community</h3>
-                <p className="text-muted-foreground mb-6">Create a space for your audience to connect</p>
-                <Button onClick={() => navigate("/create-community")} className="bg-gradient-to-r from-[#3533cd] to-[#3533cd]/80">
-                  <Plus className="w-4 h-4 mr-2" />
-                  Create Community
+                  Create Template Pack
                 </Button>
               </CardContent>
             </Card>

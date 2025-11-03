@@ -205,10 +205,10 @@ const Products = () => {
               <Button 
                 size="xl" 
                 variant="outline"
-                onClick={() => navigate("/pricing")}
+                onClick={() => navigate("/templates")}
                 className="border-2 border-primary/30 hover:bg-primary/5 hover:border-primary/50 text-lg px-10 py-7 rounded-full transition-all duration-300"
               >
-                View Pricing
+                View All Templates
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </motion.div>

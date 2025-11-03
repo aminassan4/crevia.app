@@ -11,6 +11,7 @@ import Community from "./pages/Community";
 import Communities from "./pages/Communities";
 import Events from "./pages/Events";
 import Products from "./pages/Products";
+import Templates from "./pages/Templates";
 import CreateEvent from "./pages/CreateEvent";
 import CreatorDashboard from "./pages/Dashboard";
 import CreateProduct from "./pages/CreateProduct";
@@ -35,6 +36,7 @@ const AppContent = () => (
       <Route path="/communities" element={<Communities />} />
       <Route path="/events" element={<Events />} />
       <Route path="/products" element={<Products />} />
+      <Route path="/templates" element={<Templates />} />
       <Route path="/create-event" element={<CreateEvent />} />
       <Route path="/dashboard" element={<CreatorDashboard />} />
       <Route path="/create-product" element={<CreateProduct />} />

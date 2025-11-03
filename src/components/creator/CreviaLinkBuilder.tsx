@@ -192,19 +192,19 @@ export const CreviaLinkBuilder = () => {
 
   if (isPreview) {
     return (
-      <div className={`min-h-screen py-12 ${getThemeStyles(profile.theme)}`}>
-        <div className="max-w-2xl mx-auto px-4">
+      <div className={`fixed inset-0 z-50 overflow-auto ${getThemeStyles(profile.theme)}`}>
+        <div className="min-h-screen py-8">
           <Button 
             onClick={() => setIsPreview(false)}
             variant="outline"
-            className="mb-6"
+            className="fixed top-4 left-4 z-10 bg-background/80 backdrop-blur-sm"
           >
             Back to Editor
           </Button>
 
-          {/* Preview Mode */}
+          {/* Preview Mode - Full Page */}
           <div className={`${getFontClass(profile.fontStyle)}`}>
-            <div className="max-w-xl mx-auto px-4 py-8">
+            <div className="max-w-2xl mx-auto px-4 py-16">
               {/* Profile Section */}
               <div className="text-center mb-8">
                 <div className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-white shadow-lg overflow-hidden">
@@ -271,11 +271,14 @@ export const CreviaLinkBuilder = () => {
 
               {/* CTA */}
               <div className="text-center">
-                <Button className={`${getButtonTheme(profile.theme)} ${
-                  profile.buttonStyle === "rounded" ? "rounded-full" : 
-                  profile.buttonStyle === "square" ? "rounded-none" : 
-                  "rounded-lg"
-                } px-8`}>
+                <Button 
+                  onClick={() => window.location.href = '/'}
+                  className={`${getButtonTheme(profile.theme)} ${
+                    profile.buttonStyle === "rounded" ? "rounded-full" : 
+                    profile.buttonStyle === "square" ? "rounded-none" : 
+                    "rounded-lg"
+                  } px-8`}
+                >
                   Create Your Link in Bio
                 </Button>
               </div>
