@@ -215,21 +215,13 @@ const Home = () => {
           >
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-primary/20 bg-muted">
               <div className="relative aspect-video">
-                <video 
-                  className="w-full h-full object-cover"
-                  controls
-                  poster="/placeholder.svg"
-                >
-                  <source src="/path-to-your-demo-video.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-                
-                {/* Play Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/30 transition-all cursor-pointer pointer-events-none">
-                  <div className="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center">
-                    <Video className="w-10 h-10 text-primary ml-1" />
-                  </div>
-                </div>
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/57PvujgWk5E"
+                  title="Crevia Demo Video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
               </div>
             </div>
           </motion.div>
