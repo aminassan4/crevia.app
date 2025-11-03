@@ -152,14 +152,6 @@ const BrandDashboard = () => {
                 Welcome back, [Brand Name]
               </p>
             </div>
-            <div className="flex items-center gap-4">
-              <Button 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground"
-                onClick={() => navigate("/crevia-connect")}
-              >
-                Crevia Connect
-              </Button>
-            </div>
           </div>
           <p className="font-body text-sm text-muted-foreground mt-2">
             Building connections, one creator at a time.
