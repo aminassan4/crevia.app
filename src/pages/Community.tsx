@@ -192,37 +192,6 @@ const Community = () => {
     }
   ];
 
-  const pastEvents = [
-    {
-      title: "Freelancers Summit 2024",
-      date: "November 2024",
-      location: "iHub Nairobi",
-      attendees: 500,
-      type: "Summit"
-    },
-    {
-      title: "Creative Economy Workshop",
-      date: "October 2024",
-      location: "Lagos, Nigeria",
-      attendees: 300,
-      type: "Workshop"
-    },
-    {
-      title: "Digital Innovation Conference",
-      date: "September 2024",
-      location: "Cape Town, SA",
-      attendees: 800,
-      type: "Conference"
-    },
-    {
-      title: "Entrepreneur Bootcamp",
-      date: "August 2024",
-      location: "Kigali, Rwanda",
-      attendees: 450,
-      type: "Bootcamp"
-    }
-  ];
-
   const [eventView, setEventView] = useState<"upcoming" | "previous">("upcoming");
 
 
@@ -493,41 +462,89 @@ const Community = () => {
             </motion.div>
           )}
 
-          {/* Previous Events - Two Column Grid */}
+          {/* Previous Events - YouTube Video Highlights */}
           {eventView === "previous" && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-6"
+              className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto"
             >
-              {pastEvents.map((event, index) => (
-                <Card key={index} className="hover-lift h-full">
-                  <CardHeader>
-                    <Badge variant="outline" className="w-fit mb-2">{event.type}</Badge>
-                    <CardTitle className="font-heading text-xl">{event.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-2 mb-4">
-                      <p className="font-body text-sm text-muted-foreground flex items-center">
-                        <Calendar className="w-4 h-4 mr-2 text-primary" />
-                        {event.date}
-                      </p>
-                      <p className="font-body text-sm text-muted-foreground flex items-center">
-                        <span className="mr-2">📍</span>
-                        {event.location}
-                      </p>
-                      <p className="font-body text-sm text-muted-foreground flex items-center">
-                        <Users className="w-4 h-4 mr-2 text-primary" />
-                        {event.attendees} attendees
-                      </p>
+              {/* Freelancers Summit 2024 */}
+              <Card className="overflow-hidden hover-lift">
+                <CardContent className="p-0">
+                  <div className="relative aspect-video">
+                    <iframe
+                      className="w-full h-full"
+                      src="https://www.youtube.com/embed/-20xdAqoBfo"
+                      title="Freelancers Summit 2024"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                  <div className="p-6">
+                    <Badge className="mb-3">Summit</Badge>
+                    <h3 className="font-heading text-2xl font-bold mb-3">
+                      Freelancers Summit 2024
+                    </h3>
+                    <div className="space-y-2 text-sm text-muted-foreground mb-4">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4" />
+                        <span>November 2024</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span>📍</span>
+                        <span>iHub Nairobi</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Users className="w-4 h-4" />
+                        <span>500 attendees</span>
+                      </div>
                     </div>
-                    <Button variant="ghost" className="w-full">
+                    <Button variant="outline" className="w-full">
                       View Highlights
                     </Button>
-                  </CardContent>
-                </Card>
-              ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* AI Summit 2025 */}
+              <Card className="overflow-hidden hover-lift">
+                <CardContent className="p-0">
+                  <div className="relative aspect-video">
+                    <iframe
+                      className="w-full h-full"
+                      src="https://www.youtube.com/embed/BKaxVxiLz0Y"
+                      title="AI Summit 2025"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                  <div className="p-6">
+                    <Badge className="mb-3">Summit</Badge>
+                    <h3 className="font-heading text-2xl font-bold mb-3">
+                      AI Summit 2025
+                    </h3>
+                    <div className="space-y-2 text-sm text-muted-foreground mb-4">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4" />
+                        <span>January 2025</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span>📍</span>
+                        <span>Nairobi, Kenya</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Users className="w-4 h-4" />
+                        <span>800 attendees</span>
+                      </div>
+                    </div>
+                    <Button variant="outline" className="w-full">
+                      View Highlights
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
             </motion.div>
           )}
         </div>
