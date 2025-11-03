@@ -54,11 +54,10 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-heading text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight"
+            className="font-heading text-5xl md:text-7xl font-extrabold text-foreground mb-6 leading-tight"
           >
-            One Platform to Build Your{" "}
             <span className="bg-gradient-hero bg-clip-text text-transparent">
-              Wealth
+              FROM CREATION TO COLLABORATION IN ONE LINK
             </span>
           </motion.h1>
 
@@ -69,8 +68,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="font-body text-xl md:text-2xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed"
           >
-            Sell digital products and host events—all in one place. 
-            Join thousands of African creators monetizing their expertise.
+            Build your link in bio, sell digital templates, host events, and connect with brands—all on one platform designed for African creators.
           </motion.p>
 
           {/* CTA Button */}
