@@ -54,10 +54,10 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-heading text-5xl md:text-7xl font-extrabold text-foreground mb-6 leading-tight"
+            className="font-heading text-3xl md:text-5xl lg:text-6xl font-extrabold text-foreground mb-6 leading-tight"
           >
             <span className="bg-gradient-hero bg-clip-text text-transparent">
-              FROM CREATION TO COLLABORATION IN ONE LINK
+              FROM CREATION TO COLLABORATION—ALL IN ONE LINK
             </span>
           </motion.h1>
 
@@ -66,9 +66,9 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="font-body text-xl md:text-2xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed"
+            className="font-body text-base md:text-lg lg:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed"
           >
-            Build your link in bio, sell digital templates, host events, and connect with brands—all on one platform designed for African creators.
+            A new way for creators to connect with brands, sell their digital products, and get AI support that understands your world.
           </motion.p>
 
           {/* CTA Button */}
