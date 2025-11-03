@@ -29,6 +29,7 @@ import Footer from "@/components/Footer";
 
 const Events = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [eventTab, setEventTab] = useState<"upcoming" | "previous">("upcoming");
   const navigate = useNavigate();
 
   const popularEvents = [
@@ -214,18 +215,48 @@ const Events = () => {
         </div>
       </section>
 
-      {/* Popular Events */}
-      <section className="py-16">
+      {/* Event Tabs */}
+      <section className="py-12 border-b border-border">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="font-heading text-2xl font-bold text-foreground">
-              Popular Events
+          <div className="text-center mb-8">
+            <h2 className="font-heading text-3xl font-bold text-foreground mb-4">
+              Join us at upcoming events or see what we've accomplished
             </h2>
-            <Button variant="ghost" size="sm">
-              View All
-              <ChevronRight className="w-4 h-4 ml-1" />
+          </div>
+          <div className="flex items-center justify-center gap-4">
+            <Button
+              variant={eventTab === "upcoming" ? "default" : "ghost"}
+              size="lg"
+              onClick={() => setEventTab("upcoming")}
+              className="min-w-[160px]"
+            >
+              Upcoming Events
+            </Button>
+            <Button
+              variant={eventTab === "previous" ? "default" : "ghost"}
+              size="lg"
+              onClick={() => setEventTab("previous")}
+              className="min-w-[160px]"
+            >
+              Previous Events
             </Button>
           </div>
+        </div>
+      </section>
+
+      {/* Upcoming Events */}
+      {eventTab === "upcoming" && (
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="font-heading text-2xl font-bold text-foreground">
+                Popular Events
+              </h2>
+              <Button variant="ghost" size="sm">
+                View All
+                <ChevronRight className="w-4 h-4 ml-1" />
+              </Button>
+            </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {popularEvents.map((event, index) => (
@@ -265,6 +296,104 @@ const Events = () => {
           </div>
         </div>
       </section>
+      )}
+
+      {/* Previous Events with Video Highlights */}
+      {eventTab === "previous" && (
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+              {/* Freelancers Summit 2024 */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Card className="overflow-hidden">
+                  <CardContent className="p-0">
+                    <div className="relative aspect-video">
+                      <iframe
+                        className="w-full h-full"
+                        src="https://www.youtube.com/embed/-20xdAqoBfo"
+                        title="Freelancers Summit 2024"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                    <div className="p-6">
+                      <Badge className="mb-3">Summit</Badge>
+                      <h3 className="font-heading text-2xl font-bold mb-3">
+                        Freelancers Summit 2024
+                      </h3>
+                      <div className="space-y-2 text-sm text-muted-foreground mb-4">
+                        <div className="flex items-center gap-2">
+                          <Calendar className="w-4 h-4" />
+                          <span>November 2024</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <MapPin className="w-4 h-4" />
+                          <span>iHub Nairobi</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Users className="w-4 h-4" />
+                          <span>500 attendees</span>
+                        </div>
+                      </div>
+                      <Button variant="outline" className="w-full">
+                        View Highlights
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* AI Summit 2025 */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                <Card className="overflow-hidden">
+                  <CardContent className="p-0">
+                    <div className="relative aspect-video">
+                      <iframe
+                        className="w-full h-full"
+                        src="https://www.youtube.com/embed/BKaxVxiLz0Y"
+                        title="AI Summit 2025"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                    <div className="p-6">
+                      <Badge className="mb-3">Summit</Badge>
+                      <h3 className="font-heading text-2xl font-bold mb-3">
+                        AI Summit 2025
+                      </h3>
+                      <div className="space-y-2 text-sm text-muted-foreground mb-4">
+                        <div className="flex items-center gap-2">
+                          <Calendar className="w-4 h-4" />
+                          <span>January 2025</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <MapPin className="w-4 h-4" />
+                          <span>Nairobi, Kenya</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Users className="w-4 h-4" />
+                          <span>800 attendees</span>
+                        </div>
+                      </div>
+                      <Button variant="outline" className="w-full">
+                        View Highlights
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Browse by Category */}
       <section className="py-16 bg-muted/30">
