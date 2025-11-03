@@ -18,29 +18,56 @@ export type Database = {
         Row: {
           avatar_url: string | null
           bio: string | null
+          brand_type: string | null
           created_at: string
+          creator_type: string[] | null
           email: string | null
           full_name: string | null
           id: string
+          main_goal: string | null
+          onboarding_completed: boolean | null
+          social_instagram: string | null
+          social_tiktok: string | null
+          social_youtube: string | null
           updated_at: string
+          user_role: string | null
+          website_url: string | null
         }
         Insert: {
           avatar_url?: string | null
           bio?: string | null
+          brand_type?: string | null
           created_at?: string
+          creator_type?: string[] | null
           email?: string | null
           full_name?: string | null
           id: string
+          main_goal?: string | null
+          onboarding_completed?: boolean | null
+          social_instagram?: string | null
+          social_tiktok?: string | null
+          social_youtube?: string | null
           updated_at?: string
+          user_role?: string | null
+          website_url?: string | null
         }
         Update: {
           avatar_url?: string | null
           bio?: string | null
+          brand_type?: string | null
           created_at?: string
+          creator_type?: string[] | null
           email?: string | null
           full_name?: string | null
           id?: string
+          main_goal?: string | null
+          onboarding_completed?: boolean | null
+          social_instagram?: string | null
+          social_tiktok?: string | null
+          social_youtube?: string | null
           updated_at?: string
+          user_role?: string | null
+          website_url?: string | null
         }
         Relationships: []
       }

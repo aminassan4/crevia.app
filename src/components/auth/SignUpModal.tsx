@@ -68,6 +68,8 @@ const SignUpModal = ({ open, onOpenChange, onSwitchToSignIn }: SignUpModalProps)
     setLoading(true);
 
     try {
+      const redirectUrl = `${window.location.origin}/onboarding`;
+      
       const { error } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
@@ -76,15 +78,15 @@ const SignUpModal = ({ open, onOpenChange, onSwitchToSignIn }: SignUpModalProps)
             full_name: `${formData.firstName} ${formData.lastName}`.trim(),
             user_role: userRole,
           },
-          emailRedirectTo: `${window.location.origin}/`,
+          emailRedirectTo: redirectUrl,
         },
       });
 
       if (error) throw error;
 
       toast({
-        title: "Account created!",
-        description: "Welcome to Crevia!",
+        title: "Check your email! 📧",
+        description: "We've sent you a link to complete your setup. Check your spam folder if you don't see it.",
       });
       onOpenChange(false);
     } catch (error: any) {
